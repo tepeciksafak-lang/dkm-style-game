@@ -40,15 +40,15 @@ const Home = () => {
       {gameState === "start" && (
         <>
           {/* Hero Section */}
-          <section className="relative py-20 px-4 bg-white">
+          <section className="relative py-32 px-4 bg-white min-h-[80vh] flex items-center">
             <div className="container mx-auto max-w-4xl text-center">
-              <h1 className="font-encode font-black text-5xl md:text-7xl text-dkm-navy mb-4">
+              <h1 className="font-encode font-black text-5xl md:text-7xl text-dkm-navy mb-6">
                 DKM 2025 Quiz
               </h1>
-              <p className="font-encode text-lg text-dkm-navy/80 mb-2">
+              <p className="font-encode text-lg text-dkm-navy/80 mb-4">
                 Die Leitmesse für die Finanz- und Versicherungswirtschaft
               </p>
-              <p className="font-encode font-semibold text-xl md:text-2xl text-dkm-navy mb-12 max-w-2xl mx-auto leading-relaxed">
+              <p className="font-encode font-semibold text-xl md:text-2xl text-dkm-navy mb-16 max-w-2xl mx-auto leading-relaxed">
                 Teste dein Wissen über die DKM und gewinne tolle Preise!
               </p>
               
@@ -56,7 +56,7 @@ const Home = () => {
                 variant="dkm" 
                 size="lg"
                 onClick={handleStartQuiz}
-                className="text-xl px-12 py-6"
+                className="text-xl px-12 py-6 mb-16"
               >
                 Quiz starten
               </Button>

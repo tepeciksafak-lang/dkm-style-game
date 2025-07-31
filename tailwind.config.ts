@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'encode': ['Encode Sans', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,6 +64,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				dkm: {
+					navy: 'hsl(var(--dkm-navy))',
+					turquoise: 'hsl(var(--dkm-turquoise))',
+					yellow: 'hsl(var(--dkm-yellow))',
+					lime: 'hsl(var(--dkm-lime))'
 				}
 			},
 			borderRadius: {

@@ -1,0 +1,87 @@
+import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+
+const Footer = () => {
+  return (
+    <footer className="bg-dkm-navy text-white py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Logo und Event Info */}
+          <div className="col-span-1 md:col-span-2">
+            <div className="font-encode font-black text-3xl mb-4">
+              DKM 2025
+            </div>
+            <div className="font-encode space-y-2 text-gray-300">
+              <p className="font-semibold">Deutsche Kraftfahrzeug-Messe</p>
+              <p>26. - 27. März 2025</p>
+              <p>Dortmund, Deutschland</p>
+              <p>Messe Westfalenhallen</p>
+            </div>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h3 className="font-encode font-bold text-lg mb-4">Navigation</h3>
+            <ul className="space-y-2 font-encode">
+              <li>
+                <a href="/" className="hover:text-dkm-yellow transition-colors">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="/spielregeln" className="hover:text-dkm-yellow transition-colors">
+                  Spielregeln
+                </a>
+              </li>
+              <li>
+                <a href="/preise" className="hover:text-dkm-yellow transition-colors">
+                  Preise
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Media */}
+          <div>
+            <h3 className="font-encode font-bold text-lg mb-4">Folge uns</h3>
+            <div className="flex space-x-4">
+              <a
+                href="#"
+                className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook size={20} className="text-white" />
+              </a>
+              <a
+                href="#"
+                className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} className="text-white" />
+              </a>
+              <a
+                href="#"
+                className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter size={20} className="text-white" />
+              </a>
+              <a
+                href="#"
+                className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} className="text-white" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-dkm-turquoise/30 mt-8 pt-8 text-center font-encode text-gray-400">
+          <p>&copy; 2025 DKM - Deutsche Kraftfahrzeug-Messe. Alle Rechte vorbehalten.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

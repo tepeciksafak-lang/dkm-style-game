@@ -8,50 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* DKM 2025 Brand Colors */
+    --dkm-navy: 205 55% 22%; /* #153b5d */
+    --dkm-turquoise: 178 43% 50%; /* #45b9b6 */
+    --dkm-yellow: 48 100% 50%; /* #ffcc00 */
+    --dkm-lime: 72 84% 58%; /* #c7d300 */
+    
+    /* Base colors using DKM palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 205 55% 22%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 205 55% 22%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 205 55% 22%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 205 55% 22%; /* DKM Navy */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 178 43% 50%; /* DKM Turquoise */
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 205 25% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 48 100% 50%; /* DKM Yellow */
+    --accent-foreground: 205 55% 22%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 178 43% 50%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Gradients */
+    --gradient-wave: linear-gradient(90deg, hsl(var(--dkm-navy)), hsl(var(--dkm-turquoise)), hsl(var(--dkm-yellow)));
+    --gradient-wave-reverse: linear-gradient(90deg, hsl(var(--dkm-yellow)), hsl(var(--dkm-turquoise)), hsl(var(--dkm-lime)));
+    
+    /* Shadows and effects */
+    --shadow-smooth: 0 4px 20px -2px hsl(205 55% 22% / 0.1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -101,5 +109,21 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Encode Sans', sans-serif;
+  }
+  
+  /* DKM specific utilities */
+  .dkm-wave-header {
+    background: var(--gradient-wave);
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  }
+  
+  .dkm-wave-bottom {
+    background: var(--gradient-wave-reverse);
+    clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
+  }
+  
+  .font-encode {
+    font-family: 'Encode Sans', sans-serif;
   }
 }

@@ -17,8 +17,8 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 2,
-    question: "Das DKM-Logo ist grün.",
-    answer: false,
+    question: "Die DKM ist die Leitmesse für die Finanz- und Versicherungswirtschaft.",
+    answer: true,
   },
   {
     id: 3,
@@ -37,13 +37,13 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 6,
-    question: "Die Messe läuft zwei Tage.",
+    question: "Die DKM 2025 läuft zwei Tage.",
     answer: true,
   },
   {
     id: 7,
-    question: "Social Media Icons dürfen beliebige Farben haben.",
-    answer: false,
+    question: "Das DKM-Logo enthält einen Leuchtturm.",
+    answer: true,
   },
 ];
 
@@ -96,7 +96,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
                 ? "Wow! Du bist ein echter DKM-Experte! 🏆" 
                 : score >= 4 
                 ? "Sehr gut! Du kennst dich schon gut mit der DKM aus! 👏"
-                : "Nicht schlecht! Schau gerne bei der DKM 2025 vorbei und lerne mehr! 🚗"
+                : "Nicht schlecht! Schau gerne bei der DKM 2025 vorbei und lerne mehr! 💼"
               }
             </p>
             <p className="font-encode text-lg text-gray-600 mb-8">

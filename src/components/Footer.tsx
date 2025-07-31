@@ -7,11 +7,28 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo und Event Info */}
           <div className="col-span-1 md:col-span-2">
-            <div className="font-encode font-black text-3xl mb-4">
-              DKM 2025
+            <div className="flex items-center mb-4">
+              {/* DKM Logo mit Leuchtturm */}
+              <div className="relative mr-3">
+                <div className="w-6 h-9 bg-white rounded-t-lg relative">
+                  <div className="w-4 h-1.5 bg-dkm-yellow absolute top-1.5 left-1 rounded"></div>
+                  <div className="w-4 h-1.5 bg-white absolute top-3.5 left-1 rounded"></div>
+                  <div className="w-4 h-1.5 bg-dkm-yellow absolute top-5.5 left-1 rounded"></div>
+                  <div className="w-8 h-2 bg-white absolute -top-1 -left-1 rounded-full"></div>
+                </div>
+                <div className="w-8 h-3 bg-white absolute -bottom-1 -left-1 rounded-b-lg"></div>
+              </div>
+              <div>
+                <div className="font-encode font-black text-2xl text-white">
+                  DKM
+                </div>
+                <div className="font-encode text-xs text-white/90 -mt-1">
+                  DIE LEITMESSE
+                </div>
+              </div>
             </div>
             <div className="font-encode space-y-2 text-gray-300">
-              <p className="font-semibold">Deutsche Kraftfahrzeug-Messe</p>
+              <p className="font-semibold">Die Leitmesse für die Finanz- und Versicherungswirtschaft</p>
               <p>26. - 27. März 2025</p>
               <p>Dortmund, Deutschland</p>
               <p>Messe Westfalenhallen</p>

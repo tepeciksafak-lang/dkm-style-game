@@ -42,11 +42,14 @@ const Home = () => {
           {/* Hero Section */}
           <section className="relative py-20 px-4 bg-white">
             <div className="container mx-auto max-w-4xl text-center">
-              <h1 className="font-encode font-black text-5xl md:text-7xl text-dkm-navy mb-6">
+              <h1 className="font-encode font-black text-5xl md:text-7xl text-dkm-navy mb-4">
                 DKM 2025 Quiz
               </h1>
+              <p className="font-encode text-lg text-dkm-navy/80 mb-2">
+                Die Leitmesse für die Finanz- und Versicherungswirtschaft
+              </p>
               <p className="font-encode font-semibold text-xl md:text-2xl text-dkm-navy mb-12 max-w-2xl mx-auto leading-relaxed">
-                Teste dein Wissen über die Deutsche Kraftfahrzeug-Messe und gewinne tolle Preise!
+                Teste dein Wissen über die DKM und gewinne tolle Preise!
               </p>
               
               <Button 
@@ -81,8 +84,8 @@ const Home = () => {
                 
                 <Card className="p-8 text-center border-2 border-dkm-lime/20">
                   <div className="font-encode font-black text-4xl text-dkm-lime mb-4">∞</div>
-                  <h3 className="font-encode font-bold text-xl text-dkm-navy mb-2">Spaß</h3>
-                  <p className="font-encode text-gray-600">Entdecke die Welt der Mobilität</p>
+                  <h3 className="font-encode font-bold text-xl text-dkm-navy mb-2">Expertise</h3>
+                  <p className="font-encode text-gray-600">Entdecke die Finanz- und Versicherungswelt</p>
                 </Card>
               </div>
             </div>

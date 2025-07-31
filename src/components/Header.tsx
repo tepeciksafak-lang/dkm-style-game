@@ -15,8 +15,8 @@ const Header = () => {
 
   return (
     <header className="relative">
-      {/* Wellenform Hintergrund */}
-      <div className="dkm-wave-header h-24 relative">
+      {/* Header mit linearem Verlauf */}
+      <div className="dkm-header-gradient h-24 relative">
         <div className="container mx-auto px-4 h-full flex items-center justify-between relative z-10">
           {/* DKM Logo mit Leuchtturm-Icon */}
           <Link to="/" className="flex items-center space-x-3">

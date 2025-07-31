@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        dkm: "bg-dkm-yellow text-dkm-navy hover:bg-dkm-turquoise hover:text-white shadow-[var(--shadow-smooth)] transform hover:scale-105",
+        dkm: "bg-dkm-yellow text-dkm-navy hover:bg-dkm-yellow/90 shadow-[var(--shadow-smooth)] transform hover:scale-105",
         "dkm-true": "bg-dkm-turquoise text-white hover:bg-dkm-turquoise/90 border-2 border-transparent hover:border-dkm-navy",
         "dkm-false": "bg-background text-dkm-navy border-2 border-dkm-navy hover:bg-dkm-navy hover:text-white",
       },

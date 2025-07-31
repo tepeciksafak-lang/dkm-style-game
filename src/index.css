@@ -45,9 +45,8 @@ All colors MUST be HSL.
 
     --radius: 1rem;
 
-    /* Gradients */
-    --gradient-wave: linear-gradient(90deg, hsl(var(--dkm-navy)), hsl(var(--dkm-turquoise)), hsl(var(--dkm-yellow)));
-    --gradient-wave-reverse: linear-gradient(90deg, hsl(var(--dkm-yellow)), hsl(var(--dkm-turquoise)), hsl(var(--dkm-lime)));
+    /* Gradients - Header only: dark blue to turquoise */
+    --gradient-header: linear-gradient(90deg, #153b5d, #45b9b6);
     
     /* Shadows and effects */
     --shadow-smooth: 0 4px 20px -2px hsl(205 55% 22% / 0.1);
@@ -113,13 +112,12 @@ All colors MUST be HSL.
   }
   
   /* DKM specific utilities */
-  .dkm-wave-header {
-    background: var(--gradient-wave);
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  .dkm-header-gradient {
+    background: var(--gradient-header);
   }
   
   .dkm-wave-bottom {
-    background: var(--gradient-wave-reverse);
+    background: linear-gradient(90deg, #ffcc00, #c7d300);
     clip-path: polygon(0 20%, 50% 0, 100% 20%, 100% 100%, 0 100%);
   }
   

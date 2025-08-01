@@ -33,6 +33,47 @@ const Home = () => {
     return <Quiz playerName={playerName} onComplete={handleQuizComplete} />;
   }
 
+  if (gameState === "result") {
+    return (
+      <div className="min-h-screen bg-white py-16 px-4">
+        <div className="container mx-auto max-w-2xl text-center">
+          <div className="mb-8">
+            <h1 className="font-encode font-black text-4xl md:text-6xl text-dkm-navy mb-6">
+              Herzlichen Glückwunsch, {playerName}!
+            </h1>
+            <div className="text-6xl md:text-8xl font-encode font-black text-dkm-turquoise mb-6">
+              {score}/7
+            </div>
+            <p className="font-encode text-xl text-dkm-navy mb-8">
+              {score >= 6 
+                ? "Wow! Du bist ein echter DKM-Experte! 🏆" 
+                : score >= 4 
+                ? "Sehr gut! Du kennst dich schon gut mit der DKM aus! 👏"
+                : "Nicht schlecht! Schau gerne bei der DKM 2025 vorbei und lerne mehr! 💼"
+              }
+            </p>
+            <p className="font-encode text-lg text-gray-600 mb-8">
+              Wir freuen uns darauf, dich auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
+            </p>
+            <Button 
+              variant="dkm" 
+              size="lg"
+              onClick={() => {
+                setGameState("start");
+                setPlayerName("");
+                setEmail("");
+                setScore(0);
+              }}
+              className="mr-4"
+            >
+              Nochmal spielen
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <Header />

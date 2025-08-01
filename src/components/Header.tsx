@@ -18,22 +18,17 @@ const Header = () => {
       {/* Header mit linearem Verlauf */}
       <div className="dkm-header-gradient h-24 relative">
         <div className="container mx-auto px-4 h-full flex items-center justify-between relative z-10">
-          {/* DKM Logo mit Leuchtturm-Icon */}
+          {/* DKM Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <div className="flex items-center">
-              {/* Vereinfachtes Leuchtturm-Icon */}
-              <div className="relative">
-                <div className="w-8 h-12 bg-white rounded-t-lg relative">
-                  <div className="w-6 h-2 bg-dkm-yellow absolute top-2 left-1 rounded"></div>
-                  <div className="w-6 h-2 bg-white absolute top-5 left-1 rounded"></div>
-                  <div className="w-6 h-2 bg-dkm-yellow absolute top-8 left-1 rounded"></div>
-                  <div className="w-10 h-3 bg-white absolute -top-1 -left-1 rounded-full"></div>
-                </div>
-                <div className="w-10 h-4 bg-white absolute -bottom-1 -left-1 rounded-b-lg"></div>
-              </div>
-              <div className="ml-2">
-                <div className="font-encode font-black text-3xl text-white tracking-tight">
-                  DKM
+              <img 
+                src="/lovable-uploads/cc8ef3b0-09fe-4585-be6b-b548a3122f75.png" 
+                alt="DKM Logo" 
+                className="h-16 w-auto"
+              />
+              <div className="ml-3">
+                <div className="font-encode font-black text-2xl text-white tracking-tight">
+                  DKM 2025
                 </div>
                 <div className="font-encode text-xs text-white/90 leading-tight -mt-1">
                   DIE LEITMESSE

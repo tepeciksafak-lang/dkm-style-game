@@ -4,20 +4,15 @@ const Footer = () => {
   return (
     <footer className="bg-dkm-navy text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Logo und Event Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              {/* DKM Logo mit Leuchtturm */}
-              <div className="relative mr-3">
-                <div className="w-6 h-9 bg-white rounded-t-lg relative">
-                  <div className="w-4 h-1.5 bg-dkm-yellow absolute top-1.5 left-1 rounded"></div>
-                  <div className="w-4 h-1.5 bg-white absolute top-3.5 left-1 rounded"></div>
-                  <div className="w-4 h-1.5 bg-dkm-yellow absolute top-5.5 left-1 rounded"></div>
-                  <div className="w-8 h-2 bg-white absolute -top-1 -left-1 rounded-full"></div>
-                </div>
-                <div className="w-8 h-3 bg-white absolute -bottom-1 -left-1 rounded-b-lg"></div>
-              </div>
+              <img 
+                src="/lovable-uploads/cc8ef3b0-09fe-4585-be6b-b548a3122f75.png" 
+                alt="DKM Logo" 
+                className="h-12 w-auto mr-3"
+              />
               <div>
                 <div className="font-encode font-black text-2xl text-white">
                   DKM
@@ -52,6 +47,23 @@ const Footer = () => {
               <li>
                 <a href="/preise" className="hover:text-dkm-yellow transition-colors">
                   Preise
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Rechtliches */}
+          <div>
+            <h3 className="font-encode font-bold text-lg mb-4">Rechtliches</h3>
+            <ul className="space-y-2 font-encode">
+              <li>
+                <a href="#" className="hover:text-dkm-yellow transition-colors">
+                  Datenschutz
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-dkm-yellow transition-colors">
+                  Impressum
                 </a>
               </li>
             </ul>

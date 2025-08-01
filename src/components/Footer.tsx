@@ -9,18 +9,10 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
               <img 
-                src="/lovable-uploads/cc8ef3b0-09fe-4585-be6b-b548a3122f75.png" 
+                src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
                 alt="DKM Logo" 
-                className="h-12 w-auto mr-3"
+                className="h-12 w-auto"
               />
-              <div>
-                <div className="font-encode font-black text-2xl text-white">
-                  DKM
-                </div>
-                <div className="font-encode text-xs text-white/90 -mt-1">
-                  DIE LEITMESSE
-                </div>
-              </div>
             </div>
             <div className="font-encode space-y-2 text-gray-300">
               <p className="font-semibold">Die Leitmesse für die Finanz- und Versicherungswirtschaft</p>

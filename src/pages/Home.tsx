@@ -66,7 +66,7 @@ const Home = () => {
               }}
               className="mr-4"
             >
-              Nochmal spielen
+              Zurück zum Start
             </Button>
           </div>
         </div>

@@ -49,12 +49,12 @@ const Footer = () => {
             <h3 className="font-encode font-bold text-lg mb-4">Rechtliches</h3>
             <ul className="space-y-2 font-encode">
               <li>
-                <a href="#" className="hover:text-dkm-yellow transition-colors">
+                <a href="/datenschutz" className="hover:text-dkm-yellow transition-colors">
                   Datenschutz
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-dkm-yellow transition-colors">
+                <a href="/impressum" className="hover:text-dkm-yellow transition-colors">
                   Impressum
                 </a>
               </li>

@@ -16,7 +16,7 @@ const Footer = () => {
             </div>
             <div className="font-encode space-y-2 text-gray-300">
               <p className="font-semibold">Die Leitmesse für die Finanz- und Versicherungswirtschaft</p>
-              <p>26. - 27. März 2025</p>
+              <p>28.–29. Oktober 2025</p>
               <p>Dortmund, Deutschland</p>
               <p>Messe Westfalenhallen</p>
             </div>

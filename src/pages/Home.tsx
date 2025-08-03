@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Quiz from "@/components/Quiz";
+import heroBg from "@/assets/hero-dkm-background.jpg";
 
 const Home = () => {
   const [gameState, setGameState] = useState<"start" | "register" | "quiz" | "result">("start");
@@ -81,15 +82,21 @@ const Home = () => {
       {gameState === "start" && (
         <>
           {/* Hero Section */}
-          <section className="relative py-32 px-4 bg-white min-h-[80vh] flex items-center">
-            <div className="container mx-auto max-w-4xl text-center">
-              <h1 className="font-encode font-black text-5xl md:text-7xl text-dkm-navy mb-6">
+          <section 
+            className="relative py-32 px-4 min-h-[80vh] flex items-center bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroBg})` }}
+          >
+            {/* Overlay for better text readability */}
+            <div className="absolute inset-0 bg-dkm-navy/70"></div>
+            
+            <div className="container mx-auto max-w-4xl text-center relative z-10">
+              <h1 className="font-encode font-black text-5xl md:text-7xl text-white mb-6">
                 DKM 2025 Quiz
               </h1>
-              <p className="font-encode text-lg text-dkm-navy/80 mb-4">
+              <p className="font-encode text-lg text-white/90 mb-4">
                 Die Leitmesse für die Finanz- und Versicherungswirtschaft
               </p>
-              <p className="font-encode font-semibold text-xl md:text-2xl text-dkm-navy mb-16 max-w-2xl mx-auto leading-relaxed">
+              <p className="font-encode font-semibold text-xl md:text-2xl text-white mb-16 max-w-2xl mx-auto leading-relaxed">
                 Teste dein Wissen über die DKM und gewinne tolle Preise!
               </p>
               
@@ -97,7 +104,7 @@ const Home = () => {
                 variant="dkm" 
                 size="lg"
                 onClick={handleStartQuiz}
-                className="text-xl px-12 py-6 mb-16"
+                className="text-xl px-12 py-6 mb-16 bg-dkm-yellow hover:bg-dkm-yellow/90 text-dkm-navy font-bold"
               >
                 Quiz starten
               </Button>

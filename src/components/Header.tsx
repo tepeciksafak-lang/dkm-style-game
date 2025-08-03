@@ -19,22 +19,12 @@ const Header = () => {
       <div className="dkm-header-gradient h-24 relative">
         <div className="container mx-auto px-4 h-full flex items-center justify-between relative z-10">
           {/* DKM Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/cc8ef3b0-09fe-4585-be6b-b548a3122f75.png" 
-                alt="DKM Logo" 
-                className="h-16 w-auto"
-              />
-              <div className="ml-3">
-                <div className="font-encode font-black text-2xl text-white tracking-tight">
-                  DKM 2025
-                </div>
-                <div className="font-encode text-xs text-white/90 leading-tight -mt-1">
-                  DIE LEITMESSE
-                </div>
-              </div>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
+              alt="DKM Logo" 
+              className="h-16 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

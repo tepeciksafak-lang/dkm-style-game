@@ -11,7 +11,7 @@ All colors MUST be HSL.
     /* DKM 2025 Brand Colors - Exakte Styleguide Werte */
     --dkm-navy: 205 55% 22%; /* #153b5d */
     --dkm-turquoise: 178 43% 50%; /* #45b9b6 */  
-    --dkm-yellow: 48 100% 50%; /* #ffcc00 */
+    --dkm-yellow: 39 100% 50%; /* #FFA500 */
     --dkm-lime: 72 84% 58%; /* #c7d300 */
     
     /* Base colors using DKM palette */
@@ -33,7 +33,7 @@ All colors MUST be HSL.
     --muted: 210 40% 96.1%;
     --muted-foreground: 205 25% 45%;
 
-    --accent: 48 100% 50%; /* DKM Yellow */
+    --accent: 39 100% 50%; /* DKM Yellow */
     --accent-foreground: 205 55% 22%;
 
     --destructive: 0 84.2% 60.2%;

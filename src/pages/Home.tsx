@@ -5,36 +5,36 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Quiz from "@/components/Quiz";
+import Challenge from "@/components/Quiz";
 import heroBg from "@/assets/hero-dkm-background.jpg";
 import landingStadium from "@/assets/landing-stadium-sunset.jpg";
 import tunnelEntrance from "@/assets/tunnel-entrance.jpg";
 import trophyCelebration from "@/assets/trophy-celebration.jpg";
 
 const Home = () => {
-  const [gameState, setGameState] = useState<"start" | "register" | "quiz" | "result">("start");
+  const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
   const [playerName, setPlayerName] = useState("");
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
 
-  const handleStartQuiz = () => {
+  const handleStartChallenge = () => {
     setGameState("register");
   };
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     if (playerName.trim() && email.trim()) {
-      setGameState("quiz");
+      setGameState("challenge");
     }
   };
 
-  const handleQuizComplete = (finalScore: number) => {
+  const handleChallengeComplete = (finalScore: number) => {
     setScore(finalScore);
     setGameState("result");
   };
 
-  if (gameState === "quiz") {
-    return <Quiz playerName={playerName} onComplete={handleQuizComplete} />;
+  if (gameState === "challenge") {
+    return <Challenge playerName={playerName} onComplete={handleChallengeComplete} />;
   }
 
   if (gameState === "result") {
@@ -99,7 +99,7 @@ const Home = () => {
             
             <div className="container mx-auto max-w-4xl text-center relative z-10">
               <h1 className="font-encode font-black text-5xl md:text-7xl text-white mb-6">
-                DKM 2025 Quiz
+                DKM 2025 Challenge
               </h1>
               <p className="font-encode text-lg text-white/90 mb-4">
                 Die Leitmesse für die Finanz- und Versicherungswirtschaft
@@ -111,10 +111,10 @@ const Home = () => {
               <Button 
                 variant="dkm" 
                 size="lg"
-                onClick={handleStartQuiz}
+                onClick={handleStartChallenge}
                 className="text-xl px-12 py-6 mb-16 bg-dkm-yellow hover:bg-dkm-yellow/90 text-dkm-navy font-bold"
               >
-                Quiz starten
+                Challenge starten
               </Button>
             </div>
             
@@ -162,7 +162,7 @@ const Home = () => {
                 Fast geschafft!
               </h2>
               <p className="font-encode text-gray-600">
-                Bitte gib deine Daten ein, um am Quiz teilzunehmen.
+                Bitte gib deine Daten ein, um an der Challenge teilzunehmen.
               </p>
             </div>
             

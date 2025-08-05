@@ -29,7 +29,7 @@ const Datenschutz = () => {
 
               <p className="leading-relaxed mb-4">
                 <strong>Wie erfassen wir Ihre Daten?</strong><br />
-                Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben oder beim Quiz-Teilnahme angeben.
+                Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben oder bei der Challenge-Teilnahme angeben.
               </p>
 
               <p className="leading-relaxed">
@@ -99,9 +99,9 @@ const Datenschutz = () => {
                 <li>IP-Adresse</li>
               </ul>
 
-              <h3 className="font-bold text-xl mb-2 mt-6">Kontaktformulare und Quiz-Teilnahme</h3>
+              <h3 className="font-bold text-xl mb-2 mt-6">Kontaktformulare und Challenge-Teilnahme</h3>
               <p className="leading-relaxed mb-4">
-                Wenn Sie an unserem Quiz teilnehmen oder uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+                Wenn Sie an unserer Challenge teilnehmen oder uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
               </p>
               <p className="leading-relaxed">
                 Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).

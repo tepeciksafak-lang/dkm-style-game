@@ -17,7 +17,7 @@ const Spielregeln = () => {
               Spielregeln
             </h1>
             <p className="font-encode text-xl text-gray-600 max-w-2xl mx-auto">
-              Alles was du über das DKM 2025 Quiz wissen musst – einfach, fair und transparent.
+              Alles was du über die DKM 2025 Challenge wissen musst – einfach, fair und transparent.
             </p>
           </div>
 
@@ -51,12 +51,12 @@ const Spielregeln = () => {
               </div>
             </Card>
 
-            {/* Quiz-Ablauf */}
+            {/* Challenge-Ablauf */}
             <Card className="p-8 border-2 border-dkm-yellow/20">
               <div className="flex items-center mb-4">
                 <Info className="text-dkm-yellow mr-3" size={32} />
                 <h2 className="font-encode font-black text-2xl text-dkm-navy">
-                  Quiz-Ablauf
+                  Challenge-Ablauf
                 </h2>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
@@ -127,13 +127,13 @@ const Spielregeln = () => {
             </h2>
             <div className="space-y-4 font-encode text-gray-700">
               <p>
-                ✅ <strong>Fairplay:</strong> Das Quiz basiert auf öffentlich verfügbaren Informationen zur DKM 2025.
+                ✅ <strong>Fairplay:</strong> Die Challenge basiert auf öffentlich verfügbaren Informationen zur DKM 2025.
               </p>
               <p>
-                ✅ <strong>Datenschutz:</strong> Deine Daten werden nur für die Quiz-Teilnahme verwendet und nicht an Dritte weitergegeben.
+                ✅ <strong>Datenschutz:</strong> Deine Daten werden nur für die Challenge-Teilnahme verwendet und nicht an Dritte weitergegeben.
               </p>
               <p>
-                ✅ <strong>Technische Anforderungen:</strong> Das Quiz funktioniert auf allen modernen Browsern und Geräten.
+                ✅ <strong>Technische Anforderungen:</strong> Die Challenge funktioniert auf allen modernen Browsern und Geräten.
               </p>
               <p>
                 ✅ <strong>Support:</strong> Bei technischen Problemen wende dich an unser Support-Team.
@@ -144,7 +144,7 @@ const Spielregeln = () => {
           {/* CTA */}
           <div className="text-center">
             <h3 className="font-encode font-black text-3xl text-dkm-navy mb-4">
-              Bereit für das Quiz?
+              Bereit für die Challenge?
             </h3>
             <p className="font-encode text-lg text-gray-600 mb-8">
               Teste jetzt dein Wissen über die DKM 2025!
@@ -155,7 +155,7 @@ const Spielregeln = () => {
               onClick={() => window.location.href = "/"}
               className="text-xl px-12 py-6"
             >
-              Zum Quiz
+              Zur Challenge
             </Button>
           </div>
         </div>

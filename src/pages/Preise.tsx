@@ -159,7 +159,7 @@ const Preise = () => {
                   <div className="w-16 h-16 bg-dkm-turquoise rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
                     2
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Quiz spielen</h3>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Challenge spielen</h3>
                   <p className="font-encode text-gray-600">Beantworte 7 Fragen über die DKM</p>
                 </div>
                 <div className="text-center">
@@ -210,7 +210,7 @@ const Preise = () => {
               Worauf wartest du noch?
             </h3>
             <p className="font-encode text-lg text-gray-600 mb-8">
-              Starte jetzt das Quiz und sichere dir deine Chance auf fantastische Preise!
+              Starte jetzt die Challenge und sichere dir deine Chance auf fantastische Preise!
             </p>
             <Button 
               variant="dkm" 
@@ -218,7 +218,7 @@ const Preise = () => {
               onClick={() => window.location.href = "/"}
               className="text-xl px-12 py-6"
             >
-              Jetzt Quiz starten
+              Jetzt Challenge starten
             </Button>
           </div>
         </div>

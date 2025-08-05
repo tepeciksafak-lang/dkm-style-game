@@ -8,13 +8,13 @@ import penaltyKick from "@/assets/penalty-kick.jpg";
 import stadiumAerialNight from "@/assets/stadium-aerial-night.jpg";
 import trophyCelebration from "@/assets/trophy-celebration.jpg";
 
-interface QuizQuestion {
+interface ChallengeQuestion {
   id: number;
   question: string;
   answer: boolean;
 }
 
-const quizQuestions: QuizQuestion[] = [
+const challengeQuestions: ChallengeQuestion[] = [
   {
     id: 1,
     question: "Die DKM 2025 findet in Dortmund statt.",
@@ -32,7 +32,7 @@ const quizQuestions: QuizQuestion[] = [
   },
   {
     id: 4,
-    question: "Ein Quizteilnehmer kann anonym teilnehmen.",
+    question: "Ein Challenge-Teilnehmer kann anonym teilnehmen.",
     answer: false,
   },
   {
@@ -52,12 +52,12 @@ const quizQuestions: QuizQuestion[] = [
   },
 ];
 
-interface QuizProps {
+interface ChallengeProps {
   playerName: string;
   onComplete: (score: number) => void;
 }
 
-const Quiz = ({ playerName, onComplete }: QuizProps) => {
+const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [showResult, setShowResult] = useState(false);
@@ -66,12 +66,12 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
 
-    if (currentQuestion < quizQuestions.length - 1) {
+    if (currentQuestion < challengeQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Quiz beendet - Score berechnen
+      // Challenge beendet - Score berechnen
       const score = newAnswers.reduce((total, userAnswer, index) => {
-        return total + (userAnswer === quizQuestions[index].answer ? 1 : 0);
+        return total + (userAnswer === challengeQuestions[index].answer ? 1 : 0);
       }, 0);
       
       setShowResult(true);
@@ -79,7 +79,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
     }
   };
 
-  const progress = ((currentQuestion) / quizQuestions.length) * 100;
+  const progress = ((currentQuestion) / challengeQuestions.length) * 100;
 
   // Get background image for current question
   const getBackgroundImage = () => {
@@ -91,7 +91,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
 
   if (showResult) {
     const score = answers.reduce((total, userAnswer, index) => {
-      return total + (userAnswer === quizQuestions[index].answer ? 1 : 0);
+      return total + (userAnswer === challengeQuestions[index].answer ? 1 : 0);
     }, 0);
 
     return (
@@ -146,7 +146,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
             <span className="font-encode font-bold text-white">
-              Frage {currentQuestion + 1} von {quizQuestions.length}
+              Frage {currentQuestion + 1} von {challengeQuestions.length}
             </span>
             <span className="font-encode font-bold text-dkm-yellow">
               {Math.round(progress)}%
@@ -159,7 +159,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
         <Card className="p-8 md:p-12 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)] bg-white/95 backdrop-blur-sm">
           <div className="text-center">
             <h2 className="font-encode font-black text-2xl md:text-3xl text-dkm-navy mb-12">
-              {quizQuestions[currentQuestion].question}
+              {challengeQuestions[currentQuestion].question}
             </h2>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -187,4 +187,4 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
   );
 };
 
-export default Quiz;
+export default Challenge;

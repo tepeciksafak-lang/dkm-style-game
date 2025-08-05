@@ -2,6 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import centerCircleCrowd from "@/assets/center-circle-crowd.jpg";
+import runningToGoal from "@/assets/running-to-goal.jpg";
+import penaltyKick from "@/assets/penalty-kick.jpg";
+import stadiumAerialNight from "@/assets/stadium-aerial-night.jpg";
+import trophyCelebration from "@/assets/trophy-celebration.jpg";
 
 interface QuizQuestion {
   id: number;
@@ -76,22 +81,35 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
 
   const progress = ((currentQuestion) / quizQuestions.length) * 100;
 
+  // Get background image for current question
+  const getBackgroundImage = () => {
+    if (currentQuestion < 2) return centerCircleCrowd;
+    if (currentQuestion < 4) return runningToGoal;
+    if (currentQuestion < 6) return penaltyKick;
+    return stadiumAerialNight; // For the last question
+  };
+
   if (showResult) {
     const score = answers.reduce((total, userAnswer, index) => {
       return total + (userAnswer === quizQuestions[index].answer ? 1 : 0);
     }, 0);
 
     return (
-      <div className="min-h-screen bg-white py-16 px-4">
-        <div className="container mx-auto max-w-2xl text-center">
+      <div 
+        className="min-h-screen py-16 px-4 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${trophyCelebration})` }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto max-w-2xl text-center relative z-10">
           <div className="mb-8">
-            <h1 className="font-encode font-black text-4xl md:text-6xl text-dkm-navy mb-6">
+            <h1 className="font-encode font-black text-4xl md:text-6xl text-white mb-6">
               Herzlichen Glückwunsch, {playerName}!
             </h1>
-            <div className="text-6xl md:text-8xl font-encode font-black text-dkm-turquoise mb-6">
+            <div className="text-6xl md:text-8xl font-encode font-black text-dkm-yellow mb-6">
               {score}/7
             </div>
-            <p className="font-encode text-xl text-dkm-navy mb-8">
+            <p className="font-encode text-xl text-white mb-8">
               {score >= 6 
                 ? "Wow! Du bist ein echter DKM-Experte! 🏆" 
                 : score >= 4 
@@ -99,7 +117,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
                 : "Nicht schlecht! Schau gerne bei der DKM 2025 vorbei und lerne mehr! 💼"
               }
             </p>
-            <p className="font-encode text-lg text-gray-600 mb-8">
+            <p className="font-encode text-lg text-white/90 mb-8">
               Wir freuen uns darauf, dich auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
             </p>
             <Button 
@@ -117,15 +135,20 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4">
-      <div className="container mx-auto max-w-2xl">
+    <div 
+      className="min-h-screen py-16 px-4 bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${getBackgroundImage()})` }}
+    >
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="container mx-auto max-w-2xl relative z-10">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
-            <span className="font-encode font-bold text-dkm-navy">
+            <span className="font-encode font-bold text-white">
               Frage {currentQuestion + 1} von {quizQuestions.length}
             </span>
-            <span className="font-encode font-bold text-dkm-turquoise">
+            <span className="font-encode font-bold text-dkm-yellow">
               {Math.round(progress)}%
             </span>
           </div>
@@ -133,7 +156,7 @@ const Quiz = ({ playerName, onComplete }: QuizProps) => {
         </div>
 
         {/* Question Card */}
-        <Card className="p-8 md:p-12 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)]">
+        <Card className="p-8 md:p-12 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)] bg-white/95 backdrop-blur-sm">
           <div className="text-center">
             <h2 className="font-encode font-black text-2xl md:text-3xl text-dkm-navy mb-12">
               {quizQuestions[currentQuestion].question}

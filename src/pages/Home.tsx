@@ -7,6 +7,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Quiz from "@/components/Quiz";
 import heroBg from "@/assets/hero-dkm-background.jpg";
+import landingStadium from "@/assets/landing-stadium-sunset.jpg";
+import tunnelEntrance from "@/assets/tunnel-entrance.jpg";
+import trophyCelebration from "@/assets/trophy-celebration.jpg";
 
 const Home = () => {
   const [gameState, setGameState] = useState<"start" | "register" | "quiz" | "result">("start");
@@ -36,16 +39,21 @@ const Home = () => {
 
   if (gameState === "result") {
     return (
-      <div className="min-h-screen bg-white py-16 px-4">
-        <div className="container mx-auto max-w-2xl text-center">
+      <div 
+        className="min-h-screen py-16 px-4 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${trophyCelebration})` }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto max-w-2xl text-center relative z-10">
           <div className="mb-8">
-            <h1 className="font-encode font-black text-4xl md:text-6xl text-dkm-navy mb-6">
+            <h1 className="font-encode font-black text-4xl md:text-6xl text-white mb-6">
               Herzlichen Glückwunsch, {playerName}!
             </h1>
-            <div className="text-6xl md:text-8xl font-encode font-black text-dkm-turquoise mb-6">
+            <div className="text-6xl md:text-8xl font-encode font-black text-dkm-yellow mb-6">
               {score}/7
             </div>
-            <p className="font-encode text-xl text-dkm-navy mb-8">
+            <p className="font-encode text-xl text-white mb-8">
               {score >= 6 
                 ? "Wow! Du bist ein echter DKM-Experte! 🏆" 
                 : score >= 4 
@@ -53,7 +61,7 @@ const Home = () => {
                 : "Nicht schlecht! Schau gerne bei der DKM 2025 vorbei und lerne mehr! 💼"
               }
             </p>
-            <p className="font-encode text-lg text-gray-600 mb-8">
+            <p className="font-encode text-lg text-white/90 mb-8">
               Wir freuen uns darauf, dich auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
             </p>
             <Button 
@@ -84,7 +92,7 @@ const Home = () => {
           {/* Hero Section */}
           <section 
             className="relative py-32 px-4 min-h-[80vh] flex items-center bg-cover bg-center"
-            style={{ backgroundImage: `url(${heroBg})` }}
+            style={{ backgroundImage: `url(${landingStadium})` }}
           >
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 bg-dkm-navy/70"></div>
@@ -142,8 +150,13 @@ const Home = () => {
       )}
 
       {gameState === "register" && (
-        <section className="min-h-screen flex items-center justify-center py-16 px-4">
-          <Card className="w-full max-w-md p-8 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)]">
+        <section 
+          className="min-h-screen flex items-center justify-center py-16 px-4 bg-cover bg-center relative"
+          style={{ backgroundImage: `url(${tunnelEntrance})` }}
+        >
+          {/* Overlay for better readability */}
+          <div className="absolute inset-0 bg-black/50"></div>
+          <Card className="w-full max-w-md p-8 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)] relative z-10 bg-white/95 backdrop-blur-sm">
             <div className="text-center mb-8">
               <h2 className="font-encode font-black text-3xl text-dkm-navy mb-2">
                 Fast geschafft!

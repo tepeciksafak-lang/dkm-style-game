@@ -124,7 +124,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-dkm-turquoise/30 mt-8 pt-8 text-center font-encode text-gray-400">
-          <p>&copy; 2025 DKM - Deutsche Kraftfahrzeug-Messe. Alle Rechte vorbehalten.</p>
+          <p>&copy; 2025 DKM - Die Leitmesse. Alle Rechte vorbehalten.</p>
         </div>
       </div>
     </footer>

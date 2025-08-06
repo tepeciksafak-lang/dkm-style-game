@@ -7,11 +7,16 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Logo und Event Info */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <img 
                 src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
                 alt="DKM Logo" 
                 className="h-12 w-auto"
+              />
+              <img 
+                src="/lovable-uploads/169b942d-e497-405b-a013-0fb3e9606734.png" 
+                alt="Salevium Logo" 
+                className="h-9 w-auto"
               />
             </div>
             <div className="font-encode space-y-2 text-gray-300">

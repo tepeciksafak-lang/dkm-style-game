@@ -18,12 +18,17 @@ const Header = () => {
       {/* Header mit linearem Verlauf */}
       <div className="dkm-header-gradient h-24 relative">
         <div className="container mx-auto px-4 h-full flex items-center justify-between relative z-10">
-          {/* DKM Logo */}
-          <Link to="/" className="flex items-center">
+          {/* DKM & Salevium Logos */}
+          <Link to="/" className="flex items-center gap-4">
             <img 
               src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
               alt="DKM Logo" 
               className="h-16 w-auto"
+            />
+            <img 
+              src="/lovable-uploads/169b942d-e497-405b-a013-0fb3e9606734.png" 
+              alt="Salevium Logo" 
+              className="h-12 w-auto"
             />
           </Link>
 

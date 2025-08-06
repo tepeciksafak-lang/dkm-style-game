@@ -33,7 +33,7 @@ const Footer = () => {
             <ul className="space-y-2 font-encode">
               <li>
                 <a href="/" className="hover:text-dkm-yellow transition-colors">
-                  Home
+                  Die Challenge
                 </a>
               </li>
               <li>

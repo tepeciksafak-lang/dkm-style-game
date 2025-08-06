@@ -10,6 +10,10 @@ import heroBg from "@/assets/hero-dkm-background.jpg";
 import landingStadium from "@/assets/landing-stadium-sunset.jpg";
 import tunnelEntrance from "@/assets/tunnel-entrance.jpg";
 import trophyCelebration from "@/assets/trophy-celebration.jpg";
+import box1Kickoff from "@/assets/box1-kickoff.jpg";
+import box2Halftime from "@/assets/box2-halftime.jpg";
+import box3FinalWhistle from "@/assets/box3-final-whistle.jpg";
+import box4LiveChallenge from "@/assets/box4-live-challenge.jpg";
 
 const Home = () => {
   const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
@@ -122,26 +126,80 @@ const Home = () => {
             <div className="absolute bottom-0 left-0 right-0 h-32 dkm-wave-bottom"></div>
           </section>
 
-          {/* Info Section */}
+          {/* Challenge Milestone Section */}
           <section className="py-20 px-4 bg-gray-50">
-            <div className="container mx-auto max-w-4xl">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <Card className="p-8 text-center border-2 border-dkm-turquoise/20">
-                  <div className="font-encode font-black text-4xl text-dkm-turquoise mb-4">7</div>
-                  <h3 className="font-encode font-bold text-xl text-dkm-navy mb-2">Fragen</h3>
-                  <p className="font-encode text-gray-600">Spannende Wahr/Falsch-Fragen rund um die DKM</p>
+            <div className="container mx-auto max-w-6xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Level 1: Kickoff */}
+                <Card className="overflow-hidden border-2 border-dkm-turquoise/20 hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="h-48 bg-cover bg-center relative"
+                    style={{ backgroundImage: `url(${box1Kickoff})` }}
+                  >
+                    <div className="absolute inset-0 bg-dkm-navy/30"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Quiz Round 1</h3>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-encode text-dkm-navy font-semibold text-sm">
+                      Level 1: Kickoff – Start your journey and take the first quiz challenge!
+                    </p>
+                  </div>
                 </Card>
                 
-                <Card className="p-8 text-center border-2 border-dkm-yellow/20">
-                  <div className="font-encode font-black text-4xl text-dkm-yellow mb-4">2</div>
-                  <h3 className="font-encode font-bold text-xl text-dkm-navy mb-2">Tage</h3>
-                  <p className="font-encode text-gray-600">Die DKM 2025 am 26.-27. März in Dortmund</p>
+                {/* Level 2: Halftime */}
+                <Card className="overflow-hidden border-2 border-dkm-yellow/20 hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="h-48 bg-cover bg-center relative"
+                    style={{ backgroundImage: `url(${box2Halftime})` }}
+                  >
+                    <div className="absolute inset-0 bg-dkm-navy/30"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Quiz Round 2</h3>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-encode text-dkm-navy font-semibold text-sm">
+                      Level 2: Halftime – Show your knowledge and make it to the next round!
+                    </p>
+                  </div>
                 </Card>
                 
-                <Card className="p-8 text-center border-2 border-dkm-lime/20">
-                  <div className="font-encode font-black text-4xl text-dkm-lime mb-4">∞</div>
-                  <h3 className="font-encode font-bold text-xl text-dkm-navy mb-2">Expertise</h3>
-                  <p className="font-encode text-gray-600">Entdecke die Finanz- und Versicherungswelt</p>
+                {/* Level 3: Final Whistle */}
+                <Card className="overflow-hidden border-2 border-dkm-lime/20 hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="h-48 bg-cover bg-center relative"
+                    style={{ backgroundImage: `url(${box3FinalWhistle})` }}
+                  >
+                    <div className="absolute inset-0 bg-dkm-navy/30"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Quiz Round 3</h3>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-encode text-dkm-navy font-semibold text-sm">
+                      Level 3: The Final Whistle – Answer the last questions and secure your spot in the finals!
+                    </p>
+                  </div>
+                </Card>
+                
+                {/* Live Challenge */}
+                <Card className="overflow-hidden border-2 border-dkm-turquoise/20 hover:shadow-lg transition-shadow duration-300">
+                  <div 
+                    className="h-48 bg-cover bg-center relative"
+                    style={{ backgroundImage: `url(${box4LiveChallenge})` }}
+                  >
+                    <div className="absolute inset-0 bg-dkm-navy/30"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Live Challenge</h3>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-encode text-dkm-navy font-semibold text-sm">
+                      Live Challenge – Prove your skills at the Salevium stand during the Messe and win exclusive prizes!
+                    </p>
+                  </div>
                 </Card>
               </div>
             </div>

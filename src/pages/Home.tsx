@@ -138,12 +138,12 @@ const Home = () => {
                   >
                     <div className="absolute inset-0 bg-dkm-navy/30"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-encode font-bold text-lg text-white mb-1">Quiz Round 1</h3>
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Anpfiff</h3>
                     </div>
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Level 1: Kickoff – Start your journey and take the first quiz challenge!
+                      Der Schiedsrichter pfeift an – stelle dich der ersten Runde und sichere dir den perfekten Start!
                     </p>
                   </div>
                 </Card>
@@ -156,12 +156,12 @@ const Home = () => {
                   >
                     <div className="absolute inset-0 bg-dkm-navy/30"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-encode font-bold text-lg text-white mb-1">Quiz Round 2</h3>
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Kurz vor der Halbzeit</h3>
                     </div>
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Level 2: Halftime – Show your knowledge and make it to the next round!
+                      Bleib konzentriert – die Pause naht, jetzt zählt jeder Punkt!
                     </p>
                   </div>
                 </Card>
@@ -174,12 +174,12 @@ const Home = () => {
                   >
                     <div className="absolute inset-0 bg-dkm-navy/30"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-encode font-bold text-lg text-white mb-1">Quiz Round 3</h3>
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Zweite Halbzeit</h3>
                     </div>
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Level 3: The Final Whistle – Answer the last questions and secure your spot in the finals!
+                      Jetzt wird's spannend – gib noch einmal alles, das Finale ist zum Greifen nah!
                     </p>
                   </div>
                 </Card>
@@ -192,12 +192,12 @@ const Home = () => {
                   >
                     <div className="absolute inset-0 bg-dkm-navy/30"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-encode font-bold text-lg text-white mb-1">Live Challenge</h3>
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Finale am Spielfeldrand</h3>
                     </div>
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Live Challenge – Prove your skills at the Salevium stand during the Messe and win exclusive prizes!
+                      Zeig dein Können live am Salevium-Stand auf der Messe – exklusive Preise warten auf dich!
                     </p>
                   </div>
                 </Card>

@@ -77,55 +77,54 @@ const Footer = () => {
           {/* Social Media */}
           <div>
             <h3 className="font-encode font-bold text-lg mb-4">Folge uns</h3>
-            <div className="flex flex-col gap-4">
-              {/* DKM Social Media */}
-              <div>
-                <h4 className="font-encode font-semibold text-sm mb-2 text-gray-300">DKM</h4>
-                <div className="flex space-x-3">
-                  <a
-                    href="https://www.facebook.com/leitmesse/?locale=de_DE"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
-                    aria-label="DKM Facebook"
-                  >
-                    <Facebook size={18} className="text-white" />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/dkm_leitmesse/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
-                    aria-label="DKM Instagram"
-                  >
-                    <Instagram size={18} className="text-white" />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/dkm-die-leitmesse/?originalSubdomain=de"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
-                    aria-label="DKM LinkedIn"
-                  >
-                    <Linkedin size={18} className="text-white" />
-                  </a>
-                </div>
+            
+            {/* DKM Social Media */}
+            <div className="mb-6">
+              <h4 className="font-encode font-semibold text-sm mb-2 text-gray-300">DKM</h4>
+              <div className="flex space-x-3">
+                <a
+                  href="https://www.facebook.com/leitmesse/?locale=de_DE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                  aria-label="DKM Facebook"
+                >
+                  <Facebook size={18} className="text-white" />
+                </a>
+                <a
+                  href="https://www.instagram.com/dkm_leitmesse/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                  aria-label="DKM Instagram"
+                >
+                  <Instagram size={18} className="text-white" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/dkm-die-leitmesse/?originalSubdomain=de"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                  aria-label="DKM LinkedIn"
+                >
+                  <Linkedin size={18} className="text-white" />
+                </a>
               </div>
-              
-              {/* Salevium Social Media */}
-              <div>
-                <h4 className="font-encode font-semibold text-sm mb-2 text-gray-300">Salevium</h4>
-                <div className="flex space-x-3">
-                  <a
-                    href="https://www.linkedin.com/company/salevium/posts/?feedView=all"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
-                    aria-label="Salevium LinkedIn"
-                  >
-                    <Linkedin size={18} className="text-white" />
-                  </a>
-                </div>
+            </div>
+            
+            {/* Salevium Social Media */}
+            <div>
+              <h4 className="font-encode font-semibold text-sm mb-2 text-gray-300">Salevium</h4>
+              <div className="flex space-x-3">
+                <a
+                  href="https://www.linkedin.com/company/salevium/posts/?feedView=all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                  aria-label="Salevium LinkedIn"
+                >
+                  <Linkedin size={18} className="text-white" />
+                </a>
               </div>
             </div>
           </div>

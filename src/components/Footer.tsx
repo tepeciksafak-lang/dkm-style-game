@@ -66,6 +66,20 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Kontakt */}
+          <div>
+            <h3 className="font-encode font-bold text-lg mb-4">Kontakt</h3>
+            <div className="space-y-2 font-encode">
+              <p className="text-gray-300">DKM Challenge</p>
+              <a 
+                href="mailto:dkm@salevium.de" 
+                className="hover:text-dkm-yellow transition-colors block"
+              >
+                dkm@salevium.de
+              </a>
+            </div>
+          </div>
+
           {/* Social Media */}
           <div>
             <h3 className="font-encode font-bold text-lg mb-4">Folge uns</h3>

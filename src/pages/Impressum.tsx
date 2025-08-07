@@ -30,6 +30,12 @@ const Impressum = () => {
                 Telefax: +49 (0) 231 1234568<br />
                 E-Mail: info@dkm-messe.de
               </p>
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <h3 className="font-bold text-lg mb-2">DKM Challenge</h3>
+                <p className="leading-relaxed">
+                  E-Mail: <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
+                </p>
+              </div>
             </section>
 
             <section>

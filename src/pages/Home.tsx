@@ -196,8 +196,11 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <p className="font-encode text-dkm-navy font-semibold text-sm">
+                    <p className="font-encode text-dkm-navy font-semibold text-sm mb-3">
                       Zeig dein Können live am Salevium-Stand auf der Messe – exklusive Preise warten auf dich!
+                    </p>
+                    <p className="font-encode text-xs text-gray-600">
+                      Fragen? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
                     </p>
                   </div>
                 </Card>

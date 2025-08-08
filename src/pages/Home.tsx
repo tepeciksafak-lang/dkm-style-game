@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Challenge from "@/components/Quiz";
@@ -20,6 +22,7 @@ const Home = () => {
   const [playerName, setPlayerName] = useState("");
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
+  const [roundNumber, setRoundNumber] = useState(1);
 
   const handleStartChallenge = () => {
     setGameState("register");
@@ -32,10 +35,21 @@ const Home = () => {
     }
   };
 
-  const handleChallengeComplete = (finalScore: number) => {
-    setScore(finalScore);
+const handleChallengeComplete = async (finalScore: number) => {
+  setScore(finalScore);
+  try {
+    await supabase.from("ok").insert({
+      Username: playerName,
+      Mailadresse: email,
+      Rundenr: String(roundNumber),
+      Punkte: String(finalScore),
+    });
+  } catch (e) {
+    console.error("Supabase insert error", e);
+  } finally {
     setGameState("result");
-  };
+  }
+};
 
   if (gameState === "challenge") {
     return <Challenge playerName={playerName} onComplete={handleChallengeComplete} />;
@@ -256,17 +270,44 @@ const Home = () => {
                   className="mt-2 border-2 border-gray-200 focus:border-dkm-turquoise rounded-xl"
                   placeholder="deine@email.de"
                 />
-              </div>
-              
-              <Button 
-                type="submit" 
-                variant="dkm" 
-                size="lg"
-                className="w-full"
-                disabled={!playerName.trim() || !email.trim()}
-              >
-                Los geht's!
-              </Button>
+</div>
+
+<div>
+  <Label className="font-encode font-bold text-dkm-navy">
+    Runde
+  </Label>
+  <RadioGroup
+    value={String(roundNumber)}
+    onValueChange={(val) => setRoundNumber(parseInt(val))}
+    className="mt-2"
+  >
+    <div className="grid grid-cols-3 gap-4">
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="1" id="round1" />
+        <Label htmlFor="round1" className="font-encode">Runde 1</Label>
+      </div>
+      <div className="flex items-center space-x-2 opacity-60">
+        <RadioGroupItem value="2" id="round2" disabled />
+        <Label htmlFor="round2" className="font-encode">Runde 2</Label>
+      </div>
+      <div className="flex items-center space-x-2 opacity-60">
+        <RadioGroupItem value="3" id="round3" disabled />
+        <Label htmlFor="round3" className="font-encode">Runde 3</Label>
+      </div>
+    </div>
+  </RadioGroup>
+  <p className="mt-1 text-sm text-gray-600">Runden 2 und 3 sind sichtbar, aber noch nicht auswählbar.</p>
+</div>
+
+<Button 
+  type="submit" 
+  variant="dkm" 
+  size="lg"
+  className="w-full"
+  disabled={!playerName.trim() || !email.trim()}
+>
+  Los geht's!
+</Button>
             </form>
           </Card>
         </section>

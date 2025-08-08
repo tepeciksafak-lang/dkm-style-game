@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      Name: {
+        Row: {
+          created_at: string
+          id: number
+          Mailadresse: string | null
+          Punkte: string | null
+          Rundenr: string | null
+          Username: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          Mailadresse?: string | null
+          Punkte?: string | null
+          Rundenr?: string | null
+          Username?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          Mailadresse?: string | null
+          Punkte?: string | null
+          Rundenr?: string | null
+          Username?: string | null
+        }
+        Relationships: []
+      }
+      ok: {
+        Row: {
+          created_at: string
+          id: number
+          Mailadresse: string | null
+          Punkte: string | null
+          Rundenr: string | null
+          Username: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          Mailadresse?: string | null
+          Punkte?: string | null
+          Rundenr?: string | null
+          Username?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          Mailadresse?: string | null
+          Punkte?: string | null
+          Rundenr?: string | null
+          Username?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

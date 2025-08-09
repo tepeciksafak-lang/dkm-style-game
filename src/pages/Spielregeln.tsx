@@ -14,7 +14,7 @@ const Spielregeln = () => {
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="font-encode font-black text-5xl md:text-6xl text-dkm-navy mb-6">
-              Spielregeln
+              Ablauf
             </h1>
             <p className="font-encode text-xl text-gray-600 max-w-2xl mx-auto">
               Alles was du über die DKM 2025 Challenge wissen musst – einfach, fair und transparent.

@@ -39,7 +39,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="/spielregeln" className="hover:text-dkm-yellow transition-colors">
-                  Spielregeln
+                  Ablauf
                 </a>
               </li>
               <li>

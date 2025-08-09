@@ -16,75 +16,56 @@ const Impressum = () => {
             <section>
               <h2 className="font-bold text-2xl mb-4">Angaben gemäß § 5 TMG</h2>
               <p className="leading-relaxed">
-                DKM Deutsche Kraftfahrzeug-Messe GmbH<br />
-                Musterstraße 123<br />
-                44137 Dortmund<br />
+                SALEVIUM UG (haftungsbeschränkt)<br />
+                Amelner Straße 10<br />
+                52445 Titz<br />
                 Deutschland
               </p>
             </section>
 
             <section>
-              <h2 className="font-bold text-2xl mb-4">Kontakt</h2>
+              <h2 className="font-bold text-2xl mb-4">Vertreten durch:</h2>
               <p className="leading-relaxed">
-                Telefon: +49 (0) 231 1234567<br />
-                Telefax: +49 (0) 231 1234568<br />
-                E-Mail: info@dkm-messe.de
-              </p>
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <h3 className="font-bold text-lg mb-2">DKM Challenge</h3>
-                <p className="leading-relaxed">
-                  E-Mail: <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="font-bold text-2xl mb-4">Handelsregister</h2>
-              <p className="leading-relaxed">
-                Registergericht: Amtsgericht Dortmund<br />
-                Registernummer: HRB 12345
+                Bilgehan Karatas
               </p>
             </section>
 
             <section>
-              <h2 className="font-bold text-2xl mb-4">Umsatzsteuer-ID</h2>
+              <h2 className="font-bold text-2xl mb-4">Kontakt:</h2>
               <p className="leading-relaxed">
-                Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />
-                DE123456789
+                Telefon: +49 2406 9630883<br />
+                E-Mail: <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a><br />
+                Web: <a href="https://www.salevium.de" target="_blank" rel="noopener noreferrer" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">https://www.salevium.de</a>
               </p>
             </section>
 
             <section>
-              <h2 className="font-bold text-2xl mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+              <h2 className="font-bold text-2xl mb-4">Registereintrag:</h2>
               <p className="leading-relaxed">
-                Max Mustermann<br />
-                Musterstraße 123<br />
-                44137 Dortmund
+                Eintragung im Handelsregister.<br />
+                Registergericht: Amtsgericht Düren<br />
+                Registernummer: HRB 9481
               </p>
             </section>
 
             <section>
-              <h2 className="font-bold text-2xl mb-4">Haftungsausschluss</h2>
-              
-              <h3 className="font-bold text-xl mb-2 mt-6">Haftung für Inhalte</h3>
-              <p className="leading-relaxed mb-4">
-                Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht unter der Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-              </p>
+              <h2 className="font-bold text-2xl mb-4">Umsatzsteuer-ID:</h2>
               <p className="leading-relaxed">
-                Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE332225356
               </p>
+            </section>
 
-              <h3 className="font-bold text-xl mb-2 mt-6">Haftung für Links</h3>
-              <p className="leading-relaxed mb-4">
-                Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-              </p>
+            <section>
+              <h2 className="font-bold text-2xl mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</h2>
               <p className="leading-relaxed">
-                Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+                Bilgehan Karatas, Anschrift wie oben
               </p>
+            </section>
 
-              <h3 className="font-bold text-xl mb-2 mt-6">Urheberrecht</h3>
+            <section>
+              <h2 className="font-bold text-2xl mb-4">Kooperationshinweis:</h2>
               <p className="leading-relaxed">
-                Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+                Die „DKM-Supermakler-Challenge" ist eine Kooperation zwischen der Salevium GmbH und der BBG GmbH (Veranstalterin der DKM). Verantwortlich für die technische Umsetzung, Datenerhebung und -verarbeitung im Rahmen der Challenge ist die Salevium GmbH.
               </p>
             </section>
           </div>

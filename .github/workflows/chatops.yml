@@ -1,0 +1,37 @@
+name: ChatOps
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  edit:
+    if: startsWith(github.event.comment.body, '/edit ')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: parse
+        shell: bash
+        run: |
+          body="${{ github.event.comment.body }}"
+          rest="${body#* }"
+          echo "branch=chatops-update" >> $GITHUB_OUTPUT
+          echo "message=ChatOps Update" >> $GITHUB_OUTPUT
+          while read -r token; do
+            [[ "$token" == '```'* ]] && break
+            k="${token%%=*}"; v="${token#*=}"
+            echo "$k=$v" >> $GITHUB_OUTPUT
+          done <<< "$rest"
+          awk 'f{print} /^```/{f=!f}' <<< "$body" > filecontent.txt
+      - name: Datei schreiben
+        run: |
+          mkdir -p "$(dirname '${{ steps.parse.outputs.path }}')"
+          tr -d '\r' < filecontent.txt > "${{ steps.parse.outputs.path }}"
+      - name: PR erstellen
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: ${{ steps.parse.outputs.branch }}
+          title: ${{ steps.parse.outputs.message }}
+          body: Erstellt durch Chat Kommentar
+          commit-message: ${{ steps.parse.outputs.message }}

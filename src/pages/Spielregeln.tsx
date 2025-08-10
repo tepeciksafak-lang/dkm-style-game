@@ -6,20 +6,30 @@ import { CheckCircle, Info, Trophy, Users } from "lucide-react";
 
 const Spielregeln = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <Header />
       
-      <main className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="font-encode font-black text-5xl md:text-6xl text-dkm-navy mb-6">
+      {/* Hero Section mit Referee Bild */}
+      <div 
+        className="relative h-64 md:h-80 bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/src/assets/referee-explaining-rules.jpg')`
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="font-encode font-black text-4xl md:text-6xl mb-4">
               Ablauf
             </h1>
-            <p className="font-encode text-xl text-gray-600 max-w-2xl mx-auto">
-              Alles was du über die DKM 2025 Challenge wissen musst – einfach, fair und transparent.
+            <p className="font-encode text-lg md:text-xl max-w-2xl">
+              Alles was du über die DKM 2025 Challenge wissen musst
             </p>
           </div>
+        </div>
+      </div>
+      
+      <main className="py-16 px-4 bg-white">
+        <div className="container mx-auto max-w-4xl">
 
           {/* Spielregeln Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">

@@ -198,19 +198,19 @@ const Preise = () => {
             </h2>
             <div className="space-y-4 font-encode text-gray-700">
               <p>
-                🏆 <strong>Gewinnbenachrichtigung:</strong> Die Gewinner werden per E-Mail benachrichtigt.
+                <strong>Gewinnbenachrichtigung:</strong> Die Gewinner werden per E-Mail benachrichtigt.
               </p>
               <p>
-                📅 <strong>Gültigkeit:</strong> Alle Preise sind gültig für die DKM 2025 (26.-27. März 2025, Dortmund).
+                <strong>Gültigkeit:</strong> Alle Preise sind gültig für die DKM 2025 (26.-27. März 2025, Dortmund).
               </p>
               <p>
-                🎫 <strong>Einlösung:</strong> Tickets und Gutscheine werden digital zugesendet.
+                <strong>Einlösung:</strong> Tickets und Gutscheine werden digital zugesendet.
               </p>
               <p>
-                ⚖️ <strong>Rechtsweg:</strong> Der Rechtsweg ist ausgeschlossen. Barauszahlung ist nicht möglich.
+                <strong>Rechtsweg:</strong> Der Rechtsweg ist ausgeschlossen. Barauszahlung ist nicht möglich.
               </p>
               <p>
-                📧 <strong>Kontakt:</strong> Fragen zu den Preisen? Schreibe uns an gewinnspiel@dkm2025.de
+                <strong>Kontakt:</strong> Fragen zu den Preisen? Schreibe uns an gewinnspiel@dkm2025.de
               </p>
             </div>
           </Card>

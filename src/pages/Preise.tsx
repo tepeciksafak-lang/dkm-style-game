@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trophy, Gift, Star, Crown, Award, Zap } from "lucide-react";
+import championsLeagueCrowd from "@/assets/champions-league-crowd.jpg";
 
 const Preise = () => {
   const prizes = [
@@ -69,20 +70,30 @@ const Preise = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <Header />
       
-      <main className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="font-encode font-black text-5xl md:text-6xl text-dkm-navy mb-6">
+      {/* Hero Section mit Champions League Crowd */}
+      <div 
+        className="relative h-64 md:h-80 bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${championsLeagueCrowd})`
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="font-encode font-black text-4xl md:text-6xl mb-4">
               Preise & Gewinne
             </h1>
-            <p className="font-encode text-xl text-gray-600 max-w-2xl mx-auto">
-              Zeige dein DKM-Wissen und gewinne fantastische Preise für die Deutsche Kraftfahrzeug-Messe 2025!
+            <p className="font-encode text-lg md:text-xl max-w-2xl">
+              Zeige dein DKM-Wissen und gewinne fantastische Preise!
             </p>
           </div>
+        </div>
+      </div>
+      
+      <main className="py-16 px-4 bg-white">
+        <div className="container mx-auto max-w-6xl">
 
           {/* Hauptpreise */}
           <div className="mb-20">

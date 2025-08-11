@@ -234,7 +234,7 @@ const handleChallengeComplete = async (finalScore: number) => {
           <Card className="w-full max-w-md p-8 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)] relative z-10 bg-white/95 backdrop-blur-sm">
             <div className="text-center mb-8">
               <h2 className="font-encode font-black text-3xl text-dkm-navy mb-2">
-                Fast geschafft!
+                Zieh dein Trikot an
               </h2>
               <p className="font-encode text-gray-600">
                 Bitte gib deine Daten ein, um an der Challenge teilzunehmen.

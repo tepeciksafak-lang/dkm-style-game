@@ -10,7 +10,7 @@ const Header = () => {
   const navigation = [
     { name: "Die Challenge", href: "/" },
     { name: "Ablauf", href: "/spielregeln" },
-    { name: "Preise", href: "/preise" },
+    { name: "Preise & Gewinne", href: "/preise" },
   ];
 
   return (

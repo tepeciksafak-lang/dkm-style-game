@@ -130,6 +130,71 @@ const Spielregeln = () => {
             </div>
           </Card>
 
+          {/* Rundenübersicht */}
+          <Card className="p-8 mb-16 border-2 border-dkm-turquoise/20">
+            <div className="flex items-center mb-6">
+              <Info className="text-dkm-turquoise mr-3" size={32} />
+              <h2 className="font-encode font-black text-2xl text-dkm-navy">
+                Die 4 Runden im Überblick
+              </h2>
+            </div>
+            <p className="font-encode text-lg text-gray-700 mb-8 text-center">
+              Insgesamt erwarten dich <strong>3 Online-Quizrunden</strong> und <strong>1 Live-Runde</strong> direkt auf der DKM 2025 in Dortmund!
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Runde 1: Anpfiff */}
+              <div className="text-center p-4 bg-dkm-turquoise/5 rounded-lg border border-dkm-turquoise/20">
+                <div className="w-12 h-12 bg-dkm-turquoise/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="font-encode font-black text-dkm-turquoise">1</span>
+                </div>
+                <h3 className="font-encode font-bold text-dkm-navy mb-2">Anpfiff</h3>
+                <p className="font-encode text-sm text-gray-600">
+                  Der Schiedsrichter pfeift an – stelle dich der ersten Runde und sichere dir den perfekten Start!
+                </p>
+              </div>
+              
+              {/* Runde 2: Halbzeit */}
+              <div className="text-center p-4 bg-dkm-yellow/5 rounded-lg border border-dkm-yellow/20">
+                <div className="w-12 h-12 bg-dkm-yellow/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="font-encode font-black text-dkm-yellow">2</span>
+                </div>
+                <h3 className="font-encode font-bold text-dkm-navy mb-2">Kurz vor der Halbzeit</h3>
+                <p className="font-encode text-sm text-gray-600">
+                  Bleib konzentriert – die Pause naht, jetzt zählt jeder Punkt!
+                </p>
+              </div>
+              
+              {/* Runde 3: Zweite Halbzeit */}
+              <div className="text-center p-4 bg-dkm-navy/5 rounded-lg border border-dkm-navy/20">
+                <div className="w-12 h-12 bg-dkm-navy/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="font-encode font-black text-dkm-navy">3</span>
+                </div>
+                <h3 className="font-encode font-bold text-dkm-navy mb-2">Zweite Halbzeit</h3>
+                <p className="font-encode text-sm text-gray-600">
+                  Jetzt wird's spannend – gib noch einmal alles, das Finale ist zum Greifen nah!
+                </p>
+              </div>
+              
+              {/* Live-Runde */}
+              <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+                <div className="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="font-encode font-black text-orange-600">🏆</span>
+                </div>
+                <h3 className="font-encode font-bold text-orange-600 mb-2">Finale am Spielfeldrand</h3>
+                <p className="font-encode text-sm text-gray-600">
+                  Zeig dein Können live am Salevium-Stand auf der Messe – exklusive Preise warten auf dich!
+                </p>
+              </div>
+            </div>
+            
+            <div className="mt-8 text-center">
+              <p className="font-encode text-sm text-gray-600">
+                Fragen zur Live-Runde? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
+              </p>
+            </div>
+          </Card>
+
           {/* Wichtige Hinweise */}
           <Card className="p-8 mb-16 bg-orange-50 border-2 border-orange-200">
             <h2 className="font-encode font-black text-2xl text-orange-600 mb-6">

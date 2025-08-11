@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Info, Trophy, Users } from "lucide-react";
+import refereeExplainingRules from "@/assets/referee-explaining-rules.jpg";
 
 const Spielregeln = () => {
   return (
@@ -13,7 +14,7 @@ const Spielregeln = () => {
       <div 
         className="relative h-64 md:h-80 bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/src/assets/referee-explaining-rules.jpg')`
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${refereeExplainingRules})`
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center">

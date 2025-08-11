@@ -91,9 +91,9 @@ const Spielregeln = () => {
           </div>
 
           {/* Bewertung */}
-          <Card className="p-8 mb-16 border-2 border-dkm-lime/20">
+          <Card className="p-8 mb-16 border-2 border-dkm-navy/20">
             <div className="flex items-center mb-6">
-              <Trophy className="text-dkm-lime mr-3" size={32} />
+              <Trophy className="text-dkm-navy mr-3" size={32} />
               <h2 className="font-encode font-black text-2xl text-dkm-navy">
                 Bewertung & Ergebnis
               </h2>
@@ -101,29 +101,29 @@ const Spielregeln = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-lime mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Jede richtige Antwort gibt 1 Punkt</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-lime mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Maximum: 7 von 7 Punkten</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-lime mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Keine Einzelergebnisse sichtbar</p>
                 </div>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-lime mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Sofortige Anzeige des Gesamtergebnisses</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-lime mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Personalisierte Erfolgsmeldung</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-lime mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Motivationstext je nach Leistung</p>
                 </div>
               </div>
@@ -131,8 +131,8 @@ const Spielregeln = () => {
           </Card>
 
           {/* Wichtige Hinweise */}
-          <Card className="p-8 mb-16 bg-gray-50 border-2 border-gray-200">
-            <h2 className="font-encode font-black text-2xl text-dkm-navy mb-6">
+          <Card className="p-8 mb-16 bg-orange-50 border-2 border-orange-200">
+            <h2 className="font-encode font-black text-2xl text-orange-600 mb-6">
               Wichtige Hinweise
             </h2>
             <div className="space-y-4 font-encode text-gray-700">

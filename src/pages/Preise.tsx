@@ -158,34 +158,48 @@ const Preise = () => {
               <h2 className="font-encode font-black text-3xl text-dkm-navy mb-6">
                 So funktioniert's
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-yellow rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
                     1
                   </div>
                   <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Anmelden</h3>
-                  <p className="font-encode text-gray-600">Registriere dich mit Name und E-Mail</p>
+                  <p className="font-encode text-sm text-gray-600">Registriere dich mit Name und E-Mail</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-turquoise rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
                     2
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Challenge spielen</h3>
-                  <p className="font-encode text-gray-600">Beantworte 7 Fragen über die DKM</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Runde 1: Anpfiff</h3>
+                  <p className="font-encode text-sm text-gray-600">Stelle dich der ersten Online-Runde</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-dkm-yellow rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
+                    3
+                  </div>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Runde 2: Halbzeit</h3>
+                  <p className="font-encode text-sm text-gray-600">Bleib konzentriert in der zweiten Runde</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-lime rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
-                    3
+                    4
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Punkte sammeln</h3>
-                  <p className="font-encode text-gray-600">Erreiche möglichst viele Punkte</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Runde 3: Finale</h3>
+                  <p className="font-encode text-sm text-gray-600">Gib alles in der finalen Online-Runde</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-navy rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
-                    4
+                    5
+                  </div>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Live auf der Messe</h3>
+                  <p className="font-encode text-sm text-gray-600">Vor-Ort Challenge am Salevium-Stand</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
+                    🏆
                   </div>
                   <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Gewinnen</h3>
-                  <p className="font-encode text-gray-600">Sichere dir fantastische Preise</p>
+                  <p className="font-encode text-sm text-gray-600">Sichere dir fantastische Preise</p>
                 </div>
               </div>
             </div>

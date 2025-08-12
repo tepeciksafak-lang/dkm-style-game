@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trophy, Medal, Award, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import trophyCelebration from "@/assets/trophy-celebration.jpg";
+import penaltyKick from "@/assets/penalty-kick.jpg";
 
 interface LeaderboardEntry {
   id: number;
@@ -109,7 +109,7 @@ const Leaderboard = () => {
         {/* Hero Section with Background */}
         <section 
           className="relative py-20 px-4 mb-8 bg-cover bg-center rounded-lg overflow-hidden"
-          style={{ backgroundImage: `url(${trophyCelebration})` }}
+          style={{ backgroundImage: `url(${penaltyKick})` }}
         >
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-black/60"></div>

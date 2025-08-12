@@ -105,24 +105,25 @@ const Leaderboard = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
+      {/* Hero Section with Background - Full Width */}
+      <section 
+        className="relative py-20 px-4 mb-8 bg-cover bg-center"
+        style={{ backgroundImage: `url(${penaltyKick})` }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        
+        <div className="relative z-10 text-center">
+          <h1 className="font-encode font-black text-4xl md:text-5xl text-white mb-4">
+            🏆 Leaderboard
+          </h1>
+          <p className="font-encode text-lg text-white/90 max-w-2xl mx-auto">
+            Die besten Spieler der DKM Challenge
+          </p>
+        </div>
+      </section>
+
       <main className="container mx-auto px-4 py-8">
-        {/* Hero Section with Background */}
-        <section 
-          className="relative py-20 px-4 mb-8 bg-cover bg-center rounded-lg overflow-hidden"
-          style={{ backgroundImage: `url(${penaltyKick})` }}
-        >
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/60"></div>
-          
-          <div className="relative z-10 text-center">
-            <h1 className="font-encode font-black text-4xl md:text-5xl text-white mb-4">
-              🏆 Leaderboard
-            </h1>
-            <p className="font-encode text-lg text-white/90 max-w-2xl mx-auto">
-              Die besten Spieler der DKM Challenge
-            </p>
-          </div>
-        </section>
 
         {/* Player's Rank Highlight */}
         {playerName && playerRank && (

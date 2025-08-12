@@ -196,6 +196,7 @@ const Leaderboard = () => {
         <div className="text-center">
           <Button 
             onClick={() => navigate('/')}
+            variant="salevium"
             size="lg"
             className="px-8"
           >

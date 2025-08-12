@@ -14,6 +14,9 @@ All colors MUST be HSL.
     --dkm-yellow: 39 100% 50%; /* #FFA500 */
     --dkm-lime: 72 84% 58%; /* #c7d300 */
     
+    /* Salevium Brand Colors */
+    --salevium-orange: 24 100% 50%; /* #FF6600 */
+    
     /* Base colors using DKM palette */
     --background: 0 0% 100%;
     --foreground: 205 55% 22%;

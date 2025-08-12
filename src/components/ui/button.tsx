@@ -21,6 +21,7 @@ const buttonVariants = cva(
         dkm: "bg-dkm-yellow text-dkm-navy hover:bg-dkm-yellow/90 shadow-[var(--shadow-smooth)] transform hover:scale-105",
         "dkm-true": "bg-dkm-turquoise text-white hover:bg-dkm-turquoise/90 border-2 border-transparent hover:border-dkm-navy",
         "dkm-false": "bg-background text-dkm-navy border-2 border-dkm-navy hover:bg-dkm-navy hover:text-white",
+        salevium: "bg-[hsl(var(--salevium-orange))] text-white hover:bg-[hsl(var(--salevium-orange))]/90 shadow-[var(--shadow-smooth)] transform hover:scale-105",
       },
       size: {
         default: "h-12 px-6 py-3 text-base",

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +19,7 @@ import box3FinalWhistle from "@/assets/box3-final-whistle.jpg";
 import box4LiveChallenge from "@/assets/box4-live-challenge.jpg";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
   const [playerName, setPlayerName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +49,8 @@ const handleChallengeComplete = async (finalScore: number) => {
   } catch (e) {
     console.error("Supabase insert error", e);
   } finally {
-    setGameState("result");
+    // Redirect to leaderboard with player name
+    navigate(`/leaderboard?player=${encodeURIComponent(playerName)}`);
   }
 };
 

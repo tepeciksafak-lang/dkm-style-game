@@ -45,7 +45,7 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Vollständige Registrierung mit Name und E-Mail-Adresse erforderlich</p>
+                  <p>Einfache Anmeldung</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />

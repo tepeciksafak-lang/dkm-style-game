@@ -216,6 +216,18 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                 </Card>
               </div>
+              
+              {/* Second CTA Button */}
+              <div className="text-center mt-16">
+                <Button 
+                  variant="dkm" 
+                  size="lg"
+                  onClick={handleStartChallenge}
+                  className="text-xl px-12 py-6 bg-dkm-yellow hover:bg-dkm-yellow/90 text-dkm-navy font-bold"
+                >
+                  Anpiff
+                </Button>
+              </div>
             </div>
           </section>
         </>

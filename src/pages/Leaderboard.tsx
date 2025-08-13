@@ -118,7 +118,7 @@ const Leaderboard = () => {
             🏆 Leaderboard
           </h1>
           <p className="font-encode text-lg text-white/90 max-w-2xl mx-auto">
-            Die besten Spieler der DKM Challenge
+            Die besten Makler der DKM Challenge
           </p>
         </div>
       </section>
@@ -143,7 +143,7 @@ const Leaderboard = () => {
         {/* Top 7 Leaderboard */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">Top 7 Spieler</CardTitle>
+            <CardTitle className="text-2xl text-center">Top 7 Makler</CardTitle>
           </CardHeader>
           <CardContent>
             {leaderboard.length === 0 ? (
@@ -192,19 +192,32 @@ const Leaderboard = () => {
             )}
           </CardContent>
         </Card>
+      </main>
 
-        {/* Back to Home Button */}
-        <div className="text-center">
+      {/* CTA with Full Width Background */}
+      <div 
+        className="relative py-32 px-8 text-center bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${penaltyKick})`
+        }}
+      >
+        <div className="relative z-10">
+          <h3 className="font-encode font-black text-4xl text-white mb-6">
+            Bereit für die Challenge?
+          </h3>
+          <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
+            Werde der erste Supermakler der DKM!
+          </p>
           <Button 
-            onClick={() => navigate('/')}
-            variant="salevium"
+            onClick={() => window.location.href = "/#register"}
+            variant="dkm"
             size="lg"
-            className="px-8"
+            className="text-xl px-16 py-8"
           >
-            Zurück zum Start
+            Anpfiff
           </Button>
         </div>
-      </main>
+      </div>
 
       <Footer />
     </div>

@@ -74,11 +74,15 @@ const Spielregeln = () => {
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
+                  <p>Jeder Teilnehmer erhält einen Preis</p>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Antworten können nicht geändert werden</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Preisverleihung auf der DKM</p>
+                  <p>Hauptpreisverleihung auf der DKM</p>
                 </div>
               </div>
             </Card>

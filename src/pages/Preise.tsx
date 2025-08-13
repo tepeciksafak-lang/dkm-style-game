@@ -158,96 +158,74 @@ const Preise = () => {
               <h2 className="font-encode font-black text-3xl text-dkm-navy mb-6">
                 So funktioniert's
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-yellow rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
                     1
                   </div>
                   <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Anmelden</h3>
-                  <p className="font-encode text-sm text-gray-600">Registriere dich mit Name und E-Mail</p>
+                  <p className="font-encode text-sm text-gray-600">Melde dich mit Name und E-Mail an</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-turquoise rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
                     2
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Runde 1: Anpfiff</h3>
-                  <p className="font-encode text-sm text-gray-600">Stelle dich der ersten Online-Runde</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">3 Wissens-Challenges Online</h3>
+                  <p className="font-encode text-sm text-gray-600">Beweise dein DKM-Wissen</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-yellow rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
                     3
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Runde 2: Halbzeit</h3>
-                  <p className="font-encode text-sm text-gray-600">Bleib konzentriert in der zweiten Runde</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Live auf der Messe mit Kompetenz-Challenge</h3>
+                  <p className="font-encode text-sm text-gray-600">Zeig dein Können vor Ort</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-lime rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
                     4
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Runde 3: Finale</h3>
-                  <p className="font-encode text-sm text-gray-600">Gib alles in der finalen Online-Runde</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Hauptpreisverleihung</h3>
+                  <p className="font-encode text-sm text-gray-600">Die besten werden geehrt</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-navy rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
                     5
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Live auf der Messe</h3>
-                  <p className="font-encode text-sm text-gray-600">Vor-Ort Challenge am Salevium-Stand</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
-                    🏆
-                  </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Gewinnen</h3>
-                  <p className="font-encode text-sm text-gray-600">Sichere dir fantastische Preise</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Nachspielzeit</h3>
+                  <p className="font-encode text-sm text-gray-600">Du erhältst deinen Teilnehmerpreis</p>
                 </div>
               </div>
             </div>
           </Card>
 
-          {/* Teilnahmebedingungen */}
-          <Card className="p-8 mb-16 border-2 border-gray-200">
-            <h2 className="font-encode font-black text-2xl text-dkm-navy mb-6">
-              Wichtige Hinweise
-            </h2>
-            <div className="space-y-4 font-encode text-gray-700">
-              <p>
-                <strong>Gewinnbenachrichtigung:</strong> Die Gewinner werden per E-Mail benachrichtigt.
-              </p>
-              <p>
-                <strong>Gültigkeit:</strong> Alle Preise sind gültig für die DKM 2025 (26.-27. März 2025, Dortmund).
-              </p>
-              <p>
-                <strong>Einlösung:</strong> Tickets und Gutscheine werden digital zugesendet.
-              </p>
-              <p>
-                <strong>Rechtsweg:</strong> Der Rechtsweg ist ausgeschlossen. Barauszahlung ist nicht möglich.
-              </p>
-              <p>
-                <strong>Kontakt:</strong> Fragen zu den Preisen? Schreibe uns an gewinnspiel@dkm2025.de
-              </p>
-            </div>
-          </Card>
 
-          {/* CTA */}
-          <div className="text-center">
-            <h3 className="font-encode font-black text-3xl text-dkm-navy mb-4">
-              Worauf wartest du noch?
-            </h3>
-            <p className="font-encode text-lg text-gray-600 mb-8">
-              Starte jetzt die Challenge und sichere dir deine Chance auf fantastische Preise!
-            </p>
-            <Button 
-              variant="dkm" 
-              size="lg"
-              onClick={() => window.location.href = "/"}
-              className="text-xl px-12 py-6"
-            >
-              Jetzt Challenge starten
-            </Button>
-          </div>
         </div>
       </main>
+
+      {/* CTA with Full Width Background */}
+      <div 
+        className="relative py-32 px-8 text-center bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${championsLeagueCrowd})`
+        }}
+      >
+        <div className="relative z-10">
+          <h3 className="font-encode font-black text-4xl text-white mb-6">
+            Worauf wartest du noch?
+          </h3>
+          <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
+            Starte jetzt die Challenge und sichere dir deine Chance auf fantastische Preise!
+          </p>
+          <Button 
+            variant="dkm" 
+            size="lg"
+            onClick={() => window.location.href = "/#register"}
+            className="text-xl px-16 py-8"
+          >
+            Anpfiff
+          </Button>
+        </div>
+      </div>
 
       <Footer />
     </div>

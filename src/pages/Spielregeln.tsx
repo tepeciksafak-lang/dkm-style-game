@@ -69,11 +69,7 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Insgesamt 7 Wahr/Falsch-Fragen</p>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Keine Zeitbegrenzung pro Frage</p>
+                  <p>3 mal Wissen-Challenge und 1 Kompetenz-Challenge</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
@@ -82,6 +78,10 @@ const Spielregeln = () => {
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Progressbar zeigt den Fortschritt</p>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
+                  <p>Preisverleihung auf der DKM</p>
                 </div>
               </div>
             </Card>

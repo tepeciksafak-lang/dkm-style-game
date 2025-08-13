@@ -83,7 +83,7 @@ const Preise = () => {
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="font-encode font-black text-4xl md:text-6xl mb-4">
-              Preise & Gewinne
+              Preise
             </h1>
             <p className="font-encode text-lg md:text-xl max-w-2xl">
               Zeige dein DKM-Wissen und gewinne fantastische Preise!

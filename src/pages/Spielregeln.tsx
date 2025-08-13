@@ -219,7 +219,7 @@ const Spielregeln = () => {
           <Button 
             variant="dkm" 
             size="lg"
-            onClick={() => window.location.href = "/"}
+            onClick={() => window.location.href = "/#register"}
             className="text-xl px-16 py-8"
           >
             Zur Challenge

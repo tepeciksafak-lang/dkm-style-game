@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +25,13 @@ const Home = () => {
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
+
+  useEffect(() => {
+    // Check if URL contains #register to automatically show registration
+    if (window.location.hash === '#register') {
+      setGameState("register");
+    }
+  }, []);
 
   const handleStartChallenge = () => {
     setGameState("register");

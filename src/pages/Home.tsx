@@ -203,12 +203,12 @@ const handleChallengeComplete = async (finalScore: number) => {
                   >
                     <div className="absolute inset-0 bg-dkm-navy/30"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-encode font-bold text-lg text-white mb-1">Finale am Spielfeldrand</h3>
+                      <h3 className="font-encode font-bold text-lg text-white mb-1">Schlussminuten</h3>
                     </div>
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm mb-3">
-                      Zeig dein Können live am Salevium-Stand auf der Messe – exklusive Preise warten auf dich!
+                      Die letzten Minuten entscheiden – zeig dein Können live am Salevium-Stand auf der Messe!
                     </p>
                     <p className="font-encode text-xs text-gray-600">
                       Fragen? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>

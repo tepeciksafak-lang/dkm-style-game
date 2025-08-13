@@ -55,10 +55,6 @@ const Spielregeln = () => {
                   <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Eine Person kann pro Runde nur einmal teilnehmen</p>
                 </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Teilnahme ab 16 Jahren</p>
-                </div>
               </div>
             </Card>
 

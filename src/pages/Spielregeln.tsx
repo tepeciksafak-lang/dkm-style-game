@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Info, Trophy, Users } from "lucide-react";
 import refereeExplainingRules from "@/assets/referee-explaining-rules.jpg";
+import challengeCtaBackground from "@/assets/challenge-cta-background.jpg";
 
 const Spielregeln = () => {
   return (
@@ -23,7 +24,7 @@ const Spielregeln = () => {
               Ablauf
             </h1>
             <p className="font-encode text-lg md:text-xl max-w-2xl">
-              Alles was du über die DKM 2025 Challenge wissen musst
+              Alles was Sie über die DKM 2025 Challenge wissen müssen
             </p>
           </div>
         </div>
@@ -35,52 +36,48 @@ const Spielregeln = () => {
           {/* Spielregeln Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {/* Teilnahme */}
-            <Card className="p-8 border-2 border-dkm-turquoise/20">
+            <Card className="p-8 border-2 border-dkm-navy/20">
               <div className="flex items-center mb-4">
-                <Users className="text-dkm-turquoise mr-3" size={32} />
+                <Users className="text-dkm-navy mr-3" size={32} />
                 <h2 className="font-encode font-black text-2xl text-dkm-navy">
                   Teilnahme
                 </h2>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Einfache Anmeldung</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Anonyme Teilnahme ist nicht möglich</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-turquoise mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Eine Person kann pro Runde nur einmal teilnehmen</p>
                 </div>
               </div>
             </Card>
 
             {/* Challenge-Ablauf */}
-            <Card className="p-8 border-2 border-dkm-yellow/20">
+            <Card className="p-8 border-2 border-orange-200">
               <div className="flex items-center mb-4">
-                <Info className="text-dkm-yellow mr-3" size={32} />
+                <Info className="text-orange-600 mr-3" size={32} />
                 <h2 className="font-encode font-black text-2xl text-dkm-navy">
                   Challenge-Ablauf
                 </h2>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>3 mal Wissen-Challenge und 1 Kompetenz-Challenge</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Antworten können nicht geändert werden</p>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Progressbar zeigt den Fortschritt</p>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-dkm-yellow mr-2 mt-1 flex-shrink-0" size={16} />
+                  <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Preisverleihung auf der DKM</p>
                 </div>
               </div>
@@ -99,11 +96,11 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Jede richtige Antwort gibt 1 Punkt</p>
+                  <p>Dynamische Punktvergabe</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Maximum: 7 von 7 Punkten</p>
+                  <p>Maximale Punktzahl liegt bei 2688 Punkten</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
@@ -117,48 +114,44 @@ const Spielregeln = () => {
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Personalisierte Erfolgsmeldung</p>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Motivationstext je nach Leistung</p>
+                  <p>Individualisiertes Trikot Prompt</p>
                 </div>
               </div>
             </div>
           </Card>
 
           {/* Rundenübersicht */}
-          <Card className="p-8 mb-16 border-2 border-dkm-turquoise/20">
+          <Card className="p-8 mb-16 border-2 border-dkm-navy/20">
             <div className="flex items-center mb-6">
-              <Info className="text-dkm-turquoise mr-3" size={32} />
+              <Info className="text-dkm-navy mr-3" size={32} />
               <h2 className="font-encode font-black text-2xl text-dkm-navy">
                 Die 4 Runden im Überblick
               </h2>
             </div>
             <p className="font-encode text-lg text-gray-700 mb-8 text-center">
-              Insgesamt erwarten dich <strong>3 Online-Quizrunden</strong> und <strong>1 Live-Runde</strong> direkt auf der DKM 2025 in Dortmund!
+              Insgesamt erwarten Sie <strong>3 Wissenschallenges</strong> und <strong>1 Kompetenzchallenge</strong> direkt auf der DKM 2025 in Dortmund!
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Runde 1: Anpfiff */}
-              <div className="text-center p-4 bg-dkm-turquoise/5 rounded-lg border border-dkm-turquoise/20">
-                <div className="w-12 h-12 bg-dkm-turquoise/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="font-encode font-black text-dkm-turquoise">1</span>
+              <div className="text-center p-4 bg-dkm-navy/5 rounded-lg border border-dkm-navy/20">
+                <div className="w-12 h-12 bg-dkm-navy/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="font-encode font-black text-dkm-navy">1</span>
                 </div>
                 <h3 className="font-encode font-bold text-dkm-navy mb-2">Anpfiff</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Der Schiedsrichter pfeift an – stelle dich der ersten Runde und sichere dir den perfekten Start!
+                  Der Schiedsrichter pfeift an – stellen Sie sich der ersten Runde und sichern Sie sich den perfekten Start!
                 </p>
               </div>
               
               {/* Runde 2: Halbzeit */}
-              <div className="text-center p-4 bg-dkm-yellow/5 rounded-lg border border-dkm-yellow/20">
-                <div className="w-12 h-12 bg-dkm-yellow/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="font-encode font-black text-dkm-yellow">2</span>
+              <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+                <div className="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="font-encode font-black text-orange-600">2</span>
                 </div>
                 <h3 className="font-encode font-bold text-dkm-navy mb-2">Kurz vor der Halbzeit</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Bleib konzentriert – die Pause naht, jetzt zählt jeder Punkt!
+                  Bleiben Sie konzentriert – die Pause naht, jetzt zählt jeder Punkt!
                 </p>
               </div>
               
@@ -169,25 +162,25 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-dkm-navy mb-2">Zweite Halbzeit</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Jetzt wird's spannend – gib noch einmal alles, das Finale ist zum Greifen nah!
+                  Jetzt wird's spannend – geben Sie noch einmal alles, das Finale ist zum Greifen nah!
                 </p>
               </div>
               
-              {/* Live-Runde */}
+              {/* Kompetenz-Challenge */}
               <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
                 <div className="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="font-encode font-black text-orange-600">🏆</span>
                 </div>
-                <h3 className="font-encode font-bold text-orange-600 mb-2">Finale am Spielfeldrand</h3>
+                <h3 className="font-encode font-bold text-orange-600 mb-2">Kompetenz-Challenge vor Ort</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Zeig dein Können live am Salevium-Stand auf der Messe – exklusive Preise warten auf dich!
+                  Zeigen Sie Ihr Können live am Salevium-Stand – beweisen Sie Ihre Expertise vor Ort!
                 </p>
               </div>
             </div>
             
             <div className="mt-8 text-center">
               <p className="font-encode text-sm text-gray-600">
-                Fragen zur Live-Runde? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
+                Fragen zur Kompetenz-Challenge? <a href="mailto:dkm@salevium.de" className="text-orange-600 hover:text-dkm-navy transition-colors">dkm@salevium.de</a>
               </p>
             </div>
           </Card>
@@ -202,33 +195,37 @@ const Spielregeln = () => {
                 ✅ <strong>Fairplay:</strong> Die Challenge basiert auf öffentlich verfügbaren Informationen zur DKM 2025.
               </p>
               <p>
-                ✅ <strong>Datenschutz:</strong> Deine Daten werden nur für die Challenge-Teilnahme verwendet und nicht an Dritte weitergegeben.
-              </p>
-              <p>
                 ✅ <strong>Technische Anforderungen:</strong> Die Challenge funktioniert auf allen modernen Browsern und Geräten.
               </p>
               <p>
-                ✅ <strong>Support:</strong> Bei technischen Problemen wende dich an unser Support-Team.
+                ✅ <strong>Support:</strong> Bei technischen Problemen wenden Sie sich an unser Support-Team.
               </p>
             </div>
           </Card>
 
-          {/* CTA */}
-          <div className="text-center">
-            <h3 className="font-encode font-black text-3xl text-dkm-navy mb-4">
-              Bereit für die Challenge?
-            </h3>
-            <p className="font-encode text-lg text-gray-600 mb-8">
-              Teste jetzt dein Wissen über die DKM 2025!
-            </p>
-            <Button 
-              variant="dkm" 
-              size="lg"
-              onClick={() => window.location.href = "/"}
-              className="text-xl px-12 py-6"
-            >
-              Zur Challenge
-            </Button>
+          {/* CTA with Background */}
+          <div 
+            className="relative py-32 px-8 text-center bg-cover bg-center rounded-lg"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${challengeCtaBackground})`
+            }}
+          >
+            <div className="relative z-10">
+              <h3 className="font-encode font-black text-4xl text-white mb-6">
+                Bereit für die Challenge?
+              </h3>
+              <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
+                Werden Sie der erste DKM Supermarktler!
+              </p>
+              <Button 
+                variant="dkm" 
+                size="lg"
+                onClick={() => window.location.href = "/"}
+                className="text-xl px-16 py-8"
+              >
+                Zur Challenge
+              </Button>
+            </div>
           </div>
         </div>
       </main>

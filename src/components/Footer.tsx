@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -124,6 +124,15 @@ const Footer = () => {
                   aria-label="Salevium LinkedIn"
                 >
                   <Linkedin size={18} className="text-white" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@salevium-0720"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full bg-dkm-turquoise hover:bg-dkm-yellow transition-colors"
+                  aria-label="Salevium YouTube"
+                >
+                  <Youtube size={18} className="text-white" />
                 </a>
               </div>
             </div>

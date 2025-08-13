@@ -70,7 +70,7 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>3 mal Wissen-Challenge und 1 Kompetenz-Challenge</p>
+                  <p>3 mal Wissens-Challenges und 1 Kompetenz-Challenge</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
@@ -102,10 +102,6 @@ const Spielregeln = () => {
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
                   <p>Maximale Punktzahl liegt bei 2688 Punkten</p>
                 </div>
-                <div className="flex items-start">
-                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Keine Einzelergebnisse sichtbar</p>
-                </div>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
@@ -114,7 +110,7 @@ const Spielregeln = () => {
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Individualisiertes Trikot Prompt</p>
+                  <p>Individualisierte Trikot Prompts</p>
                 </div>
               </div>
             </div>
@@ -129,7 +125,7 @@ const Spielregeln = () => {
               </h2>
             </div>
             <p className="font-encode text-lg text-gray-700 mb-8 text-center">
-              Insgesamt erwarten Sie <strong>3 Wissenschallenges</strong> und <strong>1 Kompetenzchallenge</strong> direkt auf der DKM 2025 in Dortmund!
+              Insgesamt erwarten Sie <strong>3 Wissens-Challenges</strong> und <strong>1 Kompetenz-Challenge</strong> direkt auf der DKM 2025 in Dortmund!
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -171,9 +167,9 @@ const Spielregeln = () => {
                 <div className="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="font-encode font-black text-orange-600">🏆</span>
                 </div>
-                <h3 className="font-encode font-bold text-orange-600 mb-2">Kompetenz-Challenge vor Ort</h3>
+                <h3 className="font-encode font-bold text-orange-600 mb-2">Schlussminuten</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Zeigen Sie Ihr Können live am Salevium-Stand – beweisen Sie Ihre Expertise vor Ort!
+                  Die letzten Minuten entscheiden – zeigen Sie Ihr Können live am Salevium-Stand auf der Messe!
                 </p>
               </div>
             </div>

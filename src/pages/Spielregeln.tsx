@@ -199,32 +199,33 @@ const Spielregeln = () => {
             </div>
           </Card>
 
-          {/* CTA with Background */}
-          <div 
-            className="relative py-32 px-8 text-center bg-cover bg-center rounded-lg"
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${challengeCtaBackground})`
-            }}
-          >
-            <div className="relative z-10">
-              <h3 className="font-encode font-black text-4xl text-white mb-6">
-                Bereit für die Challenge?
-              </h3>
-              <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
-                Werden Sie der erste DKM Supermarktler!
-              </p>
-              <Button 
-                variant="dkm" 
-                size="lg"
-                onClick={() => window.location.href = "/"}
-                className="text-xl px-16 py-8"
-              >
-                Zur Challenge
-              </Button>
-            </div>
-          </div>
         </div>
       </main>
+
+      {/* CTA with Full Width Background */}
+      <div 
+        className="relative py-32 px-8 text-center bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${challengeCtaBackground})`
+        }}
+      >
+        <div className="relative z-10">
+          <h3 className="font-encode font-black text-4xl text-white mb-6">
+            Bereit für die Challenge?
+          </h3>
+          <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
+            Werden Sie der erste DKM Supermarktler!
+          </p>
+          <Button 
+            variant="dkm" 
+            size="lg"
+            onClick={() => window.location.href = "/"}
+            className="text-xl px-16 py-8"
+          >
+            Zur Challenge
+          </Button>
+        </div>
+      </div>
 
       <Footer />
     </div>

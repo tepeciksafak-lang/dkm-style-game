@@ -119,15 +119,9 @@ const handleChallengeComplete = async (finalScore: number) => {
             <div className="absolute inset-0 bg-dkm-navy/70"></div>
             
             <div className="container mx-auto max-w-4xl text-center relative z-10">
-              <h1 className="font-encode font-black text-5xl md:text-7xl text-white mb-6">
+              <h1 className="font-encode font-black text-5xl md:text-7xl text-white mb-16">
                 DKM sucht den Supermakler 2025
               </h1>
-              <p className="font-encode text-lg text-white/90 mb-4">
-                Die Leitmesse für die Finanz- und Versicherungswirtschaft
-              </p>
-              <p className="font-encode font-semibold text-xl md:text-2xl text-white mb-16 max-w-2xl mx-auto leading-relaxed">
-                Werde der erste DKM Supermakler Deutschlands
-              </p>
               
               <Button 
                 variant="dkm" 

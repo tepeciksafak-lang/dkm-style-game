@@ -32,7 +32,7 @@ const Leaderboard = () => {
   const fetchLeaderboard = async () => {
     try {
       const { data, error } = await supabase
-        .from('ok')
+        .from('leaderboard_view')
         .select('*')
         .order('Punkte', { ascending: false })
         .order('created_at', { ascending: true });

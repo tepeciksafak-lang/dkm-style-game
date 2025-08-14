@@ -70,7 +70,30 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      leaderboard_view: {
+        Row: {
+          created_at: string | null
+          id: number | null
+          Punkte: string | null
+          Rundenr: string | null
+          Username: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number | null
+          Punkte?: string | null
+          Rundenr?: string | null
+          Username?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number | null
+          Punkte?: string | null
+          Rundenr?: string | null
+          Username?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

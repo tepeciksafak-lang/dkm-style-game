@@ -27,7 +27,7 @@ const Header = () => {
               className="h-16 w-auto"
             />
             <img 
-              src="/lovable-uploads/10f90abc-6172-4d47-8845-b51ffebd1ef3.png" 
+              src="/lovable-uploads/cc8ef3b0-09fe-4585-be6b-b548a3122f75.png" 
               alt="Salevium Logo" 
               className="h-12 w-auto"
             />

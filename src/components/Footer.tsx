@@ -8,13 +8,13 @@ const Footer = () => {
           {/* Logo und Event Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
+                alt="DKM Logo" 
+                className="h-12 w-auto"
+              />
                <img 
-                 src="/lovable-uploads/c5646609-b9de-48f4-8629-f1a6644ba81e.png" 
-                 alt="DKM Logo" 
-                 className="h-12 w-auto"
-               />
-               <img 
-                 src="/lovable-uploads/10f90abc-6172-4d47-8845-b51ffebd1ef3.png" 
+                 src="/lovable-uploads/cc8ef3b0-09fe-4585-be6b-b548a3122f75.png" 
                  alt="Salevium Logo" 
                  className="h-9 w-auto"
                />

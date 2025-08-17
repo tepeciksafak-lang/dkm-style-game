@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Challenge from "@/components/Quiz";
@@ -20,11 +21,13 @@ import box4LiveChallenge from "@/assets/box4-live-challenge.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
   const [playerName, setPlayerName] = useState("");
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     // Check if URL contains #register to automatically show registration
@@ -37,10 +40,52 @@ const Home = () => {
     setGameState("register");
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (playerName.trim() && email.trim()) {
-      setGameState("challenge");
+      setIsSubmitting(true);
+      
+      try {
+        // Check if email already exists in database for round 1
+        if (roundNumber === 1) {
+          const { data: existingUser, error } = await supabase
+            .from("ok")
+            .select("Mailadresse, Rundenr")
+            .eq("Mailadresse", email.trim())
+            .eq("Rundenr", "1")
+            .maybeSingle();
+          
+          if (error) {
+            console.error("Database query error:", error);
+            toast({
+              title: "Fehler",
+              description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+              variant: "destructive",
+            });
+            return;
+          }
+          
+          if (existingUser) {
+            toast({
+              title: "E-Mail bereits registriert",
+              description: "Diese E-Mail-Adresse wurde bereits für Runde 1 verwendet. Bitte nutze eine andere E-Mail-Adresse.",
+              variant: "destructive",
+            });
+            return;
+          }
+        }
+        
+        setGameState("challenge");
+      } catch (error) {
+        console.error("Registration error:", error);
+        toast({
+          title: "Fehler",
+          description: "Es gab ein Problem bei der Registrierung. Bitte versuche es erneut.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -318,15 +363,15 @@ const handleChallengeComplete = async (finalScore: number) => {
   <p className="mt-1 text-sm text-gray-600">Runden 2 und 3 sind sichtbar, aber noch nicht auswählbar.</p>
 </div>
 
-<Button 
-  type="submit" 
-  variant="dkm" 
-  size="lg"
-  className="w-full"
-  disabled={!playerName.trim() || !email.trim()}
->
-  Los geht's!
-</Button>
+                <Button 
+                  type="submit" 
+                  variant="dkm" 
+                  size="lg"
+                  className="w-full"
+                  disabled={!playerName.trim() || !email.trim() || isSubmitting}
+                >
+                  {isSubmitting ? "Wird überprüft..." : "Los geht's!"}
+                </Button>
             </form>
           </Card>
         </section>

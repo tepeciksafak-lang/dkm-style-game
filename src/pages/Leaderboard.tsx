@@ -115,7 +115,7 @@ const Leaderboard = () => {
         
         <div className="relative z-10 text-center">
           <h1 className="font-encode font-black text-4xl md:text-5xl text-white mb-4">
-            🏆 Leaderboard
+            Leaderboard
           </h1>
           <p className="font-encode text-lg text-white/90 max-w-2xl mx-auto">
             Die besten Makler der DKM Challenge

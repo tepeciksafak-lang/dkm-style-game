@@ -13,6 +13,11 @@ const Footer = () => {
                 alt="DKM Logo" 
                 className="h-12 w-auto"
               />
+              <img 
+                src="/lovable-uploads/7f8180b4-f035-495f-bde3-5e999fe15ec5.png" 
+                alt="Salevium Logo" 
+                className="h-10 w-auto"
+              />
             </div>
             <div className="font-encode space-y-2 text-gray-300">
               <p className="font-semibold">Die Leitmesse für die</p>

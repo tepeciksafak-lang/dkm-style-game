@@ -17,8 +17,8 @@ const Impressum = () => {
               <h2 className="font-bold text-2xl mb-4">Angaben gemäß § 5 TMG</h2>
               <p className="leading-relaxed">
                 SALEVIUM UG (haftungsbeschränkt)<br />
-                Amelner Straße 10<br />
-                52445 Titz<br />
+                Further Straße 5a<br />
+                52134 Herzogenrath<br />
                 Deutschland
               </p>
             </section>
@@ -26,7 +26,8 @@ const Impressum = () => {
             <section>
               <h2 className="font-bold text-2xl mb-4">Vertreten durch:</h2>
               <p className="leading-relaxed">
-                Bilgehan Karatas
+                Bilgehan Karatas<br />
+                Diplom Kaufmann und geschäftsführender Gesellschafter
               </p>
             </section>
 
@@ -65,7 +66,7 @@ const Impressum = () => {
             <section>
               <h2 className="font-bold text-2xl mb-4">Kooperationshinweis:</h2>
               <p className="leading-relaxed">
-                Die „DKM-Supermakler-Challenge" ist eine Kooperation zwischen der Salevium GmbH und der BBG GmbH (Veranstalterin der DKM). Verantwortlich für die technische Umsetzung, Datenerhebung und -verarbeitung im Rahmen der Challenge ist die Salevium GmbH.
+                Die „DKM-Supermakler-Challenge" ist eine Kooperation zwischen der Salevium UG (haftungsbeschränkt) und der BBG GmbH (Veranstalterin der DKM). Verantwortlich für die technische Umsetzung, Datenerhebung und -verarbeitung im Rahmen der Challenge ist die Salevium UG (haftungsbeschränkt).
               </p>
             </section>
           </div>

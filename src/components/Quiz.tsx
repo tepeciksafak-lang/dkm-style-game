@@ -111,14 +111,14 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
             </div>
             <p className="font-encode text-xl text-white mb-8">
               {score >= 6 
-                ? "Wow! Du bist ein echter DKM-Experte! 🏆" 
+                ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
                 : score >= 4 
-                ? "Sehr gut! Du kennst dich schon gut mit der DKM aus! 👏"
-                : "Nicht schlecht! Schau gerne bei der DKM 2025 vorbei und lerne mehr! 💼"
+                ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
+                : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
               }
             </p>
             <p className="font-encode text-lg text-white/90 mb-8">
-              Wir freuen uns darauf, dich auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
+              Wir freuen uns darauf, Sie auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
             </p>
             <Button 
               variant="dkm" 

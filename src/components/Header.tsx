@@ -20,18 +20,30 @@ const Header = () => {
       <div className="dkm-header-gradient h-24 relative">
         <div className="container mx-auto px-4 h-full flex items-center justify-between relative z-10">
           {/* DKM & Salevium Logos */}
-          <Link to="/" className="flex items-center gap-4">
-            <img 
-              src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
-              alt="DKM Logo" 
-              className="h-16 w-auto"
-            />
-            <img 
-              src="/lovable-uploads/7f8180b4-f035-495f-bde3-5e999fe15ec5.png" 
-              alt="Salevium Logo" 
-              className="h-12 w-auto"
-            />
-          </Link>
+          <div className="flex items-center gap-4">
+            <a 
+              href="https://www.die-leitmesse.de/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img 
+                src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
+                alt="DKM Logo" 
+                className="h-16 w-auto hover:opacity-80 transition-opacity"
+              />
+            </a>
+            <a 
+              href="https://www.salevium.de/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img 
+                src="/lovable-uploads/7f8180b4-f035-495f-bde3-5e999fe15ec5.png" 
+                alt="Salevium Logo" 
+                className="h-12 w-auto hover:opacity-80 transition-opacity"
+              />
+            </a>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">

@@ -70,7 +70,7 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>3 mal Wissens-Challenges und 1 Kompetenz-Challenge</p>
+                  <p>3 Wissens-Challenges und<br />1 Kompetenz-Challenge</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
@@ -129,7 +129,7 @@ const Spielregeln = () => {
               </h2>
             </div>
             <p className="font-encode text-lg text-gray-700 mb-8 text-center">
-              Insgesamt erwarten Sie <strong>3 Wissens-Challenges</strong> und <strong>1 Kompetenz-Challenge</strong> direkt auf der DKM 2025 in Dortmund!
+              Insgesamt erwarten Sie Online <strong>3 Wissens-Challenges</strong> und <strong>1 Kompetenz-Challenge</strong> direkt in der SALEVIUM Arena auf der DKM Messe 2025 in Dortmund!
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -173,14 +173,14 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-orange-600 mb-2">Schlussminuten</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Die letzten Minuten entscheiden – zeigen Sie Ihr Können live am Salevium-Stand auf der Messe!
+                  zeig dein Können Live in der Salevium Arena auf der DKM Messe
                 </p>
               </div>
             </div>
             
             <div className="mt-8 text-center">
               <p className="font-encode text-sm text-gray-600">
-                Fragen zur Kompetenz-Challenge? <a href="mailto:dkm@salevium.de" className="text-orange-600 hover:text-dkm-navy transition-colors">dkm@salevium.de</a>
+                Fragen zur Supermakler-Challenge? <a href="mailto:dkm@salevium.de" className="text-orange-600 hover:text-dkm-navy transition-colors">dkm@salevium.de</a>
               </p>
             </div>
           </Card>

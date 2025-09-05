@@ -175,7 +175,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                 DKM sucht den Supermakler 2025
               </h1>
               <p className="font-encode text-xl text-white mb-16">
-                Jeder Teilnehmer erhält einen Preis
+                Stellen Sie Ihr Wissen über die DKM und Ihr Können auf der DKM unter Beweis
               </p>
               
               <Button 
@@ -263,7 +263,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm mb-3">
-                      Die letzten Minuten entscheiden – zeig dein Können live am Salevium-Stand auf der Messe!
+                      zeig dein Können Live in der Salevium Arena auf der DKM Messe
                     </p>
                     <p className="font-encode text-xs text-gray-600">
                       Fragen? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
@@ -308,7 +308,7 @@ const handleChallengeComplete = async (finalScore: number) => {
             <form onSubmit={handleRegister} className="space-y-6">
               <div>
                 <Label htmlFor="name" className="font-encode font-bold text-dkm-navy">
-                  Dein Name *
+                  Ihr Name *
                 </Label>
                 <Input
                   id="name"
@@ -317,7 +317,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   onChange={(e) => setPlayerName(e.target.value)}
                   required
                   className="mt-2 border-2 border-gray-200 focus:border-dkm-turquoise rounded-xl"
-                  placeholder="Wie heißt du?"
+                  placeholder="Wie heißen Sie?"
                 />
               </div>
               
@@ -332,7 +332,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="mt-2 border-2 border-gray-200 focus:border-dkm-turquoise rounded-xl"
-                  placeholder="deine@email.de"
+                  placeholder="ihre@email.de"
                 />
 </div>
 

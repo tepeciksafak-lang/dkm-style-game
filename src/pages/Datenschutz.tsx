@@ -17,8 +17,8 @@ const Datenschutz = () => {
               <h2 className="font-bold text-2xl mb-4">1. Verantwortlicher</h2>
               <p className="leading-relaxed">
                 SALEVIUM UG (haftungsbeschränkt)<br />
-                Amelner Straße 10<br />
-                52445 Titz<br />
+                Further Straße 5a<br />
+                52134 Herzogenrath<br />
                 E-Mail: <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
               </p>
             </section>
@@ -41,7 +41,7 @@ const Datenschutz = () => {
                 <li>Ergebnisse berechnen und Rankings erstellen</li>
                 <li>KI-generierte Inhalte (z. B. Social-Media-Bilder) erstellen</li>
                 <li>Teilnehmer kontaktieren (z. B. Gewinnbenachrichtigung)</li>
-                <li>Informationen zu weiteren Angeboten der Salevium GmbH senden (Werbezwecke)</li>
+                <li>Informationen zu weiteren Angeboten der Salevium UG (haftungsbeschränkt) senden (Werbezwecke)</li>
               </ul>
             </section>
 
@@ -67,7 +67,7 @@ const Datenschutz = () => {
             <section>
               <h2 className="font-bold text-2xl mb-4">6. Speicherdauer</h2>
               <p className="leading-relaxed">
-                Bis zu 12 Monate nach Challenge-Ende oder gemäß gesetzlichen Vorgaben.
+                Bis zu 24 Monate nach Challenge-Ende oder gemäß gesetzlichen Vorgaben.
               </p>
             </section>
 
@@ -99,6 +99,13 @@ const Datenschutz = () => {
               <h2 className="font-bold text-2xl mb-4">10. Social-Media-Links</h2>
               <p className="leading-relaxed">
                 Beim Anklicken externer Social-Media-Links werden Daten an den jeweiligen Anbieter übertragen.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-bold text-2xl mb-4">11. Hinweis zur geschlechtergerechten Sprache</h2>
+              <p className="leading-relaxed">
+                Aus Gründen der besseren Lesbarkeit wird in dieser Datenschutzerklärung überwiegend die maskuline Sprachform verwendet. Diese bezieht ausdrücklich alle Geschlechter mit ein. Alle Personen sind gleichermaßen angesprochen, unabhängig vom Geschlecht.
               </p>
             </section>
           </div>

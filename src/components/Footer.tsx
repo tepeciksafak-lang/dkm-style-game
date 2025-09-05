@@ -8,20 +8,31 @@ const Footer = () => {
           {/* Logo und Event Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img 
-                src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
-                alt="DKM Logo" 
-                className="h-12 w-auto"
-              />
-              <img 
-                src="/lovable-uploads/7f8180b4-f035-495f-bde3-5e999fe15ec5.png" 
-                alt="Salevium Logo" 
-                className="h-10 w-auto"
-              />
+              <a 
+                href="https://www.die-leitmesse.de/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <img 
+                  src="/lovable-uploads/8849e965-2caf-4e2c-9c75-2ab85a4c2bbf.png" 
+                  alt="DKM Logo" 
+                  className="h-12 w-auto hover:opacity-80 transition-opacity"
+                />
+              </a>
+              <a 
+                href="https://www.salevium.de/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <img 
+                  src="/lovable-uploads/7f8180b4-f035-495f-bde3-5e999fe15ec5.png" 
+                  alt="Salevium Logo" 
+                  className="h-10 w-auto hover:opacity-80 transition-opacity"
+                />
+              </a>
             </div>
             <div className="font-encode space-y-2 text-gray-300">
-              <p className="font-semibold">Die Leitmesse für die</p>
-              <p className="font-semibold">Finanz- und Versicherungswirtschaft</p>
+              <p className="font-semibold">DIE LEITMESSE DER FINANZ- UND VERSICHERUNGSBRANCHE</p>
               <p>28.–29. Oktober 2025</p>
               <p>Dortmund, Deutschland</p>
               <p>Messe Westfalenhallen</p>

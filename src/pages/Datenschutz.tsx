@@ -105,7 +105,7 @@ const Datenschutz = () => {
             <section>
               <h2 className="font-bold text-2xl mb-4">11. Hinweis zur geschlechtergerechten Sprache</h2>
               <p className="leading-relaxed">
-                Aus Gründen der besseren Lesbarkeit wird in dieser Datenschutzerklärung überwiegend die maskuline Sprachform verwendet. Diese bezieht ausdrücklich alle Geschlechter mit ein. Alle Personen sind gleichermaßen angesprochen, unabhängig vom Geschlecht.
+                Aus Gründen der besseren Lesbarkeit wird auf der gesamten Website überwiegend die maskuline Sprachform verwendet. Diese bezieht ausdrücklich alle Geschlechter mit ein. Alle Personen sind gleichermaßen angesprochen, unabhängig vom Geschlecht.
               </p>
             </section>
           </div>

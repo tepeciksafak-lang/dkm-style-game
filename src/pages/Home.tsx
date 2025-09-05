@@ -209,7 +209,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Der Schiedsrichter pfeift an – stelle dich der ersten Runde und sichere dir den perfekten Start!
+                      Der Schiedsrichter pfeift an – stellen Sie sich der ersten Runde und sichern Sie sich den perfekten Start!
                     </p>
                   </div>
                 </Card>
@@ -227,7 +227,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Bleib konzentriert – die Pause naht, jetzt zählt jeder Punkt!
+                      Bleiben Sie konzentriert – die Pause naht, jetzt zählt jeder Punkt!
                     </p>
                   </div>
                 </Card>
@@ -245,7 +245,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm">
-                      Jetzt wird's spannend – gib noch einmal alles, das Finale ist zum Greifen nah!
+                      Jetzt wird's spannend – geben Sie noch einmal alles, das Finale ist zum Greifen nah!
                     </p>
                   </div>
                 </Card>
@@ -263,7 +263,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm mb-3">
-                      zeig dein Können Live in der Salevium Arena auf der DKM Messe
+                      zeigen Sie Ihr Können Live in der Salevium Arena auf der DKM Messe
                     </p>
                     <p className="font-encode text-xs text-gray-600">
                       Fragen? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>

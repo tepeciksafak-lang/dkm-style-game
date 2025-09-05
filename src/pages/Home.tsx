@@ -263,7 +263,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   </div>
                   <div className="p-6">
                     <p className="font-encode text-dkm-navy font-semibold text-sm mb-3">
-                      zeigen Sie Ihr Können Live in der Salevium Arena auf der DKM Messe
+                      Zeigen Sie Ihr Können Live in der Salevium Arena auf der DKM Messe
                     </p>
                     <p className="font-encode text-xs text-gray-600">
                       Fragen? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>

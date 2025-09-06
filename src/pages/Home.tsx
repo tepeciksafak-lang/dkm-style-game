@@ -98,6 +98,44 @@ const handleChallengeComplete = async (finalScore: number) => {
       Rundenr: String(roundNumber),
       Punkte: String(finalScore),
     });
+
+    // Send results to n8n webhook
+    const webhookData = {
+      name: playerName,
+      email: email,
+      score: finalScore,
+      round: roundNumber,
+      timestamp: new Date().toISOString()
+    };
+
+    // Try test URL first, then production URL
+    const testUrl = "https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251";
+    const productionUrl = "https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251";
+
+    try {
+      // Send to test URL
+      await fetch(testUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookData),
+      });
+      console.log("Test webhook sent successfully");
+
+      // Send to production URL
+      await fetch(productionUrl, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookData),
+      });
+      console.log("Production webhook sent successfully");
+    } catch (webhookError) {
+      console.error("Webhook error:", webhookError);
+    }
+
   } catch (e) {
     console.error("Supabase insert error", e);
   } finally {

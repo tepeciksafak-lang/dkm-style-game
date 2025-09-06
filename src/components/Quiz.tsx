@@ -14,40 +14,41 @@ interface ChallengeQuestion {
   answer: boolean;
 }
 
+// Runde 1 Fragen
 const challengeQuestions: ChallengeQuestion[] = [
   {
     id: 1,
-    question: "Die DKM 2025 findet in Dortmund statt.",
+    question: "Die DKM ist eine eingetragene Marke, die sich aus dem Wort 'Deckungskonzeptmesse' heraus entwickelt hat.",
     answer: true,
   },
   {
     id: 2,
-    question: "Die DKM ist die Leitmesse für die Finanz- und Versicherungswirtschaft.",
-    answer: true,
+    question: "Die DKM hat schon immer in den Westfallenhallen in Dortmund stattgefunden.",
+    answer: false,
   },
   {
     id: 3,
-    question: "Encode Sans ist die offizielle Schrift für die DKM 2025.",
+    question: "Die DKM beginnt online bereits Wochen vor dem Präsenz-Event – wahr oder falsch?",
     answer: true,
   },
   {
     id: 4,
-    question: "Ein Challenge-Teilnehmer kann anonym teilnehmen.",
-    answer: false,
+    question: "2025 gibt es genau vier Themenparks.",
+    answer: true,
   },
   {
     id: 5,
-    question: "Die Hauptfarbe des DKM-Buttons ist Gelb.",
+    question: "Die Messe-App heißt DKM365 – wahr oder falsch?",
     answer: true,
   },
   {
     id: 6,
-    question: "Die DKM 2025 läuft zwei Tage.",
+    question: "Ex-Bundespräsident Christian Wulff ist 2025 im Speaker's Corner angekündigt.",
     answer: true,
   },
   {
     id: 7,
-    question: "Das DKM-Logo enthält einen Leuchtturm.",
+    question: "Die letzte Aktion am Mittwoch ist die Vermittlertombola.",
     answer: true,
   },
 ];

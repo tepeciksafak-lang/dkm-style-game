@@ -29,6 +29,37 @@ const Home = () => {
   const [roundNumber, setRoundNumber] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Send test webhook on component mount
+  useEffect(() => {
+    const sendTestWebhook = async () => {
+      const testData = {
+        name: "Test Benutzer",
+        email: "test@example.com", 
+        score: 5,
+        round: 1,
+        timestamp: new Date().toISOString(),
+        test: true
+      };
+
+      const testUrl = "https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251";
+
+      try {
+        await fetch(testUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(testData),
+        });
+        console.log("Test webhook sent successfully to test URL");
+      } catch (error) {
+        console.error("Test webhook error:", error);
+      }
+    };
+
+    sendTestWebhook();
+  }, []);
+
   useEffect(() => {
     // Check if URL contains #register to automatically show registration
     if (window.location.hash === '#register') {

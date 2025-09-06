@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -62,6 +62,23 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [showResult, setShowResult] = useState(false);
+  const [countdown, setCountdown] = useState(10);
+
+  // Countdown-Timer für automatische Weiterleitung
+  useEffect(() => {
+    if (showResult && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else if (showResult && countdown === 0) {
+      // Nach 10 Sekunden: Challenge beenden
+      const score = answers.reduce((total, userAnswer, index) => {
+        return total + (userAnswer === challengeQuestions[index].answer ? 1 : 0);
+      }, 0);
+      onComplete(score);
+    }
+  }, [showResult, countdown, answers, onComplete]);
 
   const handleAnswer = (answer: boolean) => {
     const newAnswers = [...answers, answer];
@@ -70,13 +87,8 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
     if (currentQuestion < challengeQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Challenge beendet - Score berechnen
-      const score = newAnswers.reduce((total, userAnswer, index) => {
-        return total + (userAnswer === challengeQuestions[index].answer ? 1 : 0);
-      }, 0);
-      
+      // Challenge beendet - Ergebnis anzeigen
       setShowResult(true);
-      onComplete(score);
     }
   };
 
@@ -118,9 +130,20 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
                 : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
               }
             </p>
-            <p className="font-encode text-lg text-white/90 mb-8">
+            <p className="font-encode text-lg text-white/90 mb-4">
               Wir freuen uns darauf, Sie auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
             </p>
+            
+            {/* Countdown und Hinweise */}
+            <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 mb-8">
+              <p className="font-encode text-lg text-white mb-2">
+                ✉️ Sie erhalten in Kürze eine E-Mail mit Ihren Ergebnissen
+              </p>
+              <p className="font-encode text-lg text-dkm-yellow font-bold">
+                ⏰ Automatische Weiterleitung in {countdown} Sekunden...
+              </p>
+            </div>
+            
             <Button 
               variant="dkm" 
               size="lg"

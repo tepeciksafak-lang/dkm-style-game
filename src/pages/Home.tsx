@@ -32,24 +32,20 @@ const Home = () => {
   // Send test webhook on component mount
   useEffect(() => {
     const sendTestWebhook = async () => {
-      const testData = {
+      const testParams = new URLSearchParams({
         name: "Test Benutzer",
         email: "test@example.com", 
-        score: 5,
-        round: 1,
+        score: "5",
+        round: "1",
         timestamp: new Date().toISOString(),
-        test: true
-      };
+        test: "true"
+      });
 
-      const testUrl = "https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251";
+      const testUrl = `https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251?${testParams}`;
 
       try {
         await fetch(testUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(testData),
+          method: "GET",
         });
         console.log("Test webhook sent successfully to test URL");
       } catch (error) {
@@ -130,37 +126,29 @@ const handleChallengeComplete = async (finalScore: number) => {
       Punkte: String(finalScore),
     });
 
-    // Send results to n8n webhook
-    const webhookData = {
+    // Send results to n8n webhook using GET requests with query parameters
+    const webhookParams = new URLSearchParams({
       name: playerName,
       email: email,
-      score: finalScore,
-      round: roundNumber,
+      score: String(finalScore),
+      round: String(roundNumber),
       timestamp: new Date().toISOString()
-    };
+    });
 
     // Try test URL first, then production URL
-    const testUrl = "https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251";
-    const productionUrl = "https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251";
+    const testUrl = `https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;
+    const productionUrl = `https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;
 
     try {
       // Send to test URL
       await fetch(testUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(webhookData),
+        method: "GET",
       });
       console.log("Test webhook sent successfully");
 
       // Send to production URL
       await fetch(productionUrl, {
-        method: "POST", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(webhookData),
+        method: "GET",
       });
       console.log("Production webhook sent successfully");
     } catch (webhookError) {

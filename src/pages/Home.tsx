@@ -33,9 +33,9 @@ const Home = () => {
   useEffect(() => {
     const sendTestWebhook = async () => {
       const testParams = new URLSearchParams({
-        name: "Test Benutzer",
-        email: "test@example.com", 
-        score: "5",
+        name: "Probe Test - " + new Date().toLocaleTimeString(),
+        email: "probe@dkm-test.de", 
+        score: "6",
         round: "1",
         timestamp: new Date().toISOString(),
         test: "true"

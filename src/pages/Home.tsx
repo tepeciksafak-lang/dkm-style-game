@@ -23,38 +23,15 @@ const Home = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
-  const [playerName, setPlayerName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
+  const [totalScore, setTotalScore] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Send test webhook on component mount
-  useEffect(() => {
-    const sendTestWebhook = async () => {
-      const testParams = new URLSearchParams({
-        name: "Probe Test - " + new Date().toLocaleTimeString(),
-        email: "probe@dkm-test.de", 
-        score: "6",
-        round: "1",
-        timestamp: new Date().toISOString(),
-        test: "true"
-      });
-
-      const testUrl = `https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251?${testParams}`;
-
-      try {
-        await fetch(testUrl, {
-          method: "GET",
-        });
-        console.log("Test webhook sent successfully to test URL");
-      } catch (error) {
-        console.error("Test webhook error:", error);
-      }
-    };
-
-    sendTestWebhook();
-  }, []);
+  // Test webhook wurde entfernt - jetzt Live-Betrieb
 
   useEffect(() => {
     // Check if URL contains #register to automatically show registration
@@ -69,7 +46,8 @@ const Home = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (playerName.trim() && email.trim()) {
+    const fullName = `${firstName.trim()} ${lastName.trim()}`;
+    if (firstName.trim() && lastName.trim() && email.trim()) {
       setIsSubmitting(true);
       
       try {
@@ -118,39 +96,38 @@ const Home = () => {
 
 const handleChallengeComplete = async (finalScore: number) => {
   setScore(finalScore);
+  const newTotalScore = totalScore + finalScore;
+  setTotalScore(newTotalScore);
+  
+  const fullName = `${firstName} ${lastName}`;
+  
   try {
     await supabase.from("ok").insert({
-      Username: playerName,
+      Username: fullName,
       Mailadresse: email,
       Rundenr: String(roundNumber),
       Punkte: String(finalScore),
     });
 
-    // Send results to n8n webhook using GET requests with query parameters
+    // Send results to n8n webhook - nur Live URL, erweiterte Daten
     const webhookParams = new URLSearchParams({
-      name: playerName,
       email: email,
-      score: String(finalScore),
-      round: String(roundNumber),
+      firstName: firstName,
+      lastName: lastName,
+      roundNumber: String(roundNumber),
+      roundScore: String(finalScore),
+      totalScore: String(newTotalScore),
       timestamp: new Date().toISOString()
     });
 
-    // Try test URL first, then production URL
-    const testUrl = `https://safakt.app.n8n.cloud/webhook-test/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;
+    // Nur Live URL verwenden
     const productionUrl = `https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;
 
     try {
-      // Send to test URL
-      await fetch(testUrl, {
-        method: "GET",
-      });
-      console.log("Test webhook sent successfully");
-
-      // Send to production URL
       await fetch(productionUrl, {
         method: "GET",
       });
-      console.log("Production webhook sent successfully");
+      console.log("Live webhook sent successfully");
     } catch (webhookError) {
       console.error("Webhook error:", webhookError);
     }
@@ -159,12 +136,12 @@ const handleChallengeComplete = async (finalScore: number) => {
     console.error("Supabase insert error", e);
   } finally {
     // Redirect to leaderboard with player name
-    navigate(`/leaderboard?player=${encodeURIComponent(playerName)}`);
+    navigate(`/leaderboard?player=${encodeURIComponent(fullName)}`);
   }
 };
 
   if (gameState === "challenge") {
-    return <Challenge playerName={playerName} onComplete={handleChallengeComplete} />;
+    return <Challenge playerName={`${firstName} ${lastName}`} onComplete={handleChallengeComplete} />;
   }
 
   if (gameState === "result") {
@@ -178,7 +155,7 @@ const handleChallengeComplete = async (finalScore: number) => {
         <div className="container mx-auto max-w-2xl text-center relative z-10">
           <div className="mb-8">
             <h1 className="font-encode font-black text-4xl md:text-6xl text-white mb-6">
-              Herzlichen Glückwunsch, {playerName}!
+              Herzlichen Glückwunsch, {firstName} {lastName}!
             </h1>
             <div className="text-6xl md:text-8xl font-encode font-black text-dkm-yellow mb-6">
               {score}/7
@@ -199,9 +176,11 @@ const handleChallengeComplete = async (finalScore: number) => {
               size="lg"
               onClick={() => {
                 setGameState("start");
-                setPlayerName("");
+                setFirstName("");
+                setLastName("");
                 setEmail("");
                 setScore(0);
+                setTotalScore(0);
               }}
               className="mr-4"
             >
@@ -364,17 +343,32 @@ const handleChallengeComplete = async (finalScore: number) => {
             
             <form onSubmit={handleRegister} className="space-y-6">
               <div>
-                <Label htmlFor="name" className="font-encode font-bold text-dkm-navy">
-                  Ihr Name *
+                <Label htmlFor="firstName" className="font-encode font-bold text-dkm-navy">
+                  Vorname *
                 </Label>
                 <Input
-                  id="name"
+                  id="firstName"
                   type="text"
-                  value={playerName}
-                  onChange={(e) => setPlayerName(e.target.value)}
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   required
                   className="mt-2 border-2 border-gray-200 focus:border-dkm-turquoise rounded-xl"
-                  placeholder="Wie heißen Sie?"
+                  placeholder="Ihr Vorname"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="lastName" className="font-encode font-bold text-dkm-navy">
+                  Nachname *
+                </Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                  className="mt-2 border-2 border-gray-200 focus:border-dkm-turquoise rounded-xl"
+                  placeholder="Ihr Nachname"
                 />
               </div>
               
@@ -425,7 +419,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   variant="dkm" 
                   size="lg"
                   className="w-full"
-                  disabled={!playerName.trim() || !email.trim() || isSubmitting}
+                  disabled={!firstName.trim() || !lastName.trim() || !email.trim() || isSubmitting}
                 >
                   {isSubmitting ? "Wird überprüft..." : "Los geht's!"}
                 </Button>

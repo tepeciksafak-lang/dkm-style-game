@@ -30,6 +30,7 @@ const Home = () => {
   const [roundNumber, setRoundNumber] = useState(1);
   const [totalScore, setTotalScore] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isResultSubmitted, setIsResultSubmitted] = useState(false);
 
   // Test webhook wurde entfernt - jetzt Live-Betrieb
 
@@ -95,6 +96,13 @@ const Home = () => {
   };
 
 const handleChallengeComplete = async (finalScore: number) => {
+  // Prevent multiple submissions
+  if (isResultSubmitted) {
+    console.log("Result already submitted, skipping...");
+    return;
+  }
+  
+  setIsResultSubmitted(true);
   setScore(finalScore);
   const newTotalScore = totalScore + finalScore;
   setTotalScore(newTotalScore);
@@ -181,6 +189,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                 setEmail("");
                 setScore(0);
                 setTotalScore(0);
+                setIsResultSubmitted(false);
               }}
               className="mr-4"
             >

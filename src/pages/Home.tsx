@@ -34,6 +34,43 @@ const Home = () => {
 
   // Test webhook wurde entfernt - jetzt Live-Betrieb
 
+  // Rate Limiting für Webhooks (max 10 pro Minute)
+  const checkRateLimit = () => {
+    const now = Date.now();
+    const rateLimitKey = 'webhook_rate_limit';
+    const rateLimitData = localStorage.getItem(rateLimitKey);
+    
+    let requests: number[] = [];
+    if (rateLimitData) {
+      try {
+        requests = JSON.parse(rateLimitData);
+      } catch (e) {
+        console.error("Error parsing rate limit data:", e);
+      }
+    }
+    
+    // Entferne Requests älter als 1 Minute (60000ms)
+    const oneMinuteAgo = now - 60000;
+    requests = requests.filter(timestamp => timestamp > oneMinuteAgo);
+    
+    // Prüfe ob Limit erreicht ist
+    if (requests.length >= 10) {
+      console.warn("Rate limit reached: 10 requests per minute exceeded");
+      toast({
+        title: "Rate Limit erreicht",
+        description: "Zu viele Anfragen. Versuchen Sie es in einer Minute erneut.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    
+    // Füge aktuelle Request hinzu
+    requests.push(now);
+    localStorage.setItem(rateLimitKey, JSON.stringify(requests));
+    
+    return true;
+  };
+
   useEffect(() => {
     // Check if URL contains #register to automatically show registration
     if (window.location.hash === '#register') {
@@ -118,6 +155,12 @@ const handleChallengeComplete = async (finalScore: number) => {
     });
 
     // Send results to n8n webhook - nur Live URL, erweiterte Daten
+    // Rate Limit prüfen bevor Webhook gesendet wird
+    if (!checkRateLimit()) {
+      console.log("Webhook not sent due to rate limit");
+      return; // Webhook wird nicht gesendet, aber die App funktioniert weiter
+    }
+
     const webhookParams = new URLSearchParams({
       email: email,
       firstName: firstName,

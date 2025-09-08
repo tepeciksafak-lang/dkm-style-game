@@ -131,7 +131,7 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
               }
             </p>
             <p className="font-encode text-lg text-white/90 mb-4">
-              Wir freuen uns darauf, Sie auf der DKM 2025 vom 26.-27. März in Dortmund zu begrüßen!
+              Wir freuen uns darauf, Sie auf der DKM 2025 vom 28.-29. Oktober in Dortmund zu begrüßen!
             </p>
             
             {/* Countdown und Hinweise */}

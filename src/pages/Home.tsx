@@ -22,7 +22,7 @@ import box4LiveChallenge from "@/assets/box4-live-challenge.jpg";
 const Home = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
+  const [gameState, setGameState] = useState<"start" | "prerequisite-check" | "register" | "challenge" | "result">("start");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,7 +79,127 @@ const Home = () => {
   }, []);
 
   const handleStartChallenge = () => {
-    setGameState("register");
+    if (roundNumber === 1) {
+      setGameState("register");
+    } else {
+      setGameState("prerequisite-check");
+    }
+  };
+
+  const handlePrerequisiteCheck = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+      toast({
+        title: "Bitte alle Felder ausfüllen",
+        description: "Vor- und Nachname sowie E-Mail-Adresse sind erforderlich.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      let missingRounds: string[] = [];
+      
+      if (roundNumber === 2) {
+        // Prüfe ob Runde 1 abgeschlossen ist
+        const { data: round1Data, error: round1Error } = await supabase
+          .from("ok")
+          .select("Mailadresse, Rundenr")
+          .eq("Mailadresse", email.trim())
+          .eq("Rundenr", "1")
+          .maybeSingle();
+          
+        if (round1Error) {
+          console.error("Database query error:", round1Error);
+          toast({
+            title: "Fehler",
+            description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+            variant: "destructive",
+          });
+          return;
+        }
+        
+        if (!round1Data) {
+          missingRounds.push("Runde 1");
+        }
+      } else if (roundNumber === 3) {
+        // Prüfe ob Runde 1 und 2 abgeschlossen sind
+        const { data: completedRounds, error: roundsError } = await supabase
+          .from("ok")
+          .select("Rundenr")
+          .eq("Mailadresse", email.trim())
+          .in("Rundenr", ["1", "2"]);
+          
+        if (roundsError) {
+          console.error("Database query error:", roundsError);
+          toast({
+            title: "Fehler",
+            description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+            variant: "destructive",
+          });
+          return;
+        }
+        
+        const completedRoundNumbers = completedRounds?.map(r => r.Rundenr) || [];
+        if (!completedRoundNumbers.includes("1")) {
+          missingRounds.push("Runde 1");
+        }
+        if (!completedRoundNumbers.includes("2")) {
+          missingRounds.push("Runde 2");
+        }
+      }
+      
+      if (missingRounds.length > 0) {
+        toast({
+          title: "Voraussetzungen nicht erfüllt",
+          description: `Sie müssen zuerst ${missingRounds.join(" und ")} abschließen, bevor Sie an Runde ${roundNumber} teilnehmen können.`,
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Prüfe ob diese Runde bereits abgeschlossen wurde
+      const { data: currentRoundData, error: currentRoundError } = await supabase
+        .from("ok")
+        .select("Mailadresse, Rundenr")
+        .eq("Mailadresse", email.trim())
+        .eq("Rundenr", String(roundNumber))
+        .maybeSingle();
+        
+      if (currentRoundError) {
+        console.error("Database query error:", currentRoundError);
+        toast({
+          title: "Fehler",
+          description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      if (currentRoundData) {
+        toast({
+          title: "Runde bereits abgeschlossen",
+          description: `Sie haben Runde ${roundNumber} bereits mit dieser E-Mail-Adresse abgeschlossen.`,
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Alle Prüfungen bestanden - weiter zur Registrierung
+      setGameState("register");
+      
+    } catch (error) {
+      console.error("Prerequisite check error:", error);
+      toast({
+        title: "Fehler",
+        description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -453,17 +573,21 @@ const handleChallengeComplete = async (finalScore: number) => {
         <RadioGroupItem value="1" id="round1" />
         <Label htmlFor="round1" className="font-encode">Runde 1</Label>
       </div>
-      <div className="flex items-center space-x-2 opacity-60">
-        <RadioGroupItem value="2" id="round2" disabled />
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="2" id="round2" />
         <Label htmlFor="round2" className="font-encode">Runde 2</Label>
       </div>
-      <div className="flex items-center space-x-2 opacity-60">
-        <RadioGroupItem value="3" id="round3" disabled />
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="3" id="round3" />
         <Label htmlFor="round3" className="font-encode">Runde 3</Label>
       </div>
     </div>
   </RadioGroup>
-  <p className="mt-1 text-sm text-gray-600">Runden 2 und 3 sind sichtbar, aber noch nicht auswählbar.</p>
+  {roundNumber > 1 && (
+    <p className="mt-1 text-sm text-orange-600 font-medium">
+      Für Runde {roundNumber} ist eine Voraussetzungsprüfung erforderlich.
+    </p>
+  )}
 </div>
 
                 <Button 
@@ -475,6 +599,116 @@ const handleChallengeComplete = async (finalScore: number) => {
                 >
                   {isSubmitting ? "Wird überprüft..." : "Los geht's!"}
                 </Button>
+            </form>
+          </Card>
+        </section>
+      )}
+
+      {gameState === "prerequisite-check" && (
+        <section 
+          className="min-h-screen flex items-center justify-center py-16 px-4 bg-cover bg-center relative"
+          style={{ backgroundImage: `url(${tunnelEntrance})` }}
+        >
+          {/* Overlay for better readability */}
+          <div className="absolute inset-0 bg-black/50"></div>
+          <Card className="w-full max-w-md p-8 border-2 border-dkm-yellow/20 shadow-[var(--shadow-smooth)] relative z-10 bg-white/95 backdrop-blur-sm">
+            <div className="text-center mb-8">
+              <h2 className="font-encode font-black text-3xl text-dkm-navy mb-2">
+                Berechtigung für Runde {roundNumber}
+              </h2>
+              <p className="font-encode text-gray-600">
+                Bitte bestätigen Sie Ihre Teilnahme an den vorherigen Runden.
+              </p>
+            </div>
+            
+            <form onSubmit={handlePrerequisiteCheck} className="space-y-6">
+              <div>
+                <Label htmlFor="prereq-firstName" className="font-encode font-bold text-dkm-navy">
+                  Vorname *
+                </Label>
+                <Input
+                  id="prereq-firstName"
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  className="mt-2 border-2 border-gray-200 focus:border-dkm-yellow rounded-xl"
+                  placeholder="Ihr Vorname"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="prereq-lastName" className="font-encode font-bold text-dkm-navy">
+                  Nachname *
+                </Label>
+                <Input
+                  id="prereq-lastName"
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                  className="mt-2 border-2 border-gray-200 focus:border-dkm-yellow rounded-xl"
+                  placeholder="Ihr Nachname"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="prereq-email" className="font-encode font-bold text-dkm-navy">
+                  E-Mail-Adresse *
+                </Label>
+                <Input
+                  id="prereq-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="mt-2 border-2 border-gray-200 focus:border-dkm-yellow rounded-xl"
+                  placeholder="ihre@email.de"
+                />
+              </div>
+
+              <div className="bg-dkm-yellow/10 border border-dkm-yellow/20 rounded-xl p-4">
+                <h3 className="font-encode font-bold text-dkm-navy text-sm mb-2">
+                  Voraussetzungen für Runde {roundNumber}:
+                </h3>
+                <ul className="text-sm text-dkm-navy space-y-1">
+                  {roundNumber === 2 && (
+                    <li>• Erfolgreiche Teilnahme an Runde 1</li>
+                  )}
+                  {roundNumber === 3 && (
+                    <>
+                      <li>• Erfolgreiche Teilnahme an Runde 1</li>
+                      <li>• Erfolgreiche Teilnahme an Runde 2</li>
+                    </>
+                  )}
+                </ul>
+              </div>
+
+              <div className="flex gap-3">
+                <Button 
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="flex-1"
+                  onClick={() => {
+                    setGameState("start");
+                    setFirstName("");
+                    setLastName("");
+                    setEmail("");
+                  }}
+                >
+                  Zurück
+                </Button>
+                <Button 
+                  type="submit" 
+                  variant="dkm" 
+                  size="lg"
+                  className="flex-1"
+                  disabled={!firstName.trim() || !lastName.trim() || !email.trim() || isSubmitting}
+                >
+                  {isSubmitting ? "Wird geprüft..." : "Prüfen"}
+                </Button>
+              </div>
             </form>
           </Card>
         </section>

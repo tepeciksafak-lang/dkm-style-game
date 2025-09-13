@@ -34,7 +34,11 @@ const Home = () => {
 
   // Test webhook wurde entfernt - jetzt Live-Betrieb
 
-  // Rate Limiting für Webhooks (max 10 pro Minute)
+  // Enhanced fail-safe mechanisms
+  const [submissionAttempts, setSubmissionAttempts] = useState<Map<string, number>>(new Map());
+  const MAX_ATTEMPTS_PER_EMAIL_ROUND = 3;
+  const SUBMISSION_COOLDOWN = 300000; // 5 minutes
+  
   const checkRateLimit = () => {
     const now = Date.now();
     const rateLimitKey = 'webhook_rate_limit';
@@ -69,6 +73,46 @@ const Home = () => {
     localStorage.setItem(rateLimitKey, JSON.stringify(requests));
     
     return true;
+  };
+
+  const checkSubmissionLimit = (email: string, round: string): boolean => {
+    const key = `${email}_${round}`;
+    const attempts = submissionAttempts.get(key) || 0;
+    const lastAttemptKey = `last_attempt_${key}`;
+    const lastAttempt = localStorage.getItem(lastAttemptKey);
+    
+    if (lastAttempt) {
+      const timeSinceLastAttempt = Date.now() - parseInt(lastAttempt);
+      if (attempts >= MAX_ATTEMPTS_PER_EMAIL_ROUND && timeSinceLastAttempt < SUBMISSION_COOLDOWN) {
+        const remainingTime = Math.ceil((SUBMISSION_COOLDOWN - timeSinceLastAttempt) / 60000);
+        toast({
+          title: "Submission Limit erreicht",
+          description: `Bitte warten Sie ${remainingTime} Minuten, bevor Sie es erneut versuchen.`,
+          variant: "destructive",
+        });
+        return false;
+      }
+      
+      // Reset attempts if cooldown period has passed
+      if (timeSinceLastAttempt >= SUBMISSION_COOLDOWN) {
+        setSubmissionAttempts(prev => new Map(prev.set(key, 0)));
+        localStorage.removeItem(lastAttemptKey);
+      }
+    }
+    
+    return attempts < MAX_ATTEMPTS_PER_EMAIL_ROUND;
+  };
+
+  const incrementSubmissionAttempt = (email: string, round: string): void => {
+    const key = `${email}_${round}`;
+    const currentAttempts = submissionAttempts.get(key) || 0;
+    const newAttempts = currentAttempts + 1;
+    setSubmissionAttempts(prev => new Map(prev.set(key, newAttempts)));
+    localStorage.setItem(`last_attempt_${key}`, Date.now().toString());
+  };
+
+  const generateRequestId = (): string => {
+    return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   };
 
   useEffect(() => {
@@ -259,26 +303,50 @@ const handleChallengeComplete = async (finalScore: number) => {
     return;
   }
   
+  // Check submission limits
+  if (!checkSubmissionLimit(email, String(roundNumber))) {
+    return;
+  }
+  
   setIsResultSubmitted(true);
   setScore(finalScore);
   const newTotalScore = totalScore + finalScore;
   setTotalScore(newTotalScore);
   
   const fullName = `${firstName} ${lastName}`;
+  const requestId = generateRequestId();
   
   try {
-    await supabase.from("ok").insert({
+    // Enhanced database insert with better error handling
+    const { error: insertError } = await supabase.from("ok").insert({
       Username: fullName,
       Mailadresse: email,
       Rundenr: String(roundNumber),
       Punkte: String(finalScore),
     });
 
-    // Send results to n8n webhook - nur Live URL, erweiterte Daten
-    // Rate Limit prüfen bevor Webhook gesendet wird
+    if (insertError) {
+      // Handle unique constraint violation
+      if (insertError.message?.includes('unique_email_round')) {
+        toast({
+          title: "Bereits teilgenommen",
+          description: "Sie haben bereits an dieser Runde teilgenommen.",
+          variant: "destructive",
+        });
+        return;
+      }
+      throw insertError;
+    }
+
+    // Increment submission attempt counter
+    incrementSubmissionAttempt(email, String(roundNumber));
+
+    // Send results to n8n webhook with enhanced safety
     if (!checkRateLimit()) {
       console.log("Webhook not sent due to rate limit");
-      return; // Webhook wird nicht gesendet, aber die App funktioniert weiter
+      // Continue without webhook - database entry was successful
+      navigate(`/leaderboard?player=${encodeURIComponent(fullName)}`);
+      return;
     }
 
     const webhookParams = new URLSearchParams({
@@ -288,27 +356,44 @@ const handleChallengeComplete = async (finalScore: number) => {
       roundNumber: String(roundNumber),
       roundScore: String(finalScore),
       totalScore: String(newTotalScore),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      requestId: requestId
     });
 
-    // Nur Live URL verwenden
     const productionUrl = `https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;
 
     try {
-      await fetch(productionUrl, {
+      const webhookResponse = await fetch(productionUrl, {
         method: "GET",
+        headers: {
+          'X-Request-ID': requestId,
+          'X-Idempotency-Key': `${email}_${roundNumber}_${Date.now()}`
+        }
       });
-      console.log("Live webhook sent successfully");
+      
+      if (webhookResponse.ok) {
+        console.log("Live webhook sent successfully");
+      } else {
+        console.warn("Webhook returned non-OK status:", webhookResponse.status);
+      }
     } catch (webhookError) {
       console.error("Webhook error:", webhookError);
+      // Continue without webhook failure affecting user experience
     }
 
   } catch (e) {
     console.error("Supabase insert error", e);
-  } finally {
-    // Redirect to leaderboard with player name
-    navigate(`/leaderboard?player=${encodeURIComponent(fullName)}`);
+    setIsResultSubmitted(false); // Reset on error to allow retry
+    toast({
+      title: "Fehler beim Speichern",
+      description: "Es gab ein Problem beim Speichern Ihres Ergebnisses. Bitte versuchen Sie es erneut.",
+      variant: "destructive",
+    });
+    return;
   }
+  
+  // Always redirect to leaderboard if we reach here
+  navigate(`/leaderboard?player=${encodeURIComponent(fullName)}`);
 };
 
   if (gameState === "challenge") {

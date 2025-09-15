@@ -669,8 +669,8 @@ const handleChallengeComplete = async (finalScore: number) => {
     </div>
   </RadioGroup>
   {roundNumber > 1 && (
-    <p className="mt-1 text-sm text-orange-600 font-medium">
-      Für Runde {roundNumber} ist eine Voraussetzungsprüfung erforderlich.
+    <p className="mt-1 text-sm text-blue-600 font-medium">
+      Runde {roundNumber} ist noch nicht freigeschaltet und wird in den kommenden Wochen verfügbar sein.
     </p>
   )}
 </div>
@@ -699,10 +699,10 @@ const handleChallengeComplete = async (finalScore: number) => {
           <Card className="w-full max-w-md p-8 border-2 border-dkm-yellow/20 shadow-[var(--shadow-smooth)] relative z-10 bg-white/95 backdrop-blur-sm">
             <div className="text-center mb-8">
               <h2 className="font-encode font-black text-3xl text-dkm-navy mb-2">
-                Berechtigung für Runde {roundNumber}
+                Runde {roundNumber} - Bald verfügbar
               </h2>
               <p className="font-encode text-gray-600">
-                Bitte bestätigen Sie Ihre Teilnahme an den vorherigen Runden.
+                Diese Runde wird in den kommenden Wochen freigeschaltet. Bleiben Sie dran!
               </p>
             </div>
             

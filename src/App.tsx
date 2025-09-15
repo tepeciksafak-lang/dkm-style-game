@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Spielregeln from "./pages/Spielregeln";
+import Ablauf from "./pages/Spielregeln";
 import Preise from "./pages/Preise";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
@@ -21,7 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/spielregeln" element={<Spielregeln />} />
+          <Route path="/ablauf" element={<Ablauf />} />
           <Route path="/preise" element={<Preise />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/impressum" element={<Impressum />} />

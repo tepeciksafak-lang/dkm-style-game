@@ -318,7 +318,14 @@ const handleChallengeComplete = async (finalScore: number) => {
   
   try {
     // Enhanced database insert with better error handling
-    const { error: insertError } = await supabase.from("ok").insert({
+    console.log('Attempting Supabase insert:', {
+      Username: fullName,
+      Mailadresse: email,
+      Rundenr: String(roundNumber),
+      Punkte: String(finalScore),
+    });
+    
+    const { data: insertData, error: insertError } = await supabase.from("ok").insert({
       Username: fullName,
       Mailadresse: email,
       Rundenr: String(roundNumber),
@@ -326,8 +333,12 @@ const handleChallengeComplete = async (finalScore: number) => {
     });
 
     if (insertError) {
-      // Handle unique constraint violation
-      if (insertError.message?.includes('unique_email_round')) {
+      console.error('Supabase insert error:', insertError);
+      
+      // Handle unique constraint violation - check for both possible constraint names
+      if (insertError.message?.includes('unique_email_round') || 
+          insertError.message?.includes('ok_mailadresse_rundenr_key') ||
+          insertError.message?.includes('duplicate key value violates unique constraint')) {
         toast({
           title: "Bereits teilgenommen",
           description: "Sie haben bereits an dieser Runde teilgenommen.",
@@ -335,8 +346,17 @@ const handleChallengeComplete = async (finalScore: number) => {
         });
         return;
       }
+      
+      // Show general error for other database issues
+      toast({
+        title: "Datenbankfehler",
+        description: `Fehler beim Speichern: ${insertError.message}`,
+        variant: "destructive",
+      });
       throw insertError;
     }
+    
+    console.log('Supabase insert successful:', insertData);
 
     // Increment submission attempt counter
     incrementSubmissionAttempt(email, String(roundNumber));

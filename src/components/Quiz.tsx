@@ -28,7 +28,7 @@ const challengeQuestions: ChallengeQuestion[] = [
   },
   {
     id: 3,
-    question: "Die DKM beginnt online bereits Wochen vor dem Präsenz-Event – wahr oder falsch?",
+    question: "Die DKM beginnt online bereits Wochen vor dem Präsenz-Event?",
     answer: true,
   },
   {
@@ -38,7 +38,7 @@ const challengeQuestions: ChallengeQuestion[] = [
   },
   {
     id: 5,
-    question: "Die Messe-App heißt DKM365 – wahr oder falsch?",
+    question: "Die Messe-App heißt DKM365?",
     answer: true,
   },
   {
@@ -74,7 +74,8 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
     } else if (showResult && countdown === 0) {
       // Nach 10 Sekunden: Challenge beenden
       const score = answers.reduce((total, userAnswer, index) => {
-        return total + (userAnswer === challengeQuestions[index].answer ? 1 : 0);
+        const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
+        return total + (userAnswer === challengeQuestions[index].answer ? questionPoints : 0);
       }, 0);
       onComplete(score);
     }
@@ -104,7 +105,8 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
 
   if (showResult) {
     const score = answers.reduce((total, userAnswer, index) => {
-      return total + (userAnswer === challengeQuestions[index].answer ? 1 : 0);
+      const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
+      return total + (userAnswer === challengeQuestions[index].answer ? questionPoints : 0);
     }, 0);
 
     return (
@@ -120,12 +122,12 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
               Herzlichen Glückwunsch, {playerName}!
             </h1>
             <div className="text-6xl md:text-8xl font-encode font-black text-dkm-yellow mb-6">
-              {score}/7
+              {score}/196
             </div>
             <p className="font-encode text-xl text-white mb-8">
-              {score >= 6 
+              {score >= 140 
                 ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
-                : score >= 4 
+                : score >= 98 
                 ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
                 : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
               }

@@ -26,6 +26,7 @@ const Home = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
   const [score, setScore] = useState(0);
   const [roundNumber, setRoundNumber] = useState(1);
   const [totalScore, setTotalScore] = useState(0);
@@ -249,7 +250,7 @@ const Home = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     const fullName = `${firstName.trim()} ${lastName.trim()}`;
-    if (firstName.trim() && lastName.trim() && email.trim()) {
+    if (firstName.trim() && lastName.trim() && email.trim() && gender.trim()) {
       setIsSubmitting(true);
       
       try {
@@ -373,6 +374,7 @@ const handleChallengeComplete = async (finalScore: number) => {
       email: email,
       firstName: firstName,
       lastName: lastName,
+      gender: gender,
       roundNumber: String(roundNumber),
       roundScore: String(finalScore),
       totalScore: String(newTotalScore),
@@ -662,6 +664,30 @@ const handleChallengeComplete = async (finalScore: number) => {
                   className="mt-2 border-2 border-gray-200 focus:border-dkm-turquoise rounded-xl"
                   placeholder="ihre@email.de"
                 />
+              </div>
+              
+              <div>
+                <Label className="font-encode font-bold text-dkm-navy">
+                  Geschlecht *
+                </Label>
+                <RadioGroup
+                  value={gender}
+                  onValueChange={setGender}
+                  className="mt-2"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="männlich" id="male" />
+                    <Label htmlFor="male" className="font-encode">Männlich</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="weiblich" id="female" />
+                    <Label htmlFor="female" className="font-encode">Weiblich</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="divers" id="diverse" />
+                    <Label htmlFor="diverse" className="font-encode">Divers</Label>
+                  </div>
+                </RadioGroup>
 </div>
 
 <div>

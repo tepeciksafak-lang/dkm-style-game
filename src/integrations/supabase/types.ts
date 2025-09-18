@@ -46,6 +46,7 @@ export type Database = {
           created_at: string
           id: number
           Mailadresse: string | null
+          old_punkte: string | null
           Punkte: string | null
           Rundenr: string | null
           Username: string | null
@@ -54,6 +55,7 @@ export type Database = {
           created_at?: string
           id?: number
           Mailadresse?: string | null
+          old_punkte?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null
@@ -62,6 +64,7 @@ export type Database = {
           created_at?: string
           id?: number
           Mailadresse?: string | null
+          old_punkte?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null

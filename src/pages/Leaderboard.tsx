@@ -33,9 +33,7 @@ const Leaderboard = () => {
     try {
       const { data, error } = await supabase
         .from('leaderboard_view')
-        .select('*')
-        .order('Punkte', { ascending: false })
-        .order('created_at', { ascending: true });
+        .select('*');
 
       if (error) {
         console.error('Error fetching leaderboard:', error);

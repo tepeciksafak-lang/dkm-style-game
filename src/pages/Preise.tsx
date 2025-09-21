@@ -11,11 +11,12 @@ const Preise = () => {
       icon: <Crown className="text-dkm-yellow" size={48} />,
       title: "1. Platz",
       subtitle: "Hauptgewinn",
-      description: "Exklusiver VIP-Zugang zur DKM 2025",
+      description: "",
       details: [
         "DKM Box im Wert von 999€",
-        "1x 250€ Gutschein Möbelhaus",
-        "Employer Branding Workshop"
+        "1x 250€ Gutschein Möbelhaus", 
+        "Employer Branding Workshop",
+        "Alle Teilnahmepreise inklusive"
       ],
       color: "border-dkm-yellow/30 bg-dkm-yellow/5"
     },
@@ -23,10 +24,11 @@ const Preise = () => {
       icon: <Trophy className="text-dkm-turquoise" size={48} />,
       title: "2. Platz", 
       subtitle: "Silber-Paket",
-      description: "Premium DKM 2025 Erlebnis",
+      description: "",
       details: [
         "1x 250€ Gutschein",
-        "Employer Branding Workshop"
+        "Employer Branding Workshop",
+        "Alle Teilnahmepreise inklusive"
       ],
       color: "border-dkm-turquoise/30 bg-dkm-turquoise/5"
     },
@@ -34,9 +36,10 @@ const Preise = () => {
       icon: <Award className="text-dkm-lime" size={48} />,
       title: "3. Platz",
       subtitle: "Bronze-Paket", 
-      description: "DKM 2025 Starter-Paket",
+      description: "",
       details: [
-        "Employer Branding Workshop"
+        "Employer Branding Workshop",
+        "Alle Teilnahmepreise inklusive"
       ],
       color: "border-dkm-lime/30 bg-dkm-lime/5"
     }

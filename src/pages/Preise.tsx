@@ -9,8 +9,8 @@ const Preise = () => {
   const prizes = [
     {
       icon: <Crown className="text-dkm-yellow" size={48} />,
-      title: "1. Platz",
-      subtitle: "Hauptgewinn",
+      title: "Meister",
+      subtitle: "Meistertitel",
       description: "",
       details: [
         "DKM Box im Wert von 999€",
@@ -22,8 +22,8 @@ const Preise = () => {
     },
     {
       icon: <Trophy className="text-dkm-turquoise" size={48} />,
-      title: "2. Platz", 
-      subtitle: "Silber-Paket",
+      title: "Vizemeister", 
+      subtitle: "Vizemeister-Paket",
       description: "",
       details: [
         "1x 250€ Gutschein",
@@ -34,8 +34,8 @@ const Preise = () => {
     },
     {
       icon: <Award className="text-dkm-lime" size={48} />,
-      title: "3. Platz",
-      subtitle: "Bronze-Paket", 
+      title: "Pokalsieger",
+      subtitle: "Pokal-Paket",
       description: "",
       details: [
         "Employer Branding Workshop",

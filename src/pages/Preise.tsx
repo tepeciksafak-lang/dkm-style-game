@@ -13,11 +13,9 @@ const Preise = () => {
       subtitle: "Hauptgewinn",
       description: "Exklusiver VIP-Zugang zur DKM 2025",
       details: [
-        "Premium-Messeeintritt für 2 Personen",
-        "VIP-Lounge Zugang",
-        "Persönliche Führung durch die Highlights",
-        "Meet & Greet mit Ausstellern",
-        "Exklusives DKM 2025 Merchandise-Paket"
+        "DKM Box im Wert von 999€",
+        "1x 250€ Gutschein Möbelhaus",
+        "Employer Branding Workshop"
       ],
       color: "border-dkm-yellow/30 bg-dkm-yellow/5"
     },
@@ -27,11 +25,8 @@ const Preise = () => {
       subtitle: "Silber-Paket",
       description: "Premium DKM 2025 Erlebnis",
       details: [
-        "Messeeintritt für 2 Personen",
-        "DKM 2025 Merchandise-Paket",
-        "Gutschein für Messestand-Catering",
-        "Exklusive DKM 2025 Tasche",
-        "Digitales Messehandbuch"
+        "1x 250€ Gutschein",
+        "Employer Branding Workshop"
       ],
       color: "border-dkm-turquoise/30 bg-dkm-turquoise/5"
     },
@@ -41,11 +36,7 @@ const Preise = () => {
       subtitle: "Bronze-Paket", 
       description: "DKM 2025 Starter-Paket",
       details: [
-        "Messeeintritt für 1 Person",
-        "DKM 2025 Merchandise-Set",
-        "Messeplan und Programmheft",
-        "Rabattgutscheine für Aussteller",
-        "Digitaler Messekalender"
+        "Employer Branding Workshop"
       ],
       color: "border-dkm-lime/30 bg-dkm-lime/5"
     }
@@ -55,17 +46,17 @@ const Preise = () => {
     {
       icon: <Gift className="text-dkm-navy" size={32} />,
       title: "Alle Teilnehmer",
-      description: "Exklusiver 10% Rabattcode für DKM 2025 Tickets"
+      description: "100€ Gutschein für den Salevium Shop & exklusiver Zugang zu den Top 3 Sales Training Videos von Coach Bilge"
     },
     {
       icon: <Star className="text-dkm-turquoise" size={32} />,
-      title: "5+ Punkte",
-      description: "DKM 2025 Digital-Paket mit Wallpapern und Infos"
+      title: "Erste 100 Online Teilnehmer",
+      description: "KI SEO Audit im Wert von 150€"
     },
     {
       icon: <Zap className="text-dkm-yellow" size={32} />,
-      title: "7 Punkte",
-      description: "Zusätzlich: Chance auf Sonderverlosung Premium-Paket"
+      title: "Erste 50 Teilnehmer am Stand",
+      description: "Employer Branding Audit im Wert von 150€"
     }
   ];
 

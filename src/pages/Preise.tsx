@@ -2,64 +2,80 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trophy, Gift, Star, Crown, Award, Zap } from "lucide-react";
+import { Trophy, Gift, Star, Medal, Search } from "lucide-react";
 import championsLeagueCrowd from "@/assets/champions-league-crowd.jpg";
 
 const Preise = () => {
   const prizes = [
     {
-      icon: <Crown className="text-dkm-yellow" size={48} />,
-      title: "Meister",
-      subtitle: "Meistertitel",
+      icon: <Trophy className="text-dkm-yellow" size={48} />,
+      title: "Supermakler 2025",
+      subtitle: "Gold-Paket",
       description: "",
       details: [
-        "DKM Box im Wert von 999€",
-        "1x 250€ Gutschein Möbelhaus", 
-        "Employer Branding Workshop",
-        "Alle Teilnahmepreise inklusive"
+        "Employer Branding Workshop im Wert von 4.500 Euro",
+        "https://www.convaix.de/",
+        "Livinda-Gutschein für Möbel im Wert von 250 Euro", 
+        "https://livinda.de/",
+        "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
+        "https://www.salevium.de/",
+        "Zuzüglich Teilnahmepreise"
       ],
       color: "border-dkm-yellow/30 bg-dkm-yellow/5"
     },
     {
-      icon: <Trophy className="text-dkm-turquoise" size={48} />,
-      title: "Vizemeister", 
-      subtitle: "Vizemeister-Paket",
+      icon: (
+        <div className="relative">
+          <Medal className="text-gray-400" size={48} />
+          <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg">2</span>
+        </div>
+      ),
+      title: "Vize-Supermakler", 
+      subtitle: "Silber-Paket",
       description: "",
       details: [
-        "1x 250€ Gutschein",
-        "Employer Branding Workshop",
-        "Alle Teilnahmepreise inklusive"
+        "Employer Branding Workshop im Wert von 4.500 Euro",
+        "https://www.convaix.de/",
+        "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
+        "https://www.salevium.de/",
+        "Zuzüglich Teilnahmepreise"
       ],
-      color: "border-dkm-turquoise/30 bg-dkm-turquoise/5"
+      color: "border-gray-400/30 bg-gray-50"
     },
     {
-      icon: <Award className="text-dkm-lime" size={48} />,
-      title: "Pokalsieger",
-      subtitle: "Pokal-Paket",
+      icon: (
+        <div className="relative">
+          <Medal className="text-amber-600" size={48} />
+          <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg">3</span>
+        </div>
+      ),
+      title: "Top 3 Supermakler",
+      subtitle: "Bronze-Paket",
       description: "",
       details: [
-        "Employer Branding Workshop",
-        "Alle Teilnahmepreise inklusive"
+        "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
+        "https://www.salevium.de/",
+        "Zuzüglich Teilnahmepreise"
       ],
-      color: "border-dkm-lime/30 bg-dkm-lime/5"
+      color: "border-amber-600/30 bg-amber-50"
     }
   ];
 
   const participationPrizes = [
     {
       icon: <Gift className="text-dkm-navy" size={32} />,
-      title: "Alle Teilnehmer",
-      description: "100€ Gutschein für den Salevium Shop & exklusiver Zugang zu den Top 3 Sales Training Videos von Coach Bilge"
+      title: "Jeder Teilnehmer",
+      description: "SALEVIUM-Gutschein im Wert von 100 € • Exklusiver Zugang zu den Top 3 Sales Videos von Bilgehan Karatas (Geschäftsführer SALEVIUM) • https://www.salevium.de/"
     },
     {
-      icon: <Star className="text-dkm-turquoise" size={32} />,
-      title: "Erste 100 Online Teilnehmer",
-      description: "KI SEO Audit im Wert von 150€"
+      icon: <Search className="text-dkm-turquoise" size={32} />,
+      title: "Die ersten 100 Online-Teilnehmer",
+      description: "15 Minuten AI SEO Audit inkl. vier Analysen im Wert von 150 € • https://klickdojo.de/"
     },
     {
-      icon: <Zap className="text-dkm-yellow" size={32} />,
-      title: "Erste 50 Teilnehmer am Stand",
-      description: "Employer Branding Audit im Wert von 150€"
+      icon: <Star className="text-dkm-yellow" size={32} />,
+      title: "Die ersten 50 Teilnehmer in der SALEVIUM-Arena",
+      description: "Employer-Branding-Analyse inkl. Scorecard und Loom-Videofeedback im Wert von 500 € • https://www.convaix.de/"
     }
   ];
 
@@ -80,7 +96,7 @@ const Preise = () => {
               Preise
             </h1>
             <p className="font-encode text-lg md:text-xl max-w-2xl">
-              Zeige dein DKM-Wissen und gewinne fantastische Preise!
+              Supermakler 2025 Challenge und gewinnen Sie fantastische Preise im Gesamtwert von über 100.000 Euro!
             </p>
           </div>
         </div>
@@ -158,35 +174,35 @@ const Preise = () => {
                     1
                   </div>
                   <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Anmelden</h3>
-                  <p className="font-encode text-sm text-gray-600">Melde dich mit Name und E-Mail an</p>
+                  <p className="font-encode text-sm text-gray-600">Melden Sie sich mit Namen und E-Mail an.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-turquoise rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
                     2
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">3 Wissens-Challenges Online</h3>
-                  <p className="font-encode text-sm text-gray-600">Beweise dein DKM-Wissen</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">DKM-Wissen</h3>
+                  <p className="font-encode text-sm text-gray-600">Beweisen Sie Ihr DKM-Wissen.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-yellow rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
                     3
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Live auf der Messe mit Kompetenz-Challenge</h3>
-                  <p className="font-encode text-sm text-gray-600">Zeig dein Können vor Ort</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Vor Ort</h3>
+                  <p className="font-encode text-sm text-gray-600">Zeigen Sie vor Ort Ihr Können.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-lime rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-dkm-navy text-2xl">
                     4
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Hauptpreisverleihung</h3>
-                  <p className="font-encode text-sm text-gray-600">Die besten werden geehrt</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Ehrung</h3>
+                  <p className="font-encode text-sm text-gray-600">Die Besten werden live in der SALEVIUM-Arena geehrt.</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-dkm-navy rounded-full flex items-center justify-center mx-auto mb-4 font-encode font-black text-white text-2xl">
                     5
                   </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Nachspielzeit</h3>
-                  <p className="font-encode text-sm text-gray-600">Du erhältst deinen Teilnehmerpreis</p>
+                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-2">Teilnahmepreis</h3>
+                  <p className="font-encode text-sm text-gray-600">Sie erhalten per E-Mail Ihren Teilnahmepreis.</p>
                 </div>
               </div>
             </div>
@@ -205,10 +221,10 @@ const Preise = () => {
       >
         <div className="relative z-10">
           <h3 className="font-encode font-black text-4xl text-white mb-6">
-            Worauf wartest du noch?
+            Worauf warten Sie noch?
           </h3>
           <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
-            Starte jetzt die Challenge und sichere dir deine Chance auf fantastische Preise!
+            Starten Sie jetzt Ihre Challenge und sichern Sie sich Ihre Chance auf die fantastischen Preise im Gesamtwert von über 100.000 Euro.
           </p>
           <Button 
             variant="dkm" 

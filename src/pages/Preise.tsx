@@ -56,8 +56,9 @@ const Preise = () => {
       subtitle: "Silber-Paket",
       description: "",
       details: [
-        "Employer Branding + Livindia Gutschein",
+        "Employer Branding Workshop im Wert von 4.500 Euro",
         { text: "https://www.convaix.de/", isLink: true },
+        "Livinda-Gutschein für Möbel im Wert von 250 Euro", 
         { text: "https://livinda.de/", isLink: true },
         "Zuzüglich Teilnahmepreise"
       ],

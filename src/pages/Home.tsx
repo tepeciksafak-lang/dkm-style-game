@@ -146,7 +146,7 @@ const Home = () => {
       const { data: existingRoundData, error: existingRoundError } = await supabase
         .from("ok")
         .select("Mailadresse, Rundenr")
-        .eq("Mailadresse", email.trim())
+        .eq("Mailadresse", email.trim().toLowerCase())
         .eq("Rundenr", String(roundNumber))
         .maybeSingle();
         
@@ -178,7 +178,7 @@ const Home = () => {
         const { data: round1Data, error: round1Error } = await supabase
           .from("ok")
           .select("Mailadresse, Rundenr")
-          .eq("Mailadresse", email.trim())
+          .eq("Mailadresse", email.trim().toLowerCase())
           .eq("Rundenr", "1")
           .maybeSingle();
           
@@ -200,7 +200,7 @@ const Home = () => {
         const { data: completedRounds, error: roundsError } = await supabase
           .from("ok")
           .select("Rundenr")
-          .eq("Mailadresse", email.trim())
+          .eq("Mailadresse", email.trim().toLowerCase())
           .in("Rundenr", ["1", "2"]);
           
         if (roundsError) {
@@ -277,7 +277,7 @@ const handleChallengeComplete = async (finalScore: number) => {
     
     const { data: insertData, error: insertError } = await supabase.from("ok").insert({
       Username: fullName,
-      Mailadresse: email,
+      Mailadresse: email.trim().toLowerCase(),
       Rundenr: String(roundNumber),
       Punkte: String(finalScore),
     });

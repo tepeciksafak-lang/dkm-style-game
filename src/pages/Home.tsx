@@ -368,7 +368,7 @@ const handleChallengeComplete = async (finalScore: number) => {
 };
 
   if (gameState === "challenge") {
-    return <Challenge playerName={`${firstName} ${lastName}`} onComplete={handleChallengeComplete} />;
+    return <Challenge playerName={`${firstName} ${lastName}`} roundNumber={roundNumber} onComplete={handleChallengeComplete} />;
   }
 
   if (gameState === "result") {

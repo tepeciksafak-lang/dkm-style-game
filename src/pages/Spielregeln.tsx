@@ -50,15 +50,15 @@ const Spielregeln = () => {
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Antworten können nicht geändert werden</p>
+                  <p>Antworten können nicht geändert werden.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Anonyme Teilnahme ist nicht möglich</p>
+                  <p>Anonyme Teilnahme ist nicht möglich.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Eine Person kann pro Runde nur einmal teilnehmen</p>
+                  <p>Eine Person kann pro Runde nur einmal teilnehmen.</p>
                 </div>
               </div>
             </Card>
@@ -78,7 +78,7 @@ const Spielregeln = () => {
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Multiplizieren Sie auf der DKM am Stand von SALEVIUM Ihre Punkte, indem sie Ihr Können mit der SALES MATCH Master Box unter Beweis stellen (Halle 4, Stand C-16)</p>
+                  <p>Multiplizieren Sie auf der DKM am Stand von SALEVIUM Ihre Punkte, indem sie Ihr Können mit der SALES MATCH Master Box unter Beweis stellen (Halle 4, Stand C-16).</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
@@ -144,7 +144,7 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-dkm-navy mb-2">Anpfiff</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Der Schiedsrichter pfeift an – stellen Sie sich der ersten Runde und sichern Sie sich den perfekten Start!
+                 Der Schiedsrichter pfeift an – stellen Sie sich der ersten Runde und sichern Sie sich den perfekten Start!
                 </p>
               </div>
               
@@ -155,7 +155,7 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-dkm-navy mb-2">Kurz vor der Halbzeit</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Bleiben Sie konzentriert – die Pause naht, jetzt zählt jeder Punkt!
+                 Bleiben Sie konzentriert – die Pause naht, jetzt zählt jeder Punkt!
                 </p>
               </div>
               
@@ -166,7 +166,7 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-dkm-navy mb-2">Zweite Halbzeit</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Jetzt wird's spannend – geben Sie noch einmal alles, das Finale ist zum Greifen nah!
+                 Jetzt wird's spannend – geben Sie noch einmal alles, das Finale ist zum Greifen nah!
                 </p>
               </div>
               
@@ -177,7 +177,7 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-orange-600 mb-2">Schlussminuten</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  Zeigen Sie Ihr Können live in der SALEVIUM Arena auf der DKM (Halle 4, Stand C-16)!
+                 Zeigen Sie Ihr Können live in der SALEVIUM Arena auf der DKM (Halle 4, Stand C-16)!
                 </p>
               </div>
             </div>
@@ -205,7 +205,7 @@ const Spielregeln = () => {
                 ✅ <strong>Technische Anforderungen:</strong> Die Challenge funktioniert auf allen modernen Browsern und Geräten.
               </p>
               <p>
-                ✅ <strong>Support:</strong> Bei technischen Problemen wenden Sie sich an unser Support-Team.
+                 ✅ <strong>Support:</strong> Bei technischen Problemen wenden Sie sich an unser Support-Team.
               </p>
             </div>
           </Card>

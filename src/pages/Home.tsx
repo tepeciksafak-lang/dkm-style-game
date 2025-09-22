@@ -33,6 +33,13 @@ const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isResultSubmitted, setIsResultSubmitted] = useState(false);
 
+  // Test user authorization
+  const TEST_USERS = ['safak.t@gmx.de', 'info@salevium.de'];
+  
+  const isTestUser = (emailAddress: string): boolean => {
+    return TEST_USERS.includes(emailAddress.trim().toLowerCase());
+  };
+
   // Test webhook wurde entfernt - jetzt Live-Betrieb
 
   // Enhanced fail-safe mechanisms
@@ -142,6 +149,14 @@ const Home = () => {
     setIsSubmitting(true);
     
     try {
+      // Check if this is a test user - if yes, bypass all restrictions
+      if (isTestUser(email)) {
+        console.log("Test user detected, bypassing all restrictions");
+        setGameState("challenge");
+        setIsSubmitting(false);
+        return;
+      }
+
       // First, check if email already exists for the current round
       const { data: existingRoundData, error: existingRoundError } = await supabase
         .from("ok")

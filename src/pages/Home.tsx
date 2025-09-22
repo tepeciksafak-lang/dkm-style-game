@@ -124,11 +124,8 @@ const Home = () => {
   }, []);
 
   const handleStartChallenge = () => {
-    if (roundNumber === 1) {
-      setGameState("register");
-    } else {
-      setGameState("prerequisite-check");
-    }
+    // All rounds must go through prerequisite-check for security
+    setGameState("prerequisite-check");
   };
 
   const handlePrerequisiteCheck = async (e: React.FormEvent) => {
@@ -145,9 +142,38 @@ const Home = () => {
     setIsSubmitting(true);
     
     try {
+      // First, check if email already exists for the current round
+      const { data: existingRoundData, error: existingRoundError } = await supabase
+        .from("ok")
+        .select("Mailadresse, Rundenr")
+        .eq("Mailadresse", email.trim())
+        .eq("Rundenr", String(roundNumber))
+        .maybeSingle();
+        
+      if (existingRoundError) {
+        console.error("Database query error:", existingRoundError);
+        toast({
+          title: "Fehler",
+          description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      if (existingRoundData) {
+        toast({
+          title: "E-Mail bereits verwendet",
+          description: `Diese E-Mail-Adresse wurde bereits für Runde ${roundNumber} verwendet. Bitte nutzen Sie eine andere E-Mail-Adresse.`,
+          variant: "destructive",
+        });
+        return;
+      }
+
       let missingRounds: string[] = [];
       
-      if (roundNumber === 2) {
+      if (roundNumber === 1) {
+        // Round 1 can proceed directly after email check
+      } else if (roundNumber === 2) {
         // Prüfe ob Runde 1 abgeschlossen ist
         const { data: round1Data, error: round1Error } = await supabase
           .from("ok")
@@ -205,33 +231,6 @@ const Home = () => {
         return;
       }
       
-      // Prüfe ob diese Runde bereits abgeschlossen wurde
-      const { data: currentRoundData, error: currentRoundError } = await supabase
-        .from("ok")
-        .select("Mailadresse, Rundenr")
-        .eq("Mailadresse", email.trim())
-        .eq("Rundenr", String(roundNumber))
-        .maybeSingle();
-        
-      if (currentRoundError) {
-        console.error("Database query error:", currentRoundError);
-        toast({
-          title: "Fehler",
-          description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
-          variant: "destructive",
-        });
-        return;
-      }
-      
-      if (currentRoundData) {
-        toast({
-          title: "Runde bereits abgeschlossen",
-          description: `Sie haben Runde ${roundNumber} bereits mit dieser E-Mail-Adresse abgeschlossen.`,
-          variant: "destructive",
-        });
-        return;
-      }
-      
       // Alle Prüfungen bestanden - weiter zur Registrierung
       setGameState("register");
       
@@ -254,35 +253,7 @@ const Home = () => {
       setIsSubmitting(true);
       
       try {
-        // Check if email already exists in database for round 1
-        if (roundNumber === 1) {
-          const { data: existingUser, error } = await supabase
-            .from("ok")
-            .select("Mailadresse, Rundenr")
-            .eq("Mailadresse", email.trim())
-            .eq("Rundenr", "1")
-            .maybeSingle();
-          
-          if (error) {
-            console.error("Database query error:", error);
-            toast({
-              title: "Fehler",
-              description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
-              variant: "destructive",
-            });
-            return;
-          }
-          
-          if (existingUser) {
-            toast({
-              title: "E-Mail bereits registriert",
-              description: "Diese E-Mail-Adresse wurde bereits für Runde 1 verwendet. Bitte nutze eine andere E-Mail-Adresse.",
-              variant: "destructive",
-            });
-            return;
-          }
-        }
-        
+        // Email validation is now handled in prerequisite-check for all rounds
         setGameState("challenge");
       } catch (error) {
         console.error("Registration error:", error);

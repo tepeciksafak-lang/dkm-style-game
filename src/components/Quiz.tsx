@@ -64,7 +64,7 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
   const [showResult, setShowResult] = useState(false);
   const [countdown, setCountdown] = useState(10);
 
-  // Countdown-Timer für automatische Weiterleitung
+  // Countdown-Timer nur für automatische Weiterleitung zur Leaderboard
   useEffect(() => {
     if (showResult && countdown > 0) {
       const timer = setTimeout(() => {
@@ -72,14 +72,10 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
       }, 1000);
       return () => clearTimeout(timer);
     } else if (showResult && countdown === 0) {
-      // Nach 10 Sekunden: Challenge beenden
-      const score = answers.reduce((total, userAnswer, index) => {
-        const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
-        return total + (userAnswer === challengeQuestions[index].answer ? questionPoints : 0);
-      }, 0);
-      onComplete(score);
+      // Nach 10 Sekunden: Zur Leaderboard weiterleiten
+      window.location.href = "/leaderboard";
     }
-  }, [showResult, countdown, answers, onComplete]);
+  }, [showResult, countdown]);
 
   const handleAnswer = (answer: boolean) => {
     const newAnswers = [...answers, answer];
@@ -88,8 +84,14 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
     if (currentQuestion < challengeQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Challenge beendet - Ergebnis anzeigen
+      // Challenge beendet - Ergebnis anzeigen und sofort Punkte speichern
       setShowResult(true);
+      // Punkte sofort berechnen und speichern
+      const score = newAnswers.reduce((total, userAnswer, index) => {
+        const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
+        return total + (userAnswer === challengeQuestions[index].answer ? questionPoints : 0);
+      }, 0);
+      onComplete(score);
     }
   };
 

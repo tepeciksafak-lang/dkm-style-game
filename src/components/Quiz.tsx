@@ -302,6 +302,20 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
     }
   };
 
+  // Calculate sorting score - points per correctly placed block
+  const calculateSortingScore = (userOrder: string[], correctOrder: string[], questionNumber: number) => {
+    const pointsPerBlock = questionNumber === 1 ? 10 : questionNumber === 2 ? 20 : 30;
+    let score = 0;
+    
+    userOrder.forEach((item, index) => {
+      if (correctOrder[index] === item) {
+        score += pointsPerBlock;
+      }
+    });
+    
+    return score;
+  };
+
   const handleSortingAnswer = (sortedItems: string[]) => {
     const newAnswers = [...answers, sortedItems];
     setAnswers(newAnswers);
@@ -313,15 +327,14 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
       setShowResult(true);
       // Punkte für Sortier-Aufgaben berechnen
       const score = newAnswers.reduce((total, userAnswer, index) => {
-        const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
         if (isRound1) {
+          const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
           const currentQ = currentQuestions[index] as ChallengeQuestion;
           return total + (userAnswer === currentQ.answer ? questionPoints : 0);
         } else {
           const currentQ = currentQuestions[index] as SortingQuestion;
           const userOrder = userAnswer as string[];
-          const isCorrect = JSON.stringify(userOrder) === JSON.stringify(currentQ.correctOrder);
-          return total + (isCorrect ? questionPoints : 0);
+          return total + calculateSortingScore(userOrder, currentQ.correctOrder, index + 1);
         }
       }, 0);
       onComplete(score);
@@ -340,15 +353,14 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
 
   if (showResult) {
     const score = answers.reduce((total, userAnswer, index) => {
-      const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
       if (isRound1) {
+        const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
         const currentQ = currentQuestions[index] as ChallengeQuestion;
         return total + (userAnswer === currentQ.answer ? questionPoints : 0);
       } else {
         const currentQ = currentQuestions[index] as SortingQuestion;
         const userOrder = userAnswer as string[];
-        const isCorrect = JSON.stringify(userOrder) === JSON.stringify(currentQ.correctOrder);
-        return total + (isCorrect ? questionPoints : 0);
+        return total + calculateSortingScore(userOrder, currentQ.correctOrder, index + 1);
       }
     }, 0);
 
@@ -365,15 +377,22 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
               Herzlichen Glückwunsch, {playerName}!
             </h1>
             <div className="text-6xl md:text-8xl font-encode font-black text-dkm-yellow mb-6">
-              {score}/196
+              {score}/{isRound1 ? 196 : 420}
             </div>
             <p className="font-encode text-xl text-white mb-8">
-              {score >= 140 
-                ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
-                : score >= 98 
-                ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
-                : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
-              }
+              {isRound1 ? (
+                score >= 140 
+                  ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
+                  : score >= 98 
+                  ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
+                  : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
+              ) : (
+                score >= 300 
+                  ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
+                  : score >= 200 
+                  ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
+                  : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
+              )}
             </p>
             <p className="font-encode text-lg text-white/90 mb-4">
               Wir freuen uns darauf, Sie auf der DKM 2025 vom 28.-29. Oktober in Dortmund zu begrüßen!

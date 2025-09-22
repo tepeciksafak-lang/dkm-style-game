@@ -22,7 +22,7 @@ import box4LiveChallenge from "@/assets/box4-live-challenge.jpg";
 const Home = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [gameState, setGameState] = useState<"start" | "prerequisite-check" | "register" | "challenge" | "result">("start");
+  const [gameState, setGameState] = useState<"start" | "register" | "challenge" | "result">("start");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -124,16 +124,16 @@ const Home = () => {
   }, []);
 
   const handleStartChallenge = () => {
-    // All rounds must go through prerequisite-check for security
-    setGameState("prerequisite-check");
+    setGameState("register");
   };
 
-  const handlePrerequisiteCheck = async (e: React.FormEvent) => {
+
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !gender.trim()) {
       toast({
         title: "Bitte alle Felder ausfüllen",
-        description: "Vor- und Nachname sowie E-Mail-Adresse sind erforderlich.",
+        description: "Vor- und Nachname, E-Mail-Adresse und Geschlecht sind erforderlich.",
         variant: "destructive",
       });
       return;
@@ -231,40 +231,18 @@ const Home = () => {
         return;
       }
       
-      // Alle Prüfungen bestanden - weiter zur Registrierung
-      setGameState("register");
+      // Alle Prüfungen bestanden - weiter zur Challenge
+      setGameState("challenge");
       
     } catch (error) {
-      console.error("Prerequisite check error:", error);
+      console.error("Registration error:", error);
       toast({
         title: "Fehler",
-        description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
+        description: "Es gab ein Problem bei der Registrierung. Bitte versuche es erneut.",
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const fullName = `${firstName.trim()} ${lastName.trim()}`;
-    if (firstName.trim() && lastName.trim() && email.trim() && gender.trim()) {
-      setIsSubmitting(true);
-      
-      try {
-        // Email validation is now handled in prerequisite-check for all rounds
-        setGameState("challenge");
-      } catch (error) {
-        console.error("Registration error:", error);
-        toast({
-          title: "Fehler",
-          description: "Es gab ein Problem bei der Registrierung. Bitte versuche es erneut.",
-          variant: "destructive",
-        });
-      } finally {
-        setIsSubmitting(false);
-      }
     }
   };
 
@@ -699,122 +677,13 @@ const handleChallengeComplete = async (finalScore: number) => {
                   className="w-full"
                   disabled={!firstName.trim() || !lastName.trim() || !email.trim() || isSubmitting}
                 >
-                  {isSubmitting ? "Wird überprüft..." : "Los geht's!"}
+                  {isSubmitting ? "Wird überprüft..." : "Challenge starten"}
                 </Button>
             </form>
           </Card>
         </section>
       )}
 
-      {gameState === "prerequisite-check" && (
-        <section 
-          className="min-h-screen flex items-center justify-center py-16 px-4 bg-cover bg-center relative"
-          style={{ backgroundImage: `url(${tunnelEntrance})` }}
-        >
-          {/* Overlay for better readability */}
-          <div className="absolute inset-0 bg-black/50"></div>
-          <Card className="w-full max-w-md p-8 border-2 border-dkm-yellow/20 shadow-[var(--shadow-smooth)] relative z-10 bg-white/95 backdrop-blur-sm">
-            <div className="text-center mb-8">
-              <h2 className="font-encode font-black text-3xl text-dkm-navy mb-2">
-                Runde {roundNumber} - Bald verfügbar
-              </h2>
-              <p className="font-encode text-gray-600">
-                Diese Runde wird in den kommenden Wochen freigeschaltet. Bleiben Sie dran!
-              </p>
-            </div>
-            
-            <form onSubmit={handlePrerequisiteCheck} className="space-y-6">
-              <div>
-                <Label htmlFor="prereq-firstName" className="font-encode font-bold text-dkm-navy">
-                  Vorname *
-                </Label>
-                <Input
-                  id="prereq-firstName"
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  className="mt-2 border-2 border-gray-200 focus:border-dkm-yellow rounded-xl"
-                  placeholder="Ihr Vorname"
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="prereq-lastName" className="font-encode font-bold text-dkm-navy">
-                  Nachname *
-                </Label>
-                <Input
-                  id="prereq-lastName"
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  required
-                  className="mt-2 border-2 border-gray-200 focus:border-dkm-yellow rounded-xl"
-                  placeholder="Ihr Nachname"
-                />
-              </div>
-              
-              <div>
-                <Label htmlFor="prereq-email" className="font-encode font-bold text-dkm-navy">
-                  E-Mail-Adresse *
-                </Label>
-                <Input
-                  id="prereq-email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="mt-2 border-2 border-gray-200 focus:border-dkm-yellow rounded-xl"
-                  placeholder="ihre@email.de"
-                />
-              </div>
-
-              <div className="bg-dkm-yellow/10 border border-dkm-yellow/20 rounded-xl p-4">
-                <h3 className="font-encode font-bold text-dkm-navy text-sm mb-2">
-                  Voraussetzungen für Runde {roundNumber}:
-                </h3>
-                <ul className="text-sm text-dkm-navy space-y-1">
-                  {roundNumber === 2 && (
-                    <li>• Erfolgreiche Teilnahme an Runde 1</li>
-                  )}
-                  {roundNumber === 3 && (
-                    <>
-                      <li>• Erfolgreiche Teilnahme an Runde 1</li>
-                      <li>• Erfolgreiche Teilnahme an Runde 2</li>
-                    </>
-                  )}
-                </ul>
-              </div>
-
-              <div className="flex gap-3">
-                <Button 
-                  type="button"
-                  variant="outline"
-                  size="lg"
-                  className="flex-1"
-                  onClick={() => {
-                    setGameState("start");
-                    setFirstName("");
-                    setLastName("");
-                    setEmail("");
-                  }}
-                >
-                  Zurück
-                </Button>
-                <Button 
-                  type="submit" 
-                  variant="dkm" 
-                  size="lg"
-                  className="flex-1"
-                  disabled={!firstName.trim() || !lastName.trim() || !email.trim() || isSubmitting}
-                >
-                  {isSubmitting ? "Wird geprüft..." : "Prüfen"}
-                </Button>
-              </div>
-            </form>
-          </Card>
-        </section>
-      )}
 
       <Footer />
     </div>

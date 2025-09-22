@@ -87,7 +87,7 @@ const Footer = () => {
 
           {/* Social Media */}
           <div>
-            <h3 className="font-encode font-bold text-lg mb-4">Folge uns</h3>
+            <h3 className="font-encode font-bold text-lg mb-4">Folgen Sie uns</h3>
             
             {/* DKM Social Media */}
             <div className="mb-6">

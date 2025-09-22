@@ -128,7 +128,7 @@ const Preise = () => {
               Preise
             </h1>
             <p className="font-encode text-lg md:text-xl max-w-2xl">
-              Meistern Sie die DKM-Challenge und gewinnen fantastische Preise im Gesamtwert von über 77.777€!
+              Meistern Sie die DKM-Challenge und gewinnen Sie fantastische Preise im Gesamtwert von über 77.777€!
             </p>
           </div>
         </div>

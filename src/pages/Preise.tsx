@@ -40,7 +40,7 @@ const Preise = () => {
         { text: "https://livinda.de/", isLink: true },
         "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
         { text: "https://www.salevium.de/", isLink: true },
-        "Multiplizieren Sie auf der DKM am Stand von SALEVIUM Ihre Punkte, indem sie Ihr Können mit der SALES MATCH Master Box unter Beweis stellen (Halle 4, Stand C-16)",
+        
         "Zuzüglich Teilnahmepreise"
       ],
       color: "border-dkm-yellow/30 bg-dkm-yellow/5"
@@ -56,10 +56,9 @@ const Preise = () => {
       subtitle: "Silber-Paket",
       description: "",
       details: [
-        "Employer Branding Workshop im Wert von 4.500 Euro",
+        "Employer Branding + Livindia Gutschein",
         { text: "https://www.convaix.de/", isLink: true },
-        "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
-        { text: "https://www.salevium.de/", isLink: true },
+        { text: "https://livinda.de/", isLink: true },
         "Zuzüglich Teilnahmepreise"
       ],
       color: "border-gray-400/30 bg-gray-50"
@@ -75,8 +74,8 @@ const Preise = () => {
       subtitle: "Bronze-Paket",
       description: "",
       details: [
-        "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
-        { text: "https://www.salevium.de/", isLink: true },
+        "Employer Branding Workshop im Wert von 4.500 Euro",
+        { text: "https://www.convaix.de/", isLink: true },
         "Zuzüglich Teilnahmepreise"
       ],
       color: "border-amber-600/30 bg-amber-50"

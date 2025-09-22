@@ -115,8 +115,11 @@ const Leaderboard = () => {
           <h1 className="font-encode font-black text-4xl md:text-5xl text-white mb-4">
             Leaderboard
           </h1>
+          <p className="font-encode text-xl text-white/90 max-w-2xl mx-auto mb-2">
+            Die erste Quiz-Challenge ist eröffnet.
+          </p>
           <p className="font-encode text-lg text-white/90 max-w-2xl mx-auto">
-            Die besten Makler der DKM Challenge
+            Werden Sie der erste Supermakler der DKM!
           </p>
         </div>
       </section>

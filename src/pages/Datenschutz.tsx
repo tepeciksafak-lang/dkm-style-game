@@ -28,7 +28,7 @@ const Datenschutz = () => {
               <ul className="leading-relaxed space-y-2 list-disc list-inside">
                 <li>Vor- und Nachname</li>
                 <li>E-Mail-Adresse</li>
-                <li>Optional: Lieblingsfarben, Rückennummer, Position</li>
+                <li>Geschlecht</li>
                 <li>Quiz-Ergebnisse und Punktestände</li>
                 <li>Zeitstempel der Teilnahme</li>
               </ul>
@@ -42,6 +42,7 @@ const Datenschutz = () => {
                 <li>KI-generierte Inhalte (z. B. Social-Media-Bilder) erstellen</li>
                 <li>Teilnehmer kontaktieren (z. B. Gewinnbenachrichtigung)</li>
                 <li>Informationen zu weiteren Angeboten der Salevium UG (haftungsbeschränkt) senden (Werbezwecke)</li>
+                <li>Sponsoren der Preise dürfen sich danach auch für Werbezwecke melden</li>
               </ul>
             </section>
 
@@ -60,7 +61,8 @@ const Datenschutz = () => {
               <p className="leading-relaxed mb-2">Nur an:</p>
               <ul className="leading-relaxed space-y-2 list-disc list-inside">
                 <li>Technische Dienstleister für den Plattformbetrieb</li>
-                <li>BBG GmbH als Veranstaltungspartner (eingeschränkt, ohne vollständige Lead-Daten)</li>
+                <li>bbg Betriebsberatungs GmbH als Veranstaltungspartner (eingeschränkt, ohne vollständige Lead-Daten)</li>
+                <li>Sponsoren erhalten nur Daten der Gewinner</li>
               </ul>
             </section>
 

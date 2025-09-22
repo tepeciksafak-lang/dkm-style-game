@@ -186,7 +186,7 @@ const Challenge = ({ playerName, onComplete }: ChallengeProps) => {
         {/* Question Card */}
         <Card className="p-8 md:p-12 border-2 border-dkm-turquoise/20 shadow-[var(--shadow-smooth)] bg-white/95 backdrop-blur-sm">
           <div className="text-center">
-            <h2 className="font-encode font-black text-2xl md:text-3xl text-dkm-navy mb-12">
+            <h2 className="font-encode font-black text-2xl md:text-3xl text-dkm-navy mb-12 break-words hyphens-auto">
               {challengeQuestions[currentQuestion].question}
             </h2>
             

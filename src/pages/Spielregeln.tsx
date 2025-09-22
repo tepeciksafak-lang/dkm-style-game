@@ -40,13 +40,17 @@ const Spielregeln = () => {
               <div className="flex items-center mb-4">
                 <Users className="text-dkm-navy mr-3" size={32} />
                 <h2 className="font-encode font-black text-2xl text-dkm-navy">
-                  Teilnahme
+                  Ihre Teilnahme
                 </h2>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Einfache Anmeldung</p>
+                  <p>Jeder kann sich einfach anmelden und loslegen.</p>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
+                  <p>Antworten können nicht geändert werden</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
@@ -70,19 +74,19 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>3 Wissens-Challenges und<br />1 Kompetenz-Challenge</p>
+                  <p>Sie absolvieren online 3 Wissens-Challenges und sammeln Supermakler-Punkte.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Jeder Teilnehmer erhält einen Preis</p>
+                  <p>Multiplizieren Sie auf der DKM am Stand von SALEVIUM Ihre Punkte, indem sie Ihr Können mit der SALES MATCH Master Box unter Beweis stellen (Halle 4, Stand C-16)</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Antworten können nicht geändert werden</p>
+                  <p>Jeder Teilnehmer erhält zwei Preise und hat die Chance auf weitere Preise im Gesamtwert von über 100.000 Euro.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Hauptpreisverleihung auf der DKM</p>
+                  <p><a href="https://www.die-leitmesse.de/verlosungen" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-dkm-navy transition-colors underline">Alle Verlosungen auf die-leitmesse.de</a></p>
                 </div>
               </div>
             </Card>
@@ -100,21 +104,21 @@ const Spielregeln = () => {
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Dynamische Punktvergabe</p>
+                  <p>Die Challenges unterliegen einer dynamischen Punktevergabe.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Maximale Punktzahl liegt bei 2688 Punkten</p>
+                  <p>Die maximale Punktzahl liegt bei 2.688 Punkten.</p>
                 </div>
               </div>
               <div className="space-y-4 font-encode text-gray-700">
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Sofortige Anzeige des Gesamtergebnisses</p>
+                  <p>Das Gesamtergebnis wird im Leaderboard sofort angezeigt.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-dkm-navy mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Individualisierte Trikot Prompts</p>
+                  <p>Nach jeder Wissens-Challenge erhalten Sie einen individualisierten Supermakler-Prompt.</p>
                 </div>
               </div>
             </div>
@@ -129,7 +133,7 @@ const Spielregeln = () => {
               </h2>
             </div>
             <p className="font-encode text-lg text-gray-700 mb-8 text-center">
-              Insgesamt erwarten Sie Online <strong>3 Wissens-Challenges</strong> und <strong>1 Kompetenz-Challenge</strong> direkt in der SALEVIUM Arena auf der DKM Messe 2025 in Dortmund!
+              Insgesamt erwarten Sie Online <strong>3 Wissens-Challenges</strong> und <strong>1 Kompetenz-Challenge</strong> direkt in der SALEVIUM Arena (Halle 4, Stand C-16) auf der DKM Messe 2025 in Dortmund!
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -173,7 +177,7 @@ const Spielregeln = () => {
                 </div>
                 <h3 className="font-encode font-bold text-orange-600 mb-2">Schlussminuten</h3>
                 <p className="font-encode text-sm text-gray-600">
-                  zeig dein Können Live in der Salevium Arena auf der DKM Messe
+                  Zeigen Sie Ihr Können live in der SALEVIUM Arena auf der DKM (Halle 4, Stand C-16)!
                 </p>
               </div>
             </div>
@@ -191,6 +195,9 @@ const Spielregeln = () => {
               Wichtige Hinweise
             </h2>
             <div className="space-y-4 font-encode text-gray-700">
+              <p>
+                Der Rechtsweg ist ausgeschlossen. Mitarbeitende von SALEVIUM und der bbg Betriebsberatungs GmbH sind von der Challenge ausgeschlossen.
+              </p>
               <p>
                 ✅ <strong>Fairplay:</strong> Die Challenge basiert auf öffentlich verfügbaren Informationen zur DKM 2025.
               </p>
@@ -218,7 +225,7 @@ const Spielregeln = () => {
             Bereit für die Challenge?
           </h3>
           <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
-            Werden Sie der erste DKM Supermarktler!
+            Werden Sie der erste DKM Supermakler!
           </p>
           <Button 
             variant="dkm" 

@@ -463,7 +463,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                 onClick={handleStartChallenge}
                 className="text-xl px-12 py-6 mb-16 bg-dkm-yellow hover:bg-dkm-yellow/90 text-dkm-navy font-bold"
               >
-                Anpiff
+                Anpfiff
               </Button>
             </div>
             
@@ -559,7 +559,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                   onClick={handleStartChallenge}
                   className="text-xl px-12 py-6 bg-dkm-yellow hover:bg-dkm-yellow/90 text-dkm-navy font-bold"
                 >
-                  Anpiff
+                  Anpfiff
                 </Button>
               </div>
             </div>

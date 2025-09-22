@@ -12,10 +12,11 @@ import trophyCelebration from "@/assets/trophy-celebration.jpg";
 interface DragDropSortingProps {
   items: { id: string; text: string }[];
   onSort: (sortedIds: string[]) => void;
+  sortedItems: { id: string; text: string }[];
+  setSortedItems: (items: { id: string; text: string }[]) => void;
 }
 
-const DragDropSorting = ({ items, onSort }: DragDropSortingProps) => {
-  const [sortedItems, setSortedItems] = useState<{ id: string; text: string }[]>([]);
+const DragDropSorting = ({ items, onSort, sortedItems, setSortedItems }: DragDropSortingProps) => {
   const [draggedItem, setDraggedItem] = useState<{ id: string; text: string } | null>(null);
 
   const handleDragStart = (e: React.DragEvent, item: { id: string; text: string }) => {
@@ -52,7 +53,7 @@ const DragDropSorting = ({ items, onSort }: DragDropSortingProps) => {
   };
 
   const removeFromSorted = (itemId: string) => {
-    setSortedItems(prev => prev.filter(item => item.id !== itemId));
+    setSortedItems(sortedItems.filter(item => item.id !== itemId));
   };
 
   const availableItems = items.filter(item => !sortedItems.find(sorted => sorted.id === item.id));
@@ -128,18 +129,6 @@ const DragDropSorting = ({ items, onSort }: DragDropSortingProps) => {
         </div>
       </div>
 
-      {/* Submit Button */}
-      <div className="text-center">
-        <Button
-          variant="dkm"
-          size="lg"
-          onClick={handleSubmit}
-          disabled={sortedItems.length !== items.length}
-          className="text-xl py-6 px-12"
-        >
-          Antwort bestätigen
-        </Button>
-      </div>
     </div>
   );
 };
@@ -226,20 +215,20 @@ const challengeQuestionsRound2: SortingQuestion[] = [
     ],
     correctOrder: ["coffee", "laecheln", "stempel", "foto", "lounge", "weinbar", "dance"]
   },
-  {
-    id: 3,
-    question: "Sortiere die Messezahlen nach Größe/Ausmaß (von klein bis \"oh wow!\"):",
-    items: [
-      { id: "kongresse", text: "16 Kongresse" },
-      { id: "themenparks", text: "4 Themenparks" },
-      { id: "programm", text: "221 Live-Programmpunkte" },
-      { id: "aussteller", text: "256 Aussteller" },
-      { id: "besucher", text: "14.127 Besucher" },
-      { id: "speaker", text: "200+ Speaker" },
-      { id: "partner", text: "200+ Aussteller & Partner" }
-    ],
-    correctOrder: ["themenparks", "kongresse", "speaker", "partner", "programm", "aussteller", "besucher"]
-  }
+    {
+      id: 3,
+      question: "Sortiere die Messezahlen nach Größe/Ausmaß (von klein bis \"oh wow!\"):",
+      items: [
+        { id: "kongresse", text: "Es gibt 16 Kongresse" },
+        { id: "themenparks", text: "Es gibt 4 Themenparks" },
+        { id: "programm", text: "Es gibt 221 Live-Programmpunkte" },
+        { id: "aussteller", text: "Es gibt 256 Aussteller" },
+        { id: "besucher", text: "Es gibt 14.127 Besucher" },
+        { id: "speaker", text: "Es gibt 200+ Speaker" },
+        { id: "partner", text: "Es gibt 200+ Aussteller & Partner" }
+      ],
+      correctOrder: ["themenparks", "kongresse", "speaker", "partner", "programm", "aussteller", "besucher"]
+    }
 ];
 
 interface ChallengeProps {
@@ -254,6 +243,7 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
   const [showResult, setShowResult] = useState(false);
   const [countdown, setCountdown] = useState(10);
   const [draggedItems, setDraggedItems] = useState<{ id: string; text: string }[]>([]);
+  const [sortedItems, setSortedItems] = useState<{ id: string; text: string }[]>([]);
 
   // Get current question set based on round
   const isRound1 = roundNumber === 1;
@@ -267,6 +257,8 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
       // Shuffle items for drag and drop
       const shuffled = [...sortingQuestion.items].sort(() => Math.random() - 0.5);
       setDraggedItems(shuffled);
+      // Reset sorted items when question changes
+      setSortedItems([]);
     }
   }, [currentQuestion, isRound1, currentQuestions, totalQuestions]);
 
@@ -316,8 +308,8 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
     return score;
   };
 
-  const handleSortingAnswer = (sortedItems: string[]) => {
-    const newAnswers = [...answers, sortedItems];
+  const handleSortingAnswer = (sortedItemIds: string[]) => {
+    const newAnswers = [...answers, sortedItemIds];
     setAnswers(newAnswers);
 
     if (currentQuestion < totalQuestions - 1) {
@@ -471,11 +463,28 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
                 </Button>
               </div>
             ) : (
-              // Round 2: Drag & Drop Sorting
-              <DragDropSorting
-                items={draggedItems}
-                onSort={(sortedIds) => handleSortingAnswer(sortedIds)}
-              />
+              // Round 2: Drag & Drop Sorting Questions
+              <div className="w-full">
+                <DragDropSorting
+                  items={draggedItems}
+                  onSort={handleSortingAnswer}
+                  sortedItems={sortedItems}
+                  setSortedItems={setSortedItems}
+                />
+                
+                {/* Submit Button */}
+                <div className="text-center mt-8">
+                  <Button
+                    variant="dkm"
+                    size="lg"
+                    onClick={() => handleSortingAnswer(sortedItems.map(item => item.id))}
+                    disabled={sortedItems.length !== draggedItems.length}
+                    className="text-xl py-6 px-12"
+                  >
+                    Antwort bestätigen
+                  </Button>
+                </div>
+              </div>
             )}
           </div>
         </Card>

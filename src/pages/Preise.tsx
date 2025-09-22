@@ -6,7 +6,28 @@ import { Trophy, Gift, Star, Medal, Search } from "lucide-react";
 import championsLeagueCrowd from "@/assets/champions-league-crowd.jpg";
 
 const Preise = () => {
-  const prizes = [
+  interface DetailItem {
+    text: string;
+    isLink: boolean;
+  }
+
+  interface Prize {
+    icon: React.ReactNode;
+    title: string;
+    subtitle: string;
+    description: string;
+    details: (string | DetailItem)[];
+    color: string;
+  }
+
+  interface ParticipationPrize {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    links?: (string | DetailItem)[];
+  }
+
+  const prizes: Prize[] = [
     {
       icon: <Trophy className="text-dkm-yellow" size={48} />,
       title: "Supermakler 2025",
@@ -14,11 +35,12 @@ const Preise = () => {
       description: "",
       details: [
         "Employer Branding Workshop im Wert von 4.500 Euro",
-        "https://www.convaix.de/",
+        { text: "https://www.convaix.de/", isLink: true },
         "Livinda-Gutschein für Möbel im Wert von 250 Euro", 
-        "https://livinda.de/",
+        { text: "https://livinda.de/", isLink: true },
         "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
-        "https://www.salevium.de/",
+        { text: "https://www.salevium.de/", isLink: true },
+        "Multiplizieren Sie auf der DKM am Stand von SALEVIUM Ihre Punkte, indem sie Ihr Können mit der SALES MATCH Master Box unter Beweis stellen (Halle 4, Stand C-16)",
         "Zuzüglich Teilnahmepreise"
       ],
       color: "border-dkm-yellow/30 bg-dkm-yellow/5"
@@ -35,9 +57,9 @@ const Preise = () => {
       description: "",
       details: [
         "Employer Branding Workshop im Wert von 4.500 Euro",
-        "https://www.convaix.de/",
+        { text: "https://www.convaix.de/", isLink: true },
         "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
-        "https://www.salevium.de/",
+        { text: "https://www.salevium.de/", isLink: true },
         "Zuzüglich Teilnahmepreise"
       ],
       color: "border-gray-400/30 bg-gray-50"
@@ -54,28 +76,38 @@ const Preise = () => {
       description: "",
       details: [
         "SALES MATCH Master Box DKM Edition im Wert von 840 Euro",
-        "https://www.salevium.de/",
+        { text: "https://www.salevium.de/", isLink: true },
         "Zuzüglich Teilnahmepreise"
       ],
       color: "border-amber-600/30 bg-amber-50"
     }
   ];
 
-  const participationPrizes = [
+  const participationPrizes: ParticipationPrize[] = [
     {
       icon: <Gift className="text-dkm-navy" size={32} />,
       title: "Jeder Teilnehmer",
-      description: "SALEVIUM-Gutschein im Wert von 100 € • Exklusiver Zugang zu den Top 3 Sales Videos von Bilgehan Karatas (Geschäftsführer SALEVIUM) • https://www.salevium.de/"
+      description: "SALEVIUM-Gutschein im Wert von 100 €",
+      links: [
+        "Exklusiver Zugang zu den Top 3 Sales Videos von Bilgehan Karatas (Geschäftsführer SALEVIUM)",
+        { text: "https://www.salevium.de/", isLink: true }
+      ]
     },
     {
       icon: <Search className="text-dkm-turquoise" size={32} />,
       title: "Die ersten 100 Online-Teilnehmer",
-      description: "15 Minuten AI SEO Audit inkl. vier Analysen im Wert von 150 € • https://klickdojo.de/"
+      description: "15 Minuten AI SEO Audit inkl. vier Analysen im Wert von 150 €",
+      links: [
+        { text: "https://klickdojo.de/", isLink: true }
+      ]
     },
     {
       icon: <Star className="text-dkm-yellow" size={32} />,
       title: "Die ersten 50 Teilnehmer in der SALEVIUM-Arena",
-      description: "Employer-Branding-Analyse inkl. Scorecard und Loom-Videofeedback im Wert von 500 € • https://www.convaix.de/"
+      description: "Employer-Branding-Analyse inkl. Scorecard und Loom-Videofeedback im Wert von 500 €",
+      links: [
+        { text: "https://www.convaix.de/", isLink: true }
+      ]
     }
   ];
 
@@ -96,7 +128,7 @@ const Preise = () => {
               Preise
             </h1>
             <p className="font-encode text-lg md:text-xl max-w-2xl">
-              Supermakler 2025 Challenge und gewinnen Sie fantastische Preise im Gesamtwert von über 100.000 Euro!
+              Meistern Sie die DKM-Challenge und gewinnen fantastische Preise im Gesamtwert von über 100.000 Euro!
             </p>
           </div>
         </div>
@@ -128,12 +160,28 @@ const Preise = () => {
                     </p>
                   </div>
                   <div className="space-y-3">
-                    {prize.details.map((detail, detailIndex) => (
-                      <div key={detailIndex} className="flex items-start">
-                        <div className="w-2 h-2 bg-dkm-turquoise rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                        <p className="font-encode text-sm text-gray-700">{detail}</p>
-                      </div>
-                    ))}
+                    {prize.details.map((detail, detailIndex) => {
+                      if (typeof detail === 'object' && detail.isLink) {
+                        return (
+                          <div key={detailIndex} className="text-left">
+                            <a 
+                              href={detail.text} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="font-encode text-sm text-dkm-turquoise hover:text-dkm-navy transition-colors underline"
+                            >
+                              {detail.text}
+                            </a>
+                          </div>
+                        );
+                      }
+                        return (
+                          <div key={detailIndex} className="flex items-start">
+                            <div className="w-2 h-2 bg-dkm-turquoise rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p className="font-encode text-sm text-gray-700">{detail as string}</p>
+                          </div>
+                        );
+                    })}
                   </div>
                 </Card>
               ))}
@@ -154,9 +202,34 @@ const Preise = () => {
                   <h3 className="font-encode font-bold text-lg text-dkm-navy mb-3">
                     {prize.title}
                   </h3>
-                  <p className="font-encode text-gray-600">
+                  <p className="font-encode text-gray-600 mb-3">
                     {prize.description}
                   </p>
+                  {prize.links && (
+                    <div className="space-y-2">
+                      {prize.links.map((link, linkIndex) => {
+                        if (typeof link === 'object' && link.isLink) {
+                          return (
+                            <div key={linkIndex}>
+                              <a 
+                                href={link.text} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="font-encode text-sm text-dkm-turquoise hover:text-dkm-navy transition-colors underline"
+                              >
+                                {link.text}
+                              </a>
+                            </div>
+                          );
+                        }
+                          return (
+                            <p key={linkIndex} className="font-encode text-sm text-gray-600">
+                              {link as string}
+                            </p>
+                          );
+                      })}
+                    </div>
+                  )}
                 </Card>
               ))}
             </div>

@@ -49,7 +49,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/spielregeln" className="hover:text-dkm-yellow transition-colors">
+                <a href="/ablauf" className="hover:text-dkm-yellow transition-colors">
                   Ablauf
                 </a>
               </li>

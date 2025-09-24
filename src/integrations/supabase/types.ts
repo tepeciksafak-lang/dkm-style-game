@@ -14,59 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
-      Name: {
-        Row: {
-          created_at: string
-          id: number
-          Mailadresse: string | null
-          Punkte: string | null
-          Rundenr: string | null
-          Username: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          Mailadresse?: string | null
-          Punkte?: string | null
-          Rundenr?: string | null
-          Username?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          Mailadresse?: string | null
-          Punkte?: string | null
-          Rundenr?: string | null
-          Username?: string | null
-        }
-        Relationships: []
-      }
       ok: {
         Row: {
           created_at: string
+          first_name: string | null
+          gender: string | null
           id: number
+          last_name: string | null
           Mailadresse: string | null
           old_punkte: string | null
           Punkte: string | null
           Rundenr: string | null
+          Status: string | null
+          Token: string | null
+          "Token Generated At": string | null
           Username: string | null
         }
         Insert: {
           created_at?: string
+          first_name?: string | null
+          gender?: string | null
           id?: number
+          last_name?: string | null
           Mailadresse?: string | null
           old_punkte?: string | null
           Punkte?: string | null
           Rundenr?: string | null
+          Status?: string | null
+          Token?: string | null
+          "Token Generated At"?: string | null
           Username?: string | null
         }
         Update: {
           created_at?: string
+          first_name?: string | null
+          gender?: string | null
           id?: number
+          last_name?: string | null
           Mailadresse?: string | null
           old_punkte?: string | null
           Punkte?: string | null
           Rundenr?: string | null
+          Status?: string | null
+          Token?: string | null
+          "Token Generated At"?: string | null
           Username?: string | null
         }
         Relationships: []
@@ -76,21 +67,30 @@ export type Database = {
       leaderboard_view: {
         Row: {
           created_at: string | null
+          first_name: string | null
+          gender: string | null
           id: number | null
+          last_name: string | null
           Punkte: string | null
           Rundenr: string | null
           Username: string | null
         }
         Insert: {
           created_at?: string | null
+          first_name?: string | null
+          gender?: string | null
           id?: number | null
+          last_name?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null
         }
         Update: {
           created_at?: string | null
+          first_name?: string | null
+          gender?: string | null
           id?: number | null
+          last_name?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null

@@ -334,7 +334,6 @@ const handleChallengeComplete = async (finalScore: number) => {
     if (!checkRateLimit()) {
       console.log("Webhook not sent due to rate limit");
       // Continue without webhook - database entry was successful
-      navigate(`/leaderboard?player=${encodeURIComponent(fullName)}`);
       return;
     }
 
@@ -383,8 +382,7 @@ const handleChallengeComplete = async (finalScore: number) => {
     return;
   }
   
-  // Always redirect to leaderboard if we reach here
-  navigate(`/leaderboard?player=${encodeURIComponent(fullName)}`);
+  // Navigation will be handled by the Quiz component countdown
 };
 
   if (gameState === "challenge") {

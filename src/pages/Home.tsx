@@ -292,6 +292,9 @@ const handleChallengeComplete = async (finalScore: number) => {
     
     const { data: insertData, error: insertError } = await supabase.from("ok").insert({
       Username: fullName,
+      first_name: firstName,
+      last_name: lastName,
+      gender: gender,
       Mailadresse: email.trim().toLowerCase(),
       Rundenr: String(roundNumber),
       Punkte: String(finalScore),

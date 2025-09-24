@@ -295,7 +295,7 @@ const handleChallengeComplete = async (finalScore: number) => {
       Mailadresse: email.trim().toLowerCase(),
       Rundenr: String(roundNumber),
       Punkte: String(finalScore),
-    });
+    }).select('*');
 
     if (insertError) {
       console.error('Supabase insert error:', insertError);
@@ -323,6 +323,10 @@ const handleChallengeComplete = async (finalScore: number) => {
     
     console.log('Supabase insert successful:', insertData);
 
+    // Extract the ID from the inserted record
+    const supabaseRecordId = insertData && insertData[0] ? insertData[0].id : null;
+    console.log('Supabase record ID:', supabaseRecordId);
+
     // Increment submission attempt counter
     incrementSubmissionAttempt(email, String(roundNumber));
 
@@ -343,7 +347,8 @@ const handleChallengeComplete = async (finalScore: number) => {
       roundScore: String(finalScore),
       totalScore: String(newTotalScore),
       timestamp: new Date().toISOString(),
-      requestId: requestId
+      requestId: requestId,
+      supabaseId: supabaseRecordId ? String(supabaseRecordId) : 'unknown'
     });
 
     const productionUrl = `https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;

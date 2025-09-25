@@ -403,10 +403,10 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
             <Button 
               variant="dkm" 
               size="lg"
-              onClick={() => window.location.href = "/leaderboard"}
+              onClick={() => window.location.href = "/"}
               className="mr-4"
             >
-              Leaderboard
+              Nochmal spielen
             </Button>
           </div>
         </div>

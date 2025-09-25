@@ -12,6 +12,9 @@ import penaltyKick from "@/assets/penalty-kick.jpg";
 interface LeaderboardEntry {
   id: number;
   Username: string;
+  first_name: string;
+  last_name: string;
+  gender: string;
   Punkte: string;
   created_at: string;
 }

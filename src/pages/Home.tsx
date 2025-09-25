@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
@@ -658,9 +659,18 @@ const handleChallengeComplete = async (finalScore: number) => {
                     <Label htmlFor="diverse" className="font-encode">Divers</Label>
                   </div>
                 </RadioGroup>
-</div>
+              </div>
 
-<div>
+              {/* Email confirmation notice */}
+              <Alert className="bg-dkm-turquoise/10 border-dkm-turquoise/30">
+                <AlertDescription className="font-encode text-dkm-navy">
+                  <span className="flex items-center">
+                    ✉️ <span className="ml-2">Hinweis: Nach Beendigung des Quiz erhalten Sie eine Bestätigungsmail mit Ihren Ergebnissen. Bitte schauen Sie danach auch in Ihren SPAM-Ordner.</span>
+                  </span>
+                </AlertDescription>
+              </Alert>
+
+              <div>
   <Label className="font-encode font-bold text-dkm-navy">
     Runde
   </Label>

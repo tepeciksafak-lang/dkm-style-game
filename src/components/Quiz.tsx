@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import centerCircleCrowd from "@/assets/center-circle-crowd.jpg";
 import runningToGoal from "@/assets/running-to-goal.jpg";
 import penaltyKick from "@/assets/penalty-kick.jpg";
@@ -392,9 +393,16 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
             
             {/* Countdown und Hinweise */}
             <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 mb-8">
-              <p className="font-encode text-lg text-white mb-2">
-                ✉️ Sie erhalten in Kürze eine E-Mail mit Ihren Ergebnissen
-              </p>
+              <Alert className="bg-white/30 border-white/50 mb-4">
+                <AlertDescription className="font-encode text-white">
+                  <span className="flex items-center justify-center">
+                    ✉️ <span className="ml-2">Sie erhalten in Kürze eine E-Mail mit Ihren Ergebnissen.</span>
+                  </span>
+                  <span className="flex items-center justify-center mt-2">
+                    ⚠️ <span className="ml-2 font-bold">Bitte prüfen Sie auch Ihren SPAM-Ordner!</span>
+                  </span>
+                </AlertDescription>
+              </Alert>
               <p className="font-encode text-lg text-dkm-yellow font-bold">
                 ⏰ Automatische Weiterleitung in {countdown} Sekunden...
               </p>

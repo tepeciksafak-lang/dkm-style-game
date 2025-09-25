@@ -67,30 +67,21 @@ export type Database = {
       leaderboard_view: {
         Row: {
           created_at: string | null
-          first_name: string | null
-          gender: string | null
           id: number | null
-          last_name: string | null
           Punkte: string | null
           Rundenr: string | null
           Username: string | null
         }
         Insert: {
           created_at?: string | null
-          first_name?: string | null
-          gender?: string | null
           id?: number | null
-          last_name?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null
         }
         Update: {
           created_at?: string | null
-          first_name?: string | null
-          gender?: string | null
           id?: number | null
-          last_name?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null

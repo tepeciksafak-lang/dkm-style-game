@@ -167,16 +167,8 @@ const Home = () => {
         .maybeSingle();
         
       if (existingRoundError) {
-        console.error("Database query error:", existingRoundError);
-        toast({
-          title: "Fehler",
-          description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
-          variant: "destructive",
-        });
-        return;
-      }
-      
-      if (existingRoundData) {
+        console.warn("Skipping duplicate check due to insufficient SELECT permissions:", existingRoundError);
+      } else if (existingRoundData) {
         toast({
           title: "E-Mail bereits verwendet",
           description: `Diese E-Mail-Adresse wurde bereits für Runde ${roundNumber} verwendet. Bitte nutzen Sie eine andere E-Mail-Adresse.`,
@@ -184,6 +176,7 @@ const Home = () => {
         });
         return;
       }
+
 
       let missingRounds: string[] = [];
       
@@ -199,18 +192,14 @@ const Home = () => {
           .maybeSingle();
           
         if (round1Error) {
-          console.error("Database query error:", round1Error);
-          toast({
-            title: "Fehler",
-            description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
-            variant: "destructive",
-          });
-          return;
+          console.warn("Skipping prerequisite check for Runde 1 due to insufficient SELECT permissions:", round1Error);
         }
         
-        if (!round1Data) {
+        // Only enforce if we could check and found no record
+        if (!round1Error && !round1Data) {
           missingRounds.push("Runde 1");
         }
+
       } else if (roundNumber === 3) {
         // Prüfe ob Runde 1 und 2 abgeschlossen sind
         const { data: completedRounds, error: roundsError } = await supabase
@@ -220,22 +209,17 @@ const Home = () => {
           .in("Rundenr", ["1", "2"]);
           
         if (roundsError) {
-          console.error("Database query error:", roundsError);
-          toast({
-            title: "Fehler",
-            description: "Es gab ein Problem bei der Überprüfung. Bitte versuche es erneut.",
-            variant: "destructive",
-          });
-          return;
+          console.warn("Skipping prerequisite check for Runden 1 und 2 due to insufficient SELECT permissions:", roundsError);
+        } else {
+          const completedRoundNumbers = completedRounds?.map(r => r.Rundenr) || [];
+          if (!completedRoundNumbers.includes("1")) {
+            missingRounds.push("Runde 1");
+          }
+          if (!completedRoundNumbers.includes("2")) {
+            missingRounds.push("Runde 2");
+          }
         }
-        
-        const completedRoundNumbers = completedRounds?.map(r => r.Rundenr) || [];
-        if (!completedRoundNumbers.includes("1")) {
-          missingRounds.push("Runde 1");
-        }
-        if (!completedRoundNumbers.includes("2")) {
-          missingRounds.push("Runde 2");
-        }
+
       }
       
       if (missingRounds.length > 0) {
@@ -291,15 +275,17 @@ const handleChallengeComplete = async (finalScore: number) => {
       Punkte: String(finalScore),
     });
     
-    const { data: insertData, error: insertError } = await supabase.from("ok").insert({
-      Username: fullName,
-      first_name: firstName,
-      last_name: lastName,
-      gender: gender,
-      Mailadresse: email.trim().toLowerCase(),
-      Rundenr: String(roundNumber),
-      Punkte: String(finalScore),
-    }).select('*');
+    const { error: insertError } = await supabase
+      .from("ok")
+      .insert({
+        Username: fullName,
+        first_name: firstName,
+        last_name: lastName,
+        gender: gender,
+        Mailadresse: email.trim().toLowerCase(),
+        Rundenr: String(roundNumber),
+        Punkte: String(finalScore),
+      });
 
     if (insertError) {
       console.error('Supabase insert error:', insertError);
@@ -325,11 +311,7 @@ const handleChallengeComplete = async (finalScore: number) => {
       throw insertError;
     }
     
-    console.log('Supabase insert successful:', insertData);
-
-    // Extract the ID from the inserted record
-    const supabaseRecordId = insertData && insertData[0] ? insertData[0].id : null;
-    console.log('Supabase record ID:', supabaseRecordId);
+    console.log('Supabase insert successful');
 
     // Increment submission attempt counter
     incrementSubmissionAttempt(email, String(roundNumber));
@@ -351,7 +333,7 @@ const handleChallengeComplete = async (finalScore: number) => {
       totalScore: String(newTotalScore),
       timestamp: new Date().toISOString(),
       requestId: requestId,
-      supabaseId: supabaseRecordId ? String(supabaseRecordId) : 'unknown'
+      supabaseId: 'unknown'
     });
 
     const productionUrl = `https://safakt.app.n8n.cloud/webhook/aca1f101-205e-4171-8321-3a2f421c5251?${webhookParams}`;

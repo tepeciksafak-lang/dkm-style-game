@@ -566,9 +566,11 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
             // For number-matching questions
             const userAnswers = userAnswer as Record<string, string>;
             let points = 0;
+            // Points per correct match based on question number
+            const pointsPerMatch = index === 0 ? 10 : index === 1 ? 20 : 30;
             Object.entries(userAnswers).forEach(([itemId, userValue]) => {
               if (currentQ.correctAnswers![itemId] === userValue) {
-                points += 30; // 30 points per correct match
+                points += pointsPerMatch;
               }
             });
             return total + points;
@@ -608,6 +610,9 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
               const userAnswers = userAnswer as Record<string, string>;
               let points = 0;
               
+              // Points per correct match based on question number
+              const pointsPerMatch = index === 0 ? 10 : index === 1 ? 20 : 30;
+              
               // Normalize function for score calculation
               const normalizeForScore = (value: string): string => {
                 if (!value) return value;
@@ -624,7 +629,7 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
               
               Object.entries(userAnswers).forEach(([itemId, userValue]) => {
                 if (normalizeForScore(currentQ.correctAnswers![itemId]) === normalizeForScore(userValue)) {
-                  points += 30;
+                  points += pointsPerMatch;
                 }
               });
               return total + points;

@@ -262,7 +262,7 @@ const NumberMatchingInput = ({ items, validNumbers, correctAnswers, onSubmit }: 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
       <div className="space-y-2 mb-6">
-        <h3 className="font-encode font-bold text-white text-lg">
+        <h3 className="font-encode font-bold text-dkm-navy text-lg">
           Verfügbare Zahlen: {validNumbers.join(", ")}
         </h3>
       </div>
@@ -277,7 +277,7 @@ const NumberMatchingInput = ({ items, validNumbers, correctAnswers, onSubmit }: 
               key={item.id}
               className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-dkm-turquoise/10 border-2 border-dkm-turquoise/30 rounded-lg"
             >
-              <div className="flex-1 font-encode text-white">
+              <div className="flex-1 font-encode text-dkm-navy">
                 {item.text}
               </div>
               <div className="flex items-center gap-2">

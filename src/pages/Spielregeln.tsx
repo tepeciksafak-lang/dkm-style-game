@@ -82,7 +82,7 @@ const Spielregeln = () => {
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />
-                  <p>Jeder Teilnehmer erhält zwei Preise und hat die Chance auf weitere Preise im Gesamtwert von über 77.777€.</p>
+                  <p>Jeder Teilnehmer erhält zwei Preise und hat die Chance auf weitere Preise im Gesamtwert von über 77.777 €.</p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircle className="text-orange-600 mr-2 mt-1 flex-shrink-0" size={16} />

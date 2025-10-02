@@ -378,13 +378,13 @@ const challengeQuestionsRound2: SortingQuestion[] = [
     id: 1,
     question: "Bringe die DKM-Events in die korrekte zeitliche Reihenfolge (früh bis spät):",
     items: [
-      { id: "streaming", text: "DKM Streaming-Days (Online-Serie)" },
-      { id: "pressekonferenz", text: "Pressekonferenz des Veranstalters" },
-      { id: "oeffnung", text: "Öffnung der Messetore (1. Messetag)" },
-      { id: "speakers", text: "Speaker's Corner – Keynote / Kongress-Sessions" },
-      { id: "meetup", text: "Meet-up (Abendveranstaltung, Day 1)" },
       { id: "tombola", text: "Vermittlertombola (Finale, Day 2)" },
-      { id: "schliessung", text: "Schließung der Messe (Ende 2. Messetag)" }
+      { id: "streaming", text: "DKM Streaming-Days (Online-Serie)" },
+      { id: "meetup", text: "Meet-up (Abendveranstaltung, Day 1)" },
+      { id: "speakers", text: "Speaker's Corner – Keynote / Kongress-Sessions" },
+      { id: "pressekonferenz", text: "Pressekonferenz des Veranstalters" },
+      { id: "schliessung", text: "Schließung der Messe (Ende 2. Messetag)" },
+      { id: "oeffnung", text: "Öffnung der Messetore (1. Messetag)" }
     ],
     correctOrder: ["streaming", "pressekonferenz", "oeffnung", "speakers", "meetup", "tombola", "schliessung"]
   },
@@ -392,13 +392,13 @@ const challengeQuestionsRound2: SortingQuestion[] = [
     id: 2,
     question: "Sortiere das Netzwerk-Erlebnis von \"früh erlebt\" bis \"Abend-Highlight\":",
     items: [
-      { id: "coffee", text: "Coffee, please! (Early-Bird-Frühstück)" },
-      { id: "laecheln", text: "Erstes Lächeln am Stand (begrüßender Small-Talk)" },
+      { id: "dance", text: "Tanzschritte auf dem Dance-Floor" },
       { id: "stempel", text: "\"Gut beraten\"-Weiterbildungs-Stempel ergattern" },
-      { id: "foto", text: "Fotosession mit dem Maskottchen" },
+      { id: "coffee", text: "Coffee, please! (Early-Bird-Frühstück)" },
       { id: "lounge", text: "Me-Time in der Entscheider-Lounge" },
-      { id: "weinbar", text: "Weinbar-Genuss (Meet-Up)" },
-      { id: "dance", text: "Tanzschritte auf dem Dance-Floor" }
+      { id: "foto", text: "Fotosession mit dem Maskottchen" },
+      { id: "laecheln", text: "Erstes Lächeln am Stand (begrüßender Small-Talk)" },
+      { id: "weinbar", text: "Weinbar-Genuss (Meet-Up)" }
     ],
     correctOrder: ["coffee", "laecheln", "stempel", "foto", "lounge", "weinbar", "dance"]
   },

@@ -191,19 +191,43 @@ const NumberMatchingInput = ({ items, validNumbers, correctAnswers, onSubmit }: 
   const { toast } = useToast();
   const [inputs, setInputs] = useState<Record<string, string>>({});
 
+  // Normalize input: remove dots/spaces, add + if number exists with +
+  const normalizeInput = (value: string): string => {
+    if (!value) return value;
+    // Remove dots and spaces: "14.000" → "14000", "14 000" → "14000"
+    let normalized = value.replace(/[\.\s]/g, '');
+    
+    // For pure numbers, check if a variant with + exists in validNumbers
+    if (/^\d+$/.test(normalized)) {
+      const withPlus = normalized + '+';
+      // Check if the + version exists in valid numbers
+      const normalizedValid = validNumbers.map(n => n.replace(/[\.\s]/g, ''));
+      if (normalizedValid.includes(withPlus)) {
+        normalized = withPlus;
+      }
+    }
+    
+    return normalized;
+  };
+
   const handleInputChange = (itemId: string, value: string) => {
     setInputs((prev) => ({ ...prev, [itemId]: value }));
   };
 
   const getInputStatus = (itemId: string, value: string): "valid" | "invalid" | "duplicate" | "empty" => {
     if (!value) return "empty";
-    if (!validNumbers.includes(value)) return "invalid";
     
-    // Count how many times this value is used
-    const usageCount = Object.entries(inputs).filter(([key, val]) => val === value).length;
+    const normalizedValue = normalizeInput(value);
+    const normalizedValidNumbers = validNumbers.map(normalizeInput);
     
-    // Count how many times this value should be used
-    const expectedCount = Object.values(correctAnswers).filter((ans) => ans === value).length;
+    if (!normalizedValidNumbers.includes(normalizedValue)) return "invalid";
+    
+    // Count how many times this normalized value is used
+    const usageCount = Object.entries(inputs).filter(([key, val]) => normalizeInput(val) === normalizedValue).length;
+    
+    // Count how many times this normalized value should be used
+    const normalizedCorrectAnswers = Object.values(correctAnswers).map(normalizeInput);
+    const expectedCount = normalizedCorrectAnswers.filter((ans) => ans === normalizedValue).length;
     
     if (usageCount > expectedCount) return "duplicate";
     return "valid";
@@ -221,8 +245,9 @@ const NumberMatchingInput = ({ items, validNumbers, correctAnswers, onSubmit }: 
       return;
     }
 
-    // Check for invalid numbers
-    const hasInvalid = items.some((item) => !validNumbers.includes(inputs[item.id]));
+    // Check for invalid numbers (using normalized values)
+    const normalizedValidNumbers = validNumbers.map(normalizeInput);
+    const hasInvalid = items.some((item) => !normalizedValidNumbers.includes(normalizeInput(inputs[item.id])));
     if (hasInvalid) {
       toast({
         title: "Ungültige Zahl",
@@ -235,12 +260,14 @@ const NumberMatchingInput = ({ items, validNumbers, correctAnswers, onSubmit }: 
     // Check for duplicates (considering that some numbers can be used multiple times)
     const valueCounts: Record<string, number> = {};
     Object.values(inputs).forEach((val) => {
-      valueCounts[val] = (valueCounts[val] || 0) + 1;
+      const normalized = normalizeInput(val);
+      valueCounts[normalized] = (valueCounts[normalized] || 0) + 1;
     });
 
     const expectedCounts: Record<string, number> = {};
     Object.values(correctAnswers).forEach((val) => {
-      expectedCounts[val] = (expectedCounts[val] || 0) + 1;
+      const normalized = normalizeInput(val);
+      expectedCounts[normalized] = (expectedCounts[normalized] || 0) + 1;
     });
 
     const hasDuplicateError = Object.entries(valueCounts).some(
@@ -420,11 +447,11 @@ const challengeQuestionsRound2: SortingQuestion[] = [
         themenparks: "4",
         programm: "221",
         aussteller: "256",
-        besucher: "14.127",
-        speaker: "200+",
+        besucher: "14000+",
+        speaker: "190+",
         partner: "200+"
       },
-      validNumbers: ["16", "4", "221", "256", "14.127", "200+"]
+      validNumbers: ["16", "4", "221", "256", "14000+", "190+", "200+"]
     }
 ];
 
@@ -580,8 +607,23 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
             if (typeof userAnswer === 'object' && !Array.isArray(userAnswer)) {
               const userAnswers = userAnswer as Record<string, string>;
               let points = 0;
+              
+              // Normalize function for score calculation
+              const normalizeForScore = (value: string): string => {
+                if (!value) return value;
+                let normalized = value.replace(/[\.\s]/g, '');
+                if (/^\d+$/.test(normalized)) {
+                  const withPlus = normalized + '+';
+                  const normalizedValidNumbers = currentQ.validNumbers!.map(n => n.replace(/[\.\s]/g, ''));
+                  if (normalizedValidNumbers.includes(withPlus)) {
+                    normalized = withPlus;
+                  }
+                }
+                return normalized;
+              };
+              
               Object.entries(userAnswers).forEach(([itemId, userValue]) => {
-                if (currentQ.correctAnswers![itemId] === userValue) {
+                if (normalizeForScore(currentQ.correctAnswers![itemId]) === normalizeForScore(userValue)) {
                   points += 30;
                 }
               });

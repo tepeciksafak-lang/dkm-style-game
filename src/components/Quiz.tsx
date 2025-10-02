@@ -3,133 +3,178 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 import centerCircleCrowd from "@/assets/center-circle-crowd.jpg";
 import runningToGoal from "@/assets/running-to-goal.jpg";
 import penaltyKick from "@/assets/penalty-kick.jpg";
 import stadiumAerialNight from "@/assets/stadium-aerial-night.jpg";
 import trophyCelebration from "@/assets/trophy-celebration.jpg";
+import { Check, AlertCircle, X } from "lucide-react";
 
-// Drag & Drop Sorting Component
-interface DragDropSortingProps {
+// Number Input Sorting Component
+interface NumberInputSortingProps {
   items: { id: string; text: string }[];
-  onSort: (sortedIds: string[]) => void;
-  sortedItems: { id: string; text: string }[];
-  setSortedItems: (items: { id: string; text: string }[]) => void;
+  onSubmit: (orderedIds: string[]) => void;
 }
 
-const DragDropSorting = ({ items, onSort, sortedItems, setSortedItems }: DragDropSortingProps) => {
-  const [draggedItem, setDraggedItem] = useState<{ id: string; text: string } | null>(null);
+const NumberInputSorting = ({ items, onSubmit }: NumberInputSortingProps) => {
+  const { toast } = useToast();
+  const [inputValues, setInputValues] = useState<Record<string, string>>({});
 
-  const handleDragStart = (e: React.DragEvent, item: { id: string; text: string }) => {
-    setDraggedItem(item);
-    e.dataTransfer.effectAllowed = "move";
+  // Initialize empty values
+  useEffect(() => {
+    const initialValues: Record<string, string> = {};
+    items.forEach(item => {
+      initialValues[item.id] = "";
+    });
+    setInputValues(initialValues);
+  }, [items]);
+
+  const handleInputChange = (itemId: string, value: string) => {
+    // Only allow numbers 1-7 or empty
+    if (value === "" || (/^\d+$/.test(value) && parseInt(value) >= 1 && parseInt(value) <= 7)) {
+      setInputValues(prev => ({
+        ...prev,
+        [itemId]: value
+      }));
+    }
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
-  };
-
-  const handleDrop = (e: React.DragEvent, targetIndex?: number) => {
-    e.preventDefault();
-    if (!draggedItem) return;
-
-    const newSortedItems = [...sortedItems];
+  // Get validation status for each input
+  const getInputStatus = (itemId: string) => {
+    const value = inputValues[itemId];
+    if (!value) return "empty";
     
-    // Remove from current position if already in sorted list
-    const currentIndex = newSortedItems.findIndex(item => item.id === draggedItem.id);
-    if (currentIndex !== -1) {
-      newSortedItems.splice(currentIndex, 1);
-    }
-
-    // Add to new position
-    if (targetIndex !== undefined) {
-      newSortedItems.splice(targetIndex, 0, draggedItem);
-    } else {
-      newSortedItems.push(draggedItem);
-    }
-
-    setSortedItems(newSortedItems);
-    setDraggedItem(null);
+    const num = parseInt(value);
+    if (num < 1 || num > 7) return "invalid";
+    
+    // Check for duplicates
+    const values = Object.entries(inputValues)
+      .filter(([id]) => id !== itemId)
+      .map(([, val]) => val);
+    
+    if (values.includes(value)) return "duplicate";
+    
+    return "valid";
   };
 
-  const removeFromSorted = (itemId: string) => {
-    setSortedItems(sortedItems.filter(item => item.id !== itemId));
-  };
-
-  const availableItems = items.filter(item => !sortedItems.find(sorted => sorted.id === item.id));
-
-  const handleSubmit = () => {
-    if (sortedItems.length === items.length) {
-      onSort(sortedItems.map(item => item.id));
+  const validateAndSubmit = () => {
+    const values = Object.values(inputValues);
+    
+    // Check if all fields are filled
+    if (values.some(v => !v)) {
+      toast({
+        title: "Unvollständig",
+        description: "Bitte fülle alle Felder aus.",
+        variant: "destructive",
+      });
+      return;
     }
+
+    // Check if all numbers 1-7 are used
+    const numbers = values.map(v => parseInt(v)).sort();
+    const expectedNumbers = [1, 2, 3, 4, 5, 6, 7];
+    
+    if (JSON.stringify(numbers) !== JSON.stringify(expectedNumbers)) {
+      // Find duplicates
+      const duplicates = numbers.filter((num, index) => numbers.indexOf(num) !== index);
+      
+      if (duplicates.length > 0) {
+        toast({
+          title: "Doppelte Zahlen",
+          description: `Jede Zahl von 1-7 muss genau einmal verwendet werden. Doppelt: ${[...new Set(duplicates)].join(", ")}`,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Ungültige Eingabe",
+          description: "Jede Zahl von 1-7 muss genau einmal verwendet werden.",
+          variant: "destructive",
+        });
+      }
+      return;
+    }
+
+    // Create ordered array based on input values
+    const orderedItems = items.map(item => ({
+      ...item,
+      position: parseInt(inputValues[item.id])
+    })).sort((a, b) => a.position - b.position);
+
+    onSubmit(orderedItems.map(item => item.id));
   };
+
+  // Get which numbers are already used
+  const usedNumbers = Object.values(inputValues)
+    .filter(v => v)
+    .map(v => parseInt(v))
+    .sort((a, b) => a - b);
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-8">
-      {/* Available Items */}
+    <div className="w-full max-w-4xl mx-auto space-y-6">
       <div className="space-y-4">
-        <h3 className="font-encode font-bold text-dkm-navy text-lg">
-          Verfügbare Elemente (ziehen Sie diese in die richtige Reihenfolge):
-        </h3>
-        <div className="grid gap-3">
-          {availableItems.map((item) => (
+        <div className="space-y-2 mb-6">
+          <h3 className="font-encode font-bold text-dkm-navy text-lg">
+            Gib für jedes Element eine Position von 1-7 ein:
+          </h3>
+          <p className="text-sm text-dkm-navy/70 font-encode">
+            Bereits vergeben: {usedNumbers.length > 0 ? usedNumbers.join(", ") : "keine"}
+          </p>
+        </div>
+
+        {items.map((item, index) => {
+          const status = getInputStatus(item.id);
+          
+          return (
             <div
               key={item.id}
-              draggable
-              onDragStart={(e) => handleDragStart(e, item)}
-              className="p-4 bg-dkm-turquoise/10 border-2 border-dkm-turquoise/30 rounded-lg cursor-move hover:bg-dkm-turquoise/20 transition-colors font-encode text-dkm-navy"
+              className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-dkm-turquoise/10 border-2 border-dkm-turquoise/30 rounded-lg"
             >
-              {item.text}
+              <div className="flex-1 font-encode text-dkm-navy">
+                {item.text}
+              </div>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="number"
+                  min="1"
+                  max="7"
+                  value={inputValues[item.id] || ""}
+                  onChange={(e) => handleInputChange(item.id, e.target.value)}
+                  placeholder="1-7"
+                  className={`w-20 text-center text-lg font-bold ${
+                    status === "valid" 
+                      ? "border-green-500 bg-green-50" 
+                      : status === "duplicate" || status === "invalid"
+                      ? "border-red-500 bg-red-50"
+                      : ""
+                  }`}
+                />
+                {status === "valid" && (
+                  <Check className="w-5 h-5 text-green-500" />
+                )}
+                {status === "duplicate" && (
+                  <AlertCircle className="w-5 h-5 text-yellow-500" />
+                )}
+                {status === "invalid" && (
+                  <X className="w-5 h-5 text-red-500" />
+                )}
+              </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
-      {/* Sorted Items */}
-      <div className="space-y-4">
-        <h3 className="font-encode font-bold text-dkm-navy text-lg">
-          Ihre Reihenfolge ({sortedItems.length}/{items.length}):
-        </h3>
-        <div
-          className="min-h-[200px] p-4 border-2 border-dashed border-dkm-turquoise/50 rounded-lg bg-dkm-turquoise/5"
-          onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e)}
+      <div className="flex justify-center pt-4">
+        <Button
+          variant="dkm"
+          size="lg"
+          onClick={validateAndSubmit}
+          className="w-full sm:w-auto"
         >
-          {sortedItems.length === 0 ? (
-            <div className="text-center text-dkm-navy/60 font-encode py-8">
-              Ziehen Sie die Elemente hierher, um sie zu sortieren
-            </div>
-          ) : (
-            <div className="space-y-2">
-              {sortedItems.map((item, index) => (
-                <div
-                  key={item.id}
-                  className="p-3 bg-white border border-dkm-turquoise/30 rounded-lg flex justify-between items-center"
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDrop(e, index)}
-                >
-                  <span className="font-encode text-dkm-navy flex items-center">
-                    <span className="bg-dkm-turquoise text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3">
-                      {index + 1}
-                    </span>
-                    {item.text}
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => removeFromSorted(item.id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    ✕
-                  </Button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+          Weiter
+        </Button>
       </div>
-
     </div>
   );
 };
@@ -243,25 +288,11 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
   const [answers, setAnswers] = useState<(boolean | string[])[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [countdown, setCountdown] = useState(10);
-  const [draggedItems, setDraggedItems] = useState<{ id: string; text: string }[]>([]);
-  const [sortedItems, setSortedItems] = useState<{ id: string; text: string }[]>([]);
 
   // Get current question set based on round
   const isRound1 = roundNumber === 1;
   const currentQuestions = isRound1 ? challengeQuestionsRound1 : challengeQuestionsRound2;
   const totalQuestions = currentQuestions.length;
-
-  // Initialize dragged items for Round 2
-  useEffect(() => {
-    if (!isRound1 && currentQuestion < totalQuestions) {
-      const sortingQuestion = currentQuestions[currentQuestion] as SortingQuestion;
-      // Shuffle items for drag and drop
-      const shuffled = [...sortingQuestion.items].sort(() => Math.random() - 0.5);
-      setDraggedItems(shuffled);
-      // Reset sorted items when question changes
-      setSortedItems([]);
-    }
-  }, [currentQuestion, isRound1, currentQuestions, totalQuestions]);
 
   // Countdown-Timer nur für automatische Weiterleitung zur Leaderboard
   useEffect(() => {
@@ -471,28 +502,11 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
                 </Button>
               </div>
             ) : (
-              // Round 2: Drag & Drop Sorting Questions
-              <div className="w-full">
-                <DragDropSorting
-                  items={draggedItems}
-                  onSort={handleSortingAnswer}
-                  sortedItems={sortedItems}
-                  setSortedItems={setSortedItems}
-                />
-                
-                {/* Submit Button */}
-                <div className="text-center mt-8">
-                  <Button
-                    variant="dkm"
-                    size="lg"
-                    onClick={() => handleSortingAnswer(sortedItems.map(item => item.id))}
-                    disabled={sortedItems.length !== draggedItems.length}
-                    className="text-xl py-6 px-12"
-                  >
-                    Antwort bestätigen
-                  </Button>
-                </div>
-              </div>
+              // Round 2: Number Input Sorting Questions
+              <NumberInputSorting
+                items={(currentQuestions[currentQuestion] as SortingQuestion).items}
+                onSubmit={handleSortingAnswer}
+              />
             )}
           </div>
         </Card>

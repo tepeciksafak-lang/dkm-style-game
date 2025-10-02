@@ -179,6 +179,144 @@ const NumberInputSorting = ({ items, onSubmit }: NumberInputSortingProps) => {
   );
 };
 
+// Number Matching Input Component for Question 3 (specific numbers)
+interface NumberMatchingInputProps {
+  items: { id: string; text: string }[];
+  validNumbers: string[];
+  correctAnswers: Record<string, string>;
+  onSubmit: (answers: Record<string, string>) => void;
+}
+
+const NumberMatchingInput = ({ items, validNumbers, correctAnswers, onSubmit }: NumberMatchingInputProps) => {
+  const { toast } = useToast();
+  const [inputs, setInputs] = useState<Record<string, string>>({});
+
+  const handleInputChange = (itemId: string, value: string) => {
+    setInputs((prev) => ({ ...prev, [itemId]: value }));
+  };
+
+  const getInputStatus = (itemId: string, value: string): "valid" | "invalid" | "duplicate" | "empty" => {
+    if (!value) return "empty";
+    if (!validNumbers.includes(value)) return "invalid";
+    
+    // Count how many times this value is used
+    const usageCount = Object.entries(inputs).filter(([key, val]) => val === value).length;
+    
+    // Count how many times this value should be used
+    const expectedCount = Object.values(correctAnswers).filter((ans) => ans === value).length;
+    
+    if (usageCount > expectedCount) return "duplicate";
+    return "valid";
+  };
+
+  const validateAndSubmit = () => {
+    // Check if all fields are filled
+    const allFilled = items.every((item) => inputs[item.id]?.trim());
+    if (!allFilled) {
+      toast({
+        title: "Unvollständig",
+        description: "Bitte fülle alle Felder aus.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check for invalid numbers
+    const hasInvalid = items.some((item) => !validNumbers.includes(inputs[item.id]));
+    if (hasInvalid) {
+      toast({
+        title: "Ungültige Zahl",
+        description: "Bitte verwende nur die vorgegebenen Zahlen.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check for duplicates (considering that some numbers can be used multiple times)
+    const valueCounts: Record<string, number> = {};
+    Object.values(inputs).forEach((val) => {
+      valueCounts[val] = (valueCounts[val] || 0) + 1;
+    });
+
+    const expectedCounts: Record<string, number> = {};
+    Object.values(correctAnswers).forEach((val) => {
+      expectedCounts[val] = (expectedCounts[val] || 0) + 1;
+    });
+
+    const hasDuplicateError = Object.entries(valueCounts).some(
+      ([val, count]) => count > (expectedCounts[val] || 1)
+    );
+
+    if (hasDuplicateError) {
+      toast({
+        title: "Duplikat gefunden",
+        description: "Einige Zahlen wurden zu oft verwendet.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    onSubmit(inputs);
+  };
+
+  return (
+    <div className="w-full max-w-4xl mx-auto space-y-6">
+      <div className="space-y-2 mb-6">
+        <h3 className="font-encode font-bold text-white text-lg">
+          Verfügbare Zahlen: {validNumbers.join(", ")}
+        </h3>
+      </div>
+
+      <div className="space-y-4">
+        {items.map((item) => {
+          const value = inputs[item.id] || "";
+          const status = getInputStatus(item.id, value);
+          
+          return (
+            <div
+              key={item.id}
+              className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-dkm-turquoise/10 border-2 border-dkm-turquoise/30 rounded-lg"
+            >
+              <div className="flex-1 font-encode text-white">
+                {item.text}
+              </div>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="text"
+                  value={value}
+                  onChange={(e) => handleInputChange(item.id, e.target.value)}
+                  placeholder="Zahl"
+                  className={`w-32 text-center text-lg font-bold ${
+                    status === "valid" 
+                      ? "border-green-500 bg-green-50" 
+                      : status === "duplicate" || status === "invalid"
+                      ? "border-red-500 bg-red-50"
+                      : ""
+                  }`}
+                />
+                {status === "valid" && <Check className="w-5 h-5 text-green-500" />}
+                {status === "duplicate" && <AlertCircle className="w-5 h-5 text-yellow-500" />}
+                {status === "invalid" && <X className="w-5 h-5 text-red-500" />}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex justify-center pt-4">
+        <Button
+          variant="dkm"
+          size="lg"
+          onClick={validateAndSubmit}
+          className="w-full sm:w-auto"
+        >
+          Weiter
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 interface ChallengeQuestion {
   id: number;
   question: string;
@@ -189,7 +327,10 @@ interface SortingQuestion {
   id: number;
   question: string;
   items: { id: string; text: string }[];
-  correctOrder: string[];
+  correctOrder?: string[]; // Optional for position-based sorting
+  type?: "position-sorting" | "number-matching"; // Type of sorting question
+  correctAnswers?: Record<string, string>; // For number-matching questions
+  validNumbers?: string[]; // Valid numbers for number-matching
 }
 
 // Runde 1 Fragen (True/False)
@@ -263,17 +404,27 @@ const challengeQuestionsRound2: SortingQuestion[] = [
   },
     {
       id: 3,
-      question: "Sortiere die Messezahlen nach Größe/Ausmaß (von klein bis \"oh wow!\"):",
+      type: "number-matching",
+      question: "Ordne die Zahlen richtig zu",
       items: [
-        { id: "kongresse", text: "Es gibt 16 Kongresse" },
-        { id: "themenparks", text: "Es gibt 4 Themenparks" },
-        { id: "programm", text: "Es gibt 221 Live-Programmpunkte" },
-        { id: "aussteller", text: "Es gibt 256 Aussteller" },
-        { id: "besucher", text: "Es gibt 14.127 Besucher" },
-        { id: "speaker", text: "Es gibt 200+ Speaker" },
-        { id: "partner", text: "Es gibt 200+ Aussteller & Partner" }
+        { id: "kongresse", text: "Kongresse" },
+        { id: "themenparks", text: "Themenparks" },
+        { id: "programm", text: "Live-Programmpunkte" },
+        { id: "aussteller", text: "Aussteller" },
+        { id: "besucher", text: "Besucher" },
+        { id: "speaker", text: "Speaker" },
+        { id: "partner", text: "Aussteller & Partner" }
       ],
-      correctOrder: ["themenparks", "kongresse", "speaker", "partner", "programm", "aussteller", "besucher"]
+      correctAnswers: {
+        kongresse: "16",
+        themenparks: "4",
+        programm: "221",
+        aussteller: "256",
+        besucher: "14.127",
+        speaker: "200+",
+        partner: "200+"
+      },
+      validNumbers: ["16", "4", "221", "256", "14.127", "200+"]
     }
 ];
 
@@ -285,7 +436,7 @@ interface ChallengeProps {
 
 const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<(boolean | string[])[]>([]);
+  const [answers, setAnswers] = useState<(boolean | string[] | Record<string, string>)[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [countdown, setCountdown] = useState(10);
 
@@ -358,7 +509,47 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
         } else {
           const currentQ = currentQuestions[index] as SortingQuestion;
           const userOrder = userAnswer as string[];
-          return total + calculateSortingScore(userOrder, currentQ.correctOrder, index + 1);
+          return total + calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+        }
+      }, 0);
+      onComplete(score);
+    }
+  };
+
+  const handleNumberMatchingAnswer = (userAnswers: Record<string, string>) => {
+    const currentQ = currentQuestions[currentQuestion] as SortingQuestion;
+    const newAnswers = [...answers, userAnswers];
+    setAnswers(newAnswers);
+
+    if (currentQuestion < totalQuestions - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      // Challenge beendet - Ergebnis anzeigen und sofort Punkte speichern
+      setShowResult(true);
+      // Punkte für Sortier-Aufgaben berechnen
+      const score = newAnswers.reduce((total, userAnswer, index) => {
+        if (isRound1) {
+          const questionPoints = (index + 1) * 7;
+          const currentQ = currentQuestions[index] as ChallengeQuestion;
+          return total + (userAnswer === currentQ.answer ? questionPoints : 0);
+        } else {
+          const currentQ = currentQuestions[index] as SortingQuestion;
+          
+          if (currentQ.type === "number-matching") {
+            // For number-matching questions
+            const userAnswers = userAnswer as Record<string, string>;
+            let points = 0;
+            Object.entries(userAnswers).forEach(([itemId, userValue]) => {
+              if (currentQ.correctAnswers![itemId] === userValue) {
+                points += 30; // 30 points per correct match
+              }
+            });
+            return total + points;
+          } else {
+            // For position-sorting questions
+            const userOrder = userAnswer as string[];
+            return total + calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+          }
         }
       }, 0);
       onComplete(score);
@@ -382,9 +573,26 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
         const currentQ = currentQuestions[index] as ChallengeQuestion;
         return total + (userAnswer === currentQ.answer ? questionPoints : 0);
       } else {
-        const currentQ = currentQuestions[index] as SortingQuestion;
-        const userOrder = userAnswer as string[];
-        return total + calculateSortingScore(userOrder, currentQ.correctOrder, index + 1);
+          const currentQ = currentQuestions[index] as SortingQuestion;
+          
+          if (currentQ.type === "number-matching") {
+            // For number-matching questions
+            if (typeof userAnswer === 'object' && !Array.isArray(userAnswer)) {
+              const userAnswers = userAnswer as Record<string, string>;
+              let points = 0;
+              Object.entries(userAnswers).forEach(([itemId, userValue]) => {
+                if (currentQ.correctAnswers![itemId] === userValue) {
+                  points += 30;
+                }
+              });
+              return total + points;
+            }
+            return total;
+          } else {
+            // For position-sorting questions
+            const userOrder = userAnswer as string[];
+            return total + calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+          }
       }
     }, 0);
 
@@ -502,11 +710,23 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
                 </Button>
               </div>
             ) : (
-              // Round 2: Number Input Sorting Questions
-              <NumberInputSorting
-                items={(currentQuestions[currentQuestion] as SortingQuestion).items}
-                onSubmit={handleSortingAnswer}
-              />
+              // Round 2: Sorting Questions (Number Input or Number Matching)
+              (() => {
+                const currentSortingQ = currentQuestions[currentQuestion] as SortingQuestion;
+                return currentSortingQ.type === "number-matching" ? (
+                  <NumberMatchingInput
+                    items={currentSortingQ.items}
+                    validNumbers={currentSortingQ.validNumbers!}
+                    correctAnswers={currentSortingQ.correctAnswers!}
+                    onSubmit={handleNumberMatchingAnswer}
+                  />
+                ) : (
+                  <NumberInputSorting
+                    items={currentSortingQ.items}
+                    onSubmit={handleSortingAnswer}
+                  />
+                );
+              })()
             )}
           </div>
         </Card>

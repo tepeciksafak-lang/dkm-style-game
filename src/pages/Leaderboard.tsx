@@ -145,7 +145,7 @@ const Leaderboard = () => {
         {/* Top 7 Leaderboard */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">Top 7 Makler</CardTitle>
+            <CardTitle className="text-2xl text-center">Top 30 Makler</CardTitle>
           </CardHeader>
           <CardContent>
             {leaderboard.length === 0 ? (
@@ -154,7 +154,7 @@ const Leaderboard = () => {
               </div>
             ) : (
               <div className="space-y-4">
-                {leaderboard.slice(0, 7).map((entry, index) => {
+                {leaderboard.slice(0, 30).map((entry, index) => {
                   const position = index + 1;
                   const isCurrentPlayer = playerName === entry.Username;
                   

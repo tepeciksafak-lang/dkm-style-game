@@ -184,7 +184,7 @@ const Spielregeln = () => {
             
             <div className="mt-8 text-center">
               <p className="font-encode text-sm text-gray-600">
-                Fragen zur Supermakler-Challenge? <a href="mailto:dkm@salevium.de" className="text-orange-600 hover:text-dkm-navy transition-colors">dkm@salevium.de</a>
+                Fragen zur Supermakler-Challenge? <a href="mailto:Supermakler-challenge@salevium.de" className="text-orange-600 hover:text-dkm-navy transition-colors">Supermakler-challenge@salevium.de</a>
               </p>
             </div>
           </Card>

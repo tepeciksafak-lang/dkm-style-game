@@ -77,10 +77,10 @@ const Footer = () => {
             <div className="space-y-2 font-encode">
               <p className="text-gray-300">DKM Challenge</p>
               <a 
-                href="mailto:dkm@salevium.de" 
+                href="mailto:Supermakler-challenge@salevium.de" 
                 className="hover:text-dkm-yellow transition-colors block"
               >
-                dkm@salevium.de
+                Supermakler-challenge@salevium.de
               </a>
             </div>
           </div>

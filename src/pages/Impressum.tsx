@@ -35,7 +35,7 @@ const Impressum = () => {
               <h2 className="font-bold text-2xl mb-4">Kontakt:</h2>
               <p className="leading-relaxed">
                 Telefon: +49 2406 9630883<br />
-                E-Mail: <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a><br />
+                E-Mail: <a href="mailto:Supermakler-challenge@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">Supermakler-challenge@salevium.de</a><br />
                 Web: <a href="https://www.salevium.de" target="_blank" rel="noopener noreferrer" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">https://www.salevium.de</a>
               </p>
             </section>

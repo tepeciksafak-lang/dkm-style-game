@@ -534,7 +534,7 @@ const handleChallengeComplete = async (finalScore: number) => {
                       Zeigen Sie Ihr Können Live in der Salevium Arena auf der DKM Messe
                     </p>
                     <p className="font-encode text-xs text-gray-600">
-                      Fragen? <a href="mailto:dkm@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">dkm@salevium.de</a>
+                      Fragen? <a href="mailto:Supermakler-challenge@salevium.de" className="text-dkm-turquoise hover:text-dkm-yellow transition-colors">Supermakler-challenge@salevium.de</a>
                     </p>
                   </div>
                 </Card>

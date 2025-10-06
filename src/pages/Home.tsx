@@ -384,9 +384,28 @@ const handleChallengeComplete = async (finalScore: number) => {
   // Navigation will be handled by the Quiz component countdown
 };
 
-  const handleContinueToNextRound = () => {
+  const handleContinueToNextRound = async () => {
+    // 1. Lade alle bisherigen Runden-Punkte aus der Datenbank
+    const { data: previousRounds } = await supabase
+      .from("ok")
+      .select("Punkte")
+      .eq("Mailadresse", email.trim().toLowerCase())
+      .in("Rundenr", roundNumber === 1 ? ["1"] : ["1", "2"]);
+    
+    // 2. Berechne Gesamtscore aus bisherigen Runden
+    const previousTotal = previousRounds?.reduce((sum, round) => 
+      sum + parseInt(round.Punkte || "0"), 0) || 0;
+    
+    // 3. Setze totalScore State
+    setTotalScore(previousTotal);
+    
+    // 4. Inkrementiere Runde
     setRoundNumber(prev => prev + 1);
+    
+    // 5. Reset Result-State
     setIsResultSubmitted(false);
+    
+    // 6. Bleibe in Challenge-State
     setGameState("challenge");
   };
 

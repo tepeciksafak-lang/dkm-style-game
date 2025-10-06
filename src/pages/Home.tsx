@@ -271,7 +271,19 @@ const handleChallengeComplete = async (finalScore: number) => {
   
   setIsResultSubmitted(true);
   setScore(finalScore);
-  const newTotalScore = totalScore + finalScore;
+
+  // Lade bisherigen Gesamtscore frisch aus der DB (robuster bei direktem Weitermachen)
+  let currentTotalScore = 0;
+  if (roundNumber > 1) {
+    const { data: previousRounds } = await supabase
+      .from("ok")
+      .select("Punkte")
+      .eq("Mailadresse", email.trim().toLowerCase())
+      .in("Rundenr", roundNumber === 2 ? ["1"] : ["1", "2"]);
+    currentTotalScore = previousRounds?.reduce((sum, r) => sum + parseInt(r.Punkte || "0"), 0) || 0;
+  }
+
+  const newTotalScore = currentTotalScore + finalScore;
   setTotalScore(newTotalScore);
   
   const fullName = `${firstName} ${lastName}`;

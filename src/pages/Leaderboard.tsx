@@ -36,19 +36,27 @@ const Leaderboard = () => {
       const { data, error } = await supabase
         .from('leaderboard_view')
         .select('*')
-        .order('display_score', { ascending: false })
-        .limit(30);
+        .limit(1000);
 
       if (error) {
         console.error('Error fetching leaderboard:', error);
         return;
       }
 
-      setLeaderboard(data || []);
+      // Sortiere nach numerischem Gesamtscore (fallback: Punkte)
+      const sorted = (data || []).sort((a: any, b: any) => {
+        const aScore = parseInt((a.Gesamtscore ?? a.Punkte) ?? '0');
+        const bScore = parseInt((b.Gesamtscore ?? b.Punkte) ?? '0');
+        return bScore - aScore;
+      });
+
+      // Top 30 übernehmen
+      const top30 = sorted.slice(0, 30) as LeaderboardEntry[];
+      setLeaderboard(top30);
       
-      // Find player's rank if playerName is provided
-      if (playerName && data) {
-        const playerIndex = data.findIndex(entry => entry.Username === playerName);
+      // Spieler-Rang bestimmen (in der vollständig sortierten Liste)
+      if (playerName && sorted.length) {
+        const playerIndex = sorted.findIndex((entry: any) => entry.Username === playerName);
         if (playerIndex !== -1) {
           setPlayerRank(playerIndex + 1);
         }

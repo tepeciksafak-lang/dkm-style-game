@@ -467,11 +467,37 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
   const [answers, setAnswers] = useState<(boolean | string[] | Record<string, string>)[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [shuffledItems, setShuffledItems] = useState<Record<number, { id: string; text: string }[]>>({});
+  const [shuffledValidNumbers, setShuffledValidNumbers] = useState<Record<number, string[]>>({});
 
   // Get current question set based on round
   const isRound1 = roundNumber === 1;
   const currentQuestions = isRound1 ? challengeQuestionsRound1 : challengeQuestionsRound2;
   const totalQuestions = currentQuestions.length;
+
+  // Shuffle items and validNumbers for number-matching questions to avoid pre-sorted UI
+  useEffect(() => {
+    if (isRound1) return;
+    const q = currentQuestions[currentQuestion] as SortingQuestion;
+    if (q && q.type === "number-matching") {
+      if (q.items) {
+        const itemsCopy = [...q.items];
+        for (let i = itemsCopy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [itemsCopy[i], itemsCopy[j]] = [itemsCopy[j], itemsCopy[i]];
+        }
+        setShuffledItems(prev => ({ ...prev, [q.id]: itemsCopy }));
+      }
+      if (q.validNumbers) {
+        const numsCopy = [...q.validNumbers];
+        for (let i = numsCopy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [numsCopy[i], numsCopy[j]] = [numsCopy[j], numsCopy[i]];
+        }
+        setShuffledValidNumbers(prev => ({ ...prev, [q.id]: numsCopy }));
+      }
+    }
+  }, [isRound1, currentQuestion, roundNumber]);
 
   // Countdown-Timer zur automatischen Weiterleitung - NUR für Runde 3
   useEffect(() => {
@@ -779,8 +805,8 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
                 const currentSortingQ = currentQuestions[currentQuestion] as SortingQuestion;
                 return currentSortingQ.type === "number-matching" ? (
                   <NumberMatchingInput
-                    items={currentSortingQ.items}
-                    validNumbers={currentSortingQ.validNumbers!}
+                    items={shuffledItems[currentSortingQ.id] || currentSortingQ.items}
+                    validNumbers={shuffledValidNumbers[currentSortingQ.id] || currentSortingQ.validNumbers!}
                     correctAnswers={currentSortingQ.correctAnswers!}
                     onSubmit={handleNumberMatchingAnswer}
                   />

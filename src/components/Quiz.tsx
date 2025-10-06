@@ -360,6 +360,14 @@ interface SortingQuestion {
   validNumbers?: string[]; // Valid numbers for number-matching
 }
 
+interface MultipleChoiceQuestion {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: number; // Index of correct answer (0, 1, or 2)
+  points: number;
+}
+
 // Runde 1 Fragen (True/False)
 const challengeQuestionsRound1: ChallengeQuestion[] = [
   {
@@ -455,6 +463,59 @@ const challengeQuestionsRound2: SortingQuestion[] = [
     }
 ];
 
+// Runde 3 Fragen (Multiple Choice)
+const challengeQuestionsRound3: MultipleChoiceQuestion[] = [
+  {
+    id: 1,
+    question: "Wie viele Besucher:innen kamen 2024 zur DKM?",
+    options: ["14.700", "9.845", "20.100"],
+    correctAnswer: 0,
+    points: 10
+  },
+  {
+    id: 2,
+    question: "Welche neue Messehalle wurde bei der DKM 2024 genutzt?",
+    options: ["Halle 4", "Halle 5", "Halle 6"],
+    correctAnswer: 2,
+    points: 20
+  },
+  {
+    id: 3,
+    question: "Wie viele Aussteller:innen waren bei der DKM 2024 dabei?",
+    options: ["260", "315", "400"],
+    correctAnswer: 1,
+    points: 30
+  },
+  {
+    id: 4,
+    question: "Wie viele Quadratmeter umfasste die Ausstellungsfläche?",
+    options: ["37.000", "41.000", "45.000"],
+    correctAnswer: 0,
+    points: 40
+  },
+  {
+    id: 5,
+    question: "Aus wie vielen Ländern kamen die Besucher:innen?",
+    options: ["20", "35", "50"],
+    correctAnswer: 1,
+    points: 50
+  },
+  {
+    id: 6,
+    question: "Wie viele Konferenz- und Vortragstermine gab es?",
+    options: ["150", "200", "250"],
+    correctAnswer: 1,
+    points: 60
+  },
+  {
+    id: 7,
+    question: "Wie viele Mitausstellende waren bei der DKM 2024 dabei?",
+    options: ["35", "50", "65"],
+    correctAnswer: 1,
+    points: 70
+  }
+];
+
 interface ChallengeProps {
   playerName: string;
   roundNumber: number;
@@ -464,7 +525,7 @@ interface ChallengeProps {
 
 const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound }: ChallengeProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<(boolean | string[] | Record<string, string>)[]>([]);
+  const [answers, setAnswers] = useState<(boolean | number | string[] | Record<string, string>)[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [countdown, setCountdown] = useState(10);
   const [shuffledItems, setShuffledItems] = useState<Record<number, { id: string; text: string }[]>>({});
@@ -472,7 +533,12 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
 
   // Get current question set based on round
   const isRound1 = roundNumber === 1;
-  const currentQuestions = isRound1 ? challengeQuestionsRound1 : challengeQuestionsRound2;
+  const isRound3 = roundNumber === 3;
+  const currentQuestions = isRound1 
+    ? challengeQuestionsRound1 
+    : isRound3 
+      ? challengeQuestionsRound3 
+      : challengeQuestionsRound2;
   const totalQuestions = currentQuestions.length;
 
   // Shuffle items and validNumbers for number-matching questions to avoid pre-sorted UI
@@ -520,7 +586,7 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
     }
   }, [showResult, countdown, roundNumber]);
 
-  const handleAnswer = (answer: boolean) => {
+  const handleAnswer = (answer: boolean | number) => {
     const newAnswers = [...answers, answer];
     setAnswers(newAnswers);
 
@@ -530,11 +596,25 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
       // Challenge beendet - Ergebnis anzeigen und sofort Punkte speichern
       setShowResult(true);
       // Punkte sofort berechnen und speichern
-      const score = newAnswers.reduce((total, userAnswer, index) => {
-        const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
-        const currentQ = currentQuestions[index] as ChallengeQuestion;
-        return total + (userAnswer === currentQ.answer ? questionPoints : 0);
-      }, 0);
+      let score = 0;
+      
+      if (isRound1) {
+        newAnswers.forEach((userAnswer, index) => {
+          const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
+          const currentQ = currentQuestions[index] as ChallengeQuestion;
+          if (typeof userAnswer === 'boolean' && userAnswer === currentQ.answer) {
+            score += questionPoints;
+          }
+        });
+      } else if (isRound3) {
+        newAnswers.forEach((userAnswer, index) => {
+          const currentQ = currentQuestions[index] as MultipleChoiceQuestion;
+          if (typeof userAnswer === 'number' && userAnswer === currentQ.correctAnswer) {
+            score += currentQ.points;
+          }
+        });
+      }
+      
       onComplete(score);
     }
   };
@@ -563,17 +643,20 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
       // Challenge beendet - Ergebnis anzeigen und sofort Punkte speichern
       setShowResult(true);
       // Punkte für Sortier-Aufgaben berechnen
-      const score = newAnswers.reduce((total, userAnswer, index) => {
+      let score = 0;
+      newAnswers.forEach((userAnswer, index) => {
         if (isRound1) {
           const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
           const currentQ = currentQuestions[index] as ChallengeQuestion;
-          return total + (userAnswer === currentQ.answer ? questionPoints : 0);
+          if (typeof userAnswer === 'boolean' && userAnswer === currentQ.answer) {
+            score += questionPoints;
+          }
         } else {
           const currentQ = currentQuestions[index] as SortingQuestion;
           const userOrder = userAnswer as string[];
-          return total + calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+          score += calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
         }
-      }, 0);
+      });
       onComplete(score);
     }
   };
@@ -589,33 +672,38 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
       // Challenge beendet - Ergebnis anzeigen und sofort Punkte speichern
       setShowResult(true);
       // Punkte für Sortier-Aufgaben berechnen
-      const score = newAnswers.reduce((total, userAnswer, index) => {
+      let score = 0;
+      newAnswers.forEach((userAnswer, index) => {
         if (isRound1) {
           const questionPoints = (index + 1) * 7;
           const currentQ = currentQuestions[index] as ChallengeQuestion;
-          return total + (userAnswer === currentQ.answer ? questionPoints : 0);
+          if (typeof userAnswer === 'boolean' && userAnswer === currentQ.answer) {
+            score += questionPoints;
+          }
         } else {
           const currentQ = currentQuestions[index] as SortingQuestion;
           
           if (currentQ.type === "number-matching") {
             // For number-matching questions
-            const userAnswers = userAnswer as Record<string, string>;
-            let points = 0;
-            // Points per correct match based on question number
-            const pointsPerMatch = index === 0 ? 10 : index === 1 ? 20 : 30;
-            Object.entries(userAnswers).forEach(([itemId, userValue]) => {
-              if (currentQ.correctAnswers![itemId] === userValue) {
-                points += pointsPerMatch;
-              }
-            });
-            return total + points;
+            if (typeof userAnswer === 'object' && !Array.isArray(userAnswer)) {
+              const userAnswers = userAnswer as Record<string, string>;
+              let points = 0;
+              // Points per correct match based on question number
+              const pointsPerMatch = index === 0 ? 10 : index === 1 ? 20 : 30;
+              Object.entries(userAnswers).forEach(([itemId, userValue]) => {
+                if (currentQ.correctAnswers![itemId] === userValue) {
+                  points += pointsPerMatch;
+                }
+              });
+              score += points;
+            }
           } else {
             // For position-sorting questions
             const userOrder = userAnswer as string[];
-            return total + calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+            score += calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
           }
         }
-      }, 0);
+      });
       onComplete(score);
     }
   };
@@ -631,52 +719,67 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
   };
 
   if (showResult) {
-    const score = answers.reduce((total, userAnswer, index) => {
-      if (isRound1) {
+    let score = 0;
+    
+    if (isRound1) {
+      answers.forEach((userAnswer, index) => {
         const questionPoints = (index + 1) * 7; // Q1=7, Q2=14, Q3=21, etc.
         const currentQ = currentQuestions[index] as ChallengeQuestion;
-        return total + (userAnswer === currentQ.answer ? questionPoints : 0);
-      } else {
-          const currentQ = currentQuestions[index] as SortingQuestion;
-          
-          if (currentQ.type === "number-matching") {
-            // For number-matching questions
-            if (typeof userAnswer === 'object' && !Array.isArray(userAnswer)) {
-              const userAnswers = userAnswer as Record<string, string>;
-              let points = 0;
-              
-              // Points per correct match based on question number
-              const pointsPerMatch = index === 0 ? 10 : index === 1 ? 20 : 30;
-              
-              // Normalize function for score calculation
-              const normalizeForScore = (value: string): string => {
-                if (!value) return value;
-                let normalized = value.replace(/[\.\s]/g, '');
-                if (/^\d+$/.test(normalized)) {
-                  const withPlus = normalized + '+';
-                  const normalizedValidNumbers = currentQ.validNumbers!.map(n => n.replace(/[\.\s]/g, ''));
-                  if (normalizedValidNumbers.includes(withPlus)) {
-                    normalized = withPlus;
-                  }
+        if (typeof userAnswer === 'boolean' && userAnswer === currentQ.answer) {
+          score += questionPoints;
+        }
+      });
+    } else if (isRound3) {
+      answers.forEach((userAnswer, index) => {
+        const currentQ = currentQuestions[index] as MultipleChoiceQuestion;
+        if (typeof userAnswer === 'number' && userAnswer === currentQ.correctAnswer) {
+          score += currentQ.points;
+        }
+      });
+    } else {
+      // Round 2
+      answers.forEach((userAnswer, index) => {
+        const currentQ = currentQuestions[index] as SortingQuestion;
+        
+        if (currentQ.type === "number-matching") {
+          // For number-matching questions
+          if (typeof userAnswer === 'object' && !Array.isArray(userAnswer)) {
+            const userAnswers = userAnswer as Record<string, string>;
+            let points = 0;
+            
+            // Points per correct match based on question number
+            const pointsPerMatch = index === 0 ? 10 : index === 1 ? 20 : 30;
+            
+            // Normalize function for score calculation
+            const normalizeForScore = (value: string): string => {
+              if (!value) return value;
+              let normalized = value.replace(/[\.\s]/g, '');
+              if (/^\d+$/.test(normalized)) {
+                const withPlus = normalized + '+';
+                const normalizedValidNumbers = currentQ.validNumbers!.map(n => n.replace(/[\.\s]/g, ''));
+                if (normalizedValidNumbers.includes(withPlus)) {
+                  normalized = withPlus;
                 }
-                return normalized;
-              };
-              
-              Object.entries(userAnswers).forEach(([itemId, userValue]) => {
-                if (normalizeForScore(currentQ.correctAnswers![itemId]) === normalizeForScore(userValue)) {
-                  points += pointsPerMatch;
-                }
-              });
-              return total + points;
-            }
-            return total;
-          } else {
-            // For position-sorting questions
-            const userOrder = userAnswer as string[];
-            return total + calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+              }
+              return normalized;
+            };
+            
+            Object.entries(userAnswers).forEach(([itemId, userValue]) => {
+              if (normalizeForScore(currentQ.correctAnswers![itemId]) === normalizeForScore(userValue)) {
+                points += pointsPerMatch;
+              }
+            });
+            score += points;
           }
-      }
-    }, 0);
+        } else {
+          // For position-sorting questions
+          const userOrder = userAnswer as string[];
+          score += calculateSortingScore(userOrder, currentQ.correctOrder!, index + 1);
+        }
+      });
+    }
+    
+    const maxScore = isRound1 ? 196 : isRound3 ? 280 : 420;
 
     return (
       <div 
@@ -691,13 +794,19 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
               Herzlichen Glückwunsch, {playerName}!
             </h1>
             <div className="text-6xl md:text-8xl font-encode font-black text-dkm-yellow mb-6">
-              {score}/{isRound1 ? 196 : 420}
+              {score}/{maxScore}
             </div>
             <p className="font-encode text-xl text-white mb-8">
               {isRound1 ? (
                 score >= 140 
                   ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
                   : score >= 98 
+                  ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
+                  : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
+              ) : isRound3 ? (
+                score >= 210 
+                  ? "Wow! Sie sind ein echter DKM-Experte! 🏆" 
+                  : score >= 140 
                   ? "Sehr gut! Sie kennen sich schon gut mit der DKM aus! 👏"
                   : "Nicht schlecht! Schauen Sie gerne bei der DKM 2025 vorbei und lernen Sie mehr! 💼"
               ) : (
@@ -803,6 +912,21 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
                 >
                   Falsch
                 </Button>
+              </div>
+            ) : isRound3 ? (
+              // Round 3: Multiple Choice Questions
+              <div className="flex flex-col gap-4 max-w-md mx-auto">
+                {(currentQuestions[currentQuestion] as MultipleChoiceQuestion).options.map((option, index) => (
+                  <Button
+                    key={index}
+                    variant="dkm"
+                    size="lg"
+                    onClick={() => handleAnswer(index)}
+                    className="text-lg py-6 px-8 w-full"
+                  >
+                    {option}
+                  </Button>
+                ))}
               </div>
             ) : (
               // Round 2: Sorting Questions (Number Input or Number Matching)

@@ -411,14 +411,15 @@ const handleChallengeComplete = async (finalScore: number) => {
     // 3. Setze totalScore State
     setTotalScore(previousTotal);
     
-    // 4. Inkrementiere Runde
-    setRoundNumber(prev => prev + 1);
+    // 4. WICHTIG: Kurz gameState ändern, um Challenge-Komponente neu zu mounten
+    setGameState("register");
     
-    // 5. Reset Result-State
-    setIsResultSubmitted(false);
-    
-    // 6. Bleibe in Challenge-State
-    setGameState("challenge");
+    // 5. Nach minimaler Verzögerung: Runde inkrementieren und Challenge neu starten
+    setTimeout(() => {
+      setRoundNumber(prev => prev + 1);
+      setIsResultSubmitted(false);
+      setGameState("challenge");
+    }, 50);
   };
 
   if (gameState === "challenge") {

@@ -499,18 +499,23 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
     }
   }, [isRound1, currentQuestion, roundNumber]);
 
-  // Countdown-Timer zur automatischen Weiterleitung - NUR für Runde 3
+  // Countdown-Timer zur automatischen Weiterleitung für ALLE Runden
   useEffect(() => {
-    // Countdown NUR für Runde 3 starten
-    if (showResult && roundNumber === 3) {
+    if (showResult) {
       if (countdown > 0) {
         const timer = setTimeout(() => {
           setCountdown(countdown - 1);
         }, 1000);
         return () => clearTimeout(timer);
       } else if (countdown === 0) {
-        // Nach 10 Sekunden: Zur Leaderboard weiterleitung
-        window.location.href = "/leaderboard";
+        // Nach Runde 1 & 2: Zur nächsten Runde
+        if (roundNumber < 3 && onContinueToNextRound) {
+          onContinueToNextRound();
+        } 
+        // Nach Runde 3: Zum Leaderboard
+        else if (roundNumber === 3) {
+          window.location.href = "/leaderboard";
+        }
       }
     }
   }, [showResult, countdown, roundNumber]);
@@ -719,11 +724,11 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
                   </span>
                 </AlertDescription>
               </Alert>
-              {roundNumber === 3 && (
-                <p className="font-encode text-lg text-dkm-yellow font-bold">
-                  ⏰ Automatische Weiterleitung in {countdown} Sekunden...
-                </p>
-              )}
+              <p className="font-encode text-lg text-dkm-yellow font-bold">
+                ⏰ {roundNumber < 3 
+                  ? `Weiterleitung zur nächsten Runde in ${countdown} Sekunden...` 
+                  : `Automatische Weiterleitung zum Leaderboard in ${countdown} Sekunden...`}
+              </p>
             </div>
             
             {roundNumber < 3 && onContinueToNextRound && (

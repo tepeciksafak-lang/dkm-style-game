@@ -473,16 +473,19 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
   const currentQuestions = isRound1 ? challengeQuestionsRound1 : challengeQuestionsRound2;
   const totalQuestions = currentQuestions.length;
 
-  // Countdown-Timer - nur für Runde 3 zur automatischen Weiterleitung
+  // Countdown-Timer zur automatischen Weiterleitung - NUR für Runde 3
   useEffect(() => {
-    if (showResult && roundNumber === 3 && countdown > 0) {
-      const timer = setTimeout(() => {
-        setCountdown(countdown - 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else if (showResult && roundNumber === 3 && countdown === 0) {
-      // Nach 10 Sekunden: Zur Leaderboard weiterleitung (nur Runde 3)
-      window.location.href = "/leaderboard";
+    // Countdown NUR für Runde 3 starten
+    if (showResult && roundNumber === 3) {
+      if (countdown > 0) {
+        const timer = setTimeout(() => {
+          setCountdown(countdown - 1);
+        }, 1000);
+        return () => clearTimeout(timer);
+      } else if (countdown === 0) {
+        // Nach 10 Sekunden: Zur Leaderboard weiterleitung
+        window.location.href = "/leaderboard";
+      }
     }
   }, [showResult, countdown, roundNumber]);
 

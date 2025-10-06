@@ -286,18 +286,19 @@ const handleChallengeComplete = async (finalScore: number) => {
       Punkte: String(finalScore),
     });
     
-    const { error: insertError } = await supabase
-      .from("ok")
-      .insert({
-        Username: fullName,
-        first_name: firstName,
-        last_name: lastName,
-        gender: gender,
-        Mailadresse: email.trim().toLowerCase(),
-        Rundenr: String(roundNumber),
-        Punkte: String(finalScore),
-        Gesamtscore: String(newTotalScore),
-      });
+      const { error: insertError } = await supabase
+        .from("ok")
+        .insert({
+          Username: fullName,
+          first_name: firstName,
+          last_name: lastName,
+          gender: gender,
+          Mailadresse: email.trim().toLowerCase(),
+          Rundenr: String(roundNumber),
+          Punkte: String(finalScore),
+          Gesamtscore: String(newTotalScore),
+          Status: 'success',
+        });
 
     if (insertError) {
       console.error('Supabase insert error:', insertError);

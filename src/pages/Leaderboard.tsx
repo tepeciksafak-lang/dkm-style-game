@@ -35,7 +35,9 @@ const Leaderboard = () => {
     try {
       const { data, error } = await supabase
         .from('leaderboard_view')
-        .select('*');
+        .select('*')
+        .order('display_score', { ascending: false })
+        .limit(30);
 
       if (error) {
         console.error('Error fetching leaderboard:', error);

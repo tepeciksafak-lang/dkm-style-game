@@ -13,6 +13,7 @@ interface LeaderboardEntry {
   id: number;
   Username: string;
   Punkte: string;
+  Gesamtscore: string | null;
   created_at: string;
   Rundenr: string;
 }
@@ -184,7 +185,7 @@ const Leaderboard = () => {
                       
                       <div className="text-right">
                         <Badge variant={getRankBadgeVariant(position)} className="text-lg px-3 py-1">
-                          {entry.Punkte} Punkte
+                          {entry.Gesamtscore || entry.Punkte} Punkte
                         </Badge>
                       </div>
                     </div>

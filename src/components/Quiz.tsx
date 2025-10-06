@@ -459,9 +459,10 @@ interface ChallengeProps {
   playerName: string;
   roundNumber: number;
   onComplete: (score: number) => void;
+  onContinueToNextRound?: () => void;
 }
 
-const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
+const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound }: ChallengeProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<(boolean | string[] | Record<string, string>)[]>([]);
   const [showResult, setShowResult] = useState(false);
@@ -472,18 +473,18 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
   const currentQuestions = isRound1 ? challengeQuestionsRound1 : challengeQuestionsRound2;
   const totalQuestions = currentQuestions.length;
 
-  // Countdown-Timer nur für automatische Weiterleitung zur Leaderboard
+  // Countdown-Timer - nur für Runde 3 zur automatischen Weiterleitung
   useEffect(() => {
-    if (showResult && countdown > 0) {
+    if (showResult && roundNumber === 3 && countdown > 0) {
       const timer = setTimeout(() => {
         setCountdown(countdown - 1);
       }, 1000);
       return () => clearTimeout(timer);
-    } else if (showResult && countdown === 0) {
-      // Nach 10 Sekunden: Zur Leaderboard weiterleitung
+    } else if (showResult && roundNumber === 3 && countdown === 0) {
+      // Nach 10 Sekunden: Zur Leaderboard weiterleitung (nur Runde 3)
       window.location.href = "/leaderboard";
     }
-  }, [showResult, countdown]);
+  }, [showResult, countdown, roundNumber]);
 
   const handleAnswer = (answer: boolean) => {
     const newAnswers = [...answers, answer];
@@ -689,16 +690,29 @@ const Challenge = ({ playerName, roundNumber, onComplete }: ChallengeProps) => {
                   </span>
                 </AlertDescription>
               </Alert>
-              <p className="font-encode text-lg text-dkm-yellow font-bold">
-                ⏰ Automatische Weiterleitung in {countdown} Sekunden...
-              </p>
+              {roundNumber === 3 && (
+                <p className="font-encode text-lg text-dkm-yellow font-bold">
+                  ⏰ Automatische Weiterleitung in {countdown} Sekunden...
+                </p>
+              )}
             </div>
+            
+            {roundNumber < 3 && onContinueToNextRound && (
+              <Button 
+                variant="dkm" 
+                size="lg"
+                onClick={onContinueToNextRound}
+                className="mr-4"
+              >
+                Direkt nächste Runde
+              </Button>
+            )}
             
             <Button 
               variant="dkm" 
               size="lg"
               onClick={() => window.location.href = "/leaderboard"}
-              className="mr-4"
+              className={roundNumber < 3 ? "" : "mr-4"}
             >
               Leaderboard
             </Button>

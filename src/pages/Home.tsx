@@ -183,10 +183,10 @@ const Home = () => {
       if (roundNumber === 1) {
         // Round 1 can proceed directly after email check
       } else if (roundNumber === 2) {
-        // Prüfe ob Runde 1 abgeschlossen ist
+        // Prüfe ob Runde 1 abgeschlossen ist und lade vorherige Punkte
         const { data: round1Data, error: round1Error } = await supabase
           .from("ok")
-          .select("Mailadresse, Rundenr")
+          .select("Mailadresse, Rundenr, Punkte")
           .eq("Mailadresse", email.trim().toLowerCase())
           .eq("Rundenr", "1")
           .maybeSingle();
@@ -198,13 +198,17 @@ const Home = () => {
         // Only enforce if we could check and found no record
         if (!round1Error && !round1Data) {
           missingRounds.push("Runde 1");
+        } else if (round1Data) {
+          // Load previous score
+          const previousScore = parseInt(round1Data.Punkte || "0");
+          setTotalScore(previousScore);
         }
 
       } else if (roundNumber === 3) {
-        // Prüfe ob Runde 1 und 2 abgeschlossen sind
+        // Prüfe ob Runde 1 und 2 abgeschlossen sind und lade vorherige Punkte
         const { data: completedRounds, error: roundsError } = await supabase
           .from("ok")
-          .select("Rundenr")
+          .select("Rundenr, Punkte")
           .eq("Mailadresse", email.trim().toLowerCase())
           .in("Rundenr", ["1", "2"]);
           
@@ -217,6 +221,13 @@ const Home = () => {
           }
           if (!completedRoundNumbers.includes("2")) {
             missingRounds.push("Runde 2");
+          }
+          
+          // Load previous scores if all rounds completed
+          if (completedRounds && completedRounds.length === 2) {
+            const previousTotal = completedRounds.reduce((sum, round) => 
+              sum + parseInt(round.Punkte || "0"), 0);
+            setTotalScore(previousTotal);
           }
         }
 
@@ -285,6 +296,7 @@ const handleChallengeComplete = async (finalScore: number) => {
         Mailadresse: email.trim().toLowerCase(),
         Rundenr: String(roundNumber),
         Punkte: String(finalScore),
+        Gesamtscore: String(newTotalScore),
       });
 
     if (insertError) {
@@ -371,8 +383,19 @@ const handleChallengeComplete = async (finalScore: number) => {
   // Navigation will be handled by the Quiz component countdown
 };
 
+  const handleContinueToNextRound = () => {
+    setRoundNumber(prev => prev + 1);
+    setIsResultSubmitted(false);
+    setGameState("challenge");
+  };
+
   if (gameState === "challenge") {
-    return <Challenge playerName={`${firstName} ${lastName}`} roundNumber={roundNumber} onComplete={handleChallengeComplete} />;
+    return <Challenge 
+      playerName={`${firstName} ${lastName}`} 
+      roundNumber={roundNumber} 
+      onComplete={handleChallengeComplete}
+      onContinueToNextRound={handleContinueToNextRound}
+    />;
   }
 
   if (gameState === "result") {

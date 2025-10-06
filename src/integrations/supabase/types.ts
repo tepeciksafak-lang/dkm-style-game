@@ -19,6 +19,7 @@ export type Database = {
           created_at: string
           first_name: string | null
           gender: string | null
+          Gesamtscore: string | null
           id: number
           last_name: string | null
           Mailadresse: string | null
@@ -34,6 +35,7 @@ export type Database = {
           created_at?: string
           first_name?: string | null
           gender?: string | null
+          Gesamtscore?: string | null
           id?: number
           last_name?: string | null
           Mailadresse?: string | null
@@ -49,6 +51,7 @@ export type Database = {
           created_at?: string
           first_name?: string | null
           gender?: string | null
+          Gesamtscore?: string | null
           id?: number
           last_name?: string | null
           Mailadresse?: string | null
@@ -67,21 +70,30 @@ export type Database = {
       leaderboard_view: {
         Row: {
           created_at: string | null
+          display_score: string | null
+          Gesamtscore: string | null
           id: number | null
+          Mailadresse: string | null
           Punkte: string | null
           Rundenr: string | null
           Username: string | null
         }
         Insert: {
           created_at?: string | null
+          display_score?: never
+          Gesamtscore?: string | null
           id?: number | null
+          Mailadresse?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null
         }
         Update: {
           created_at?: string | null
+          display_score?: never
+          Gesamtscore?: string | null
           id?: number | null
+          Mailadresse?: string | null
           Punkte?: string | null
           Rundenr?: string | null
           Username?: string | null

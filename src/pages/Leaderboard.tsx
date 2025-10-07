@@ -61,9 +61,9 @@ const Leaderboard = () => {
         return bScore - aScore;
       });
 
-      // Top 30 übernehmen
-      const top30 = sorted.slice(0, 30) as LeaderboardEntry[];
-      setLeaderboard(top30);
+      // Top 25 übernehmen
+      const top25 = sorted.slice(0, 25) as LeaderboardEntry[];
+      setLeaderboard(top25);
       
       // Spieler-Rang bestimmen (in der vollständig sortierten Liste)
       if (playerName && sorted.length) {
@@ -167,7 +167,7 @@ const Leaderboard = () => {
         {/* Top 7 Leaderboard */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">Top 30</CardTitle>
+            <CardTitle className="text-2xl text-center">Top 25</CardTitle>
           </CardHeader>
           <CardContent>
             {leaderboard.length === 0 ? (

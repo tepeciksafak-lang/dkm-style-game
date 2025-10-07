@@ -167,7 +167,7 @@ const Leaderboard = () => {
         {/* Top 7 Leaderboard */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">Top 30 Makler</CardTitle>
+            <CardTitle className="text-2xl text-center">Top 30</CardTitle>
           </CardHeader>
           <CardContent>
             {leaderboard.length === 0 ? (

@@ -43,8 +43,19 @@ const Leaderboard = () => {
         return;
       }
 
+      // Gruppiere nach Mailadresse und nimm nur den Eintrag mit der höchsten Rundenr (neuester Eintrag)
+      const uniqueByEmail = new Map<string, any>();
+      (data || []).forEach((entry: any) => {
+        const existingEntry = uniqueByEmail.get(entry.Mailadresse);
+        if (!existingEntry || parseInt(entry.Rundenr || '0') > parseInt(existingEntry.Rundenr || '0')) {
+          uniqueByEmail.set(entry.Mailadresse, entry);
+        }
+      });
+
+      const uniqueData = Array.from(uniqueByEmail.values());
+
       // Sortiere nach numerischem Gesamtscore (fallback: Punkte)
-      const sorted = (data || []).sort((a: any, b: any) => {
+      const sorted = uniqueData.sort((a: any, b: any) => {
         const aScore = parseInt((a.Gesamtscore ?? a.Punkte) ?? '0');
         const bScore = parseInt((b.Gesamtscore ?? b.Punkte) ?? '0');
         return bScore - aScore;
@@ -165,7 +176,7 @@ const Leaderboard = () => {
               </div>
             ) : (
               <div className="space-y-4">
-                {leaderboard.slice(0, 30).map((entry, index) => {
+                {leaderboard.map((entry, index) => {
                   const position = index + 1;
                   const isCurrentPlayer = playerName === entry.Username;
                   

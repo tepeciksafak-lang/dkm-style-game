@@ -437,30 +437,30 @@ const challengeQuestionsRound2: SortingQuestion[] = [
     ],
     correctOrder: ["coffee", "laecheln", "stempel", "foto", "lounge", "weinbar", "dance"]
   },
-    {
-      id: 3,
-      type: "number-matching",
-      question: "Ordne die Zahlen richtig zu",
-      items: [
-        { id: "kongresse", text: "Kongresse" },
-        { id: "themenparks", text: "Themenparks" },
-        { id: "programm", text: "Live-Programmpunkte" },
-        { id: "aussteller", text: "Aussteller" },
-        { id: "besucher", text: "Besucher" },
-        { id: "speaker", text: "Speaker" },
-        { id: "partner", text: "Aussteller & Partner" }
-      ],
-      correctAnswers: {
-        kongresse: "16",
-        themenparks: "4",
-        programm: "221",
-        aussteller: "256",
-        besucher: "14000+",
-        speaker: "190+",
-        partner: "200+"
-      },
-      validNumbers: ["16", "4", "221", "256", "14000+", "190+", "200+"]
-    }
+  {
+    id: 3,
+    type: "number-matching",
+    question: "Ordne die Zahlen richtig zu",
+    items: [
+      { id: "kongresse", text: "Kongresse" },
+      { id: "themenparks", text: "Themenparks" },
+      { id: "programm", text: "Live-Programmpunkte" },
+      { id: "partner", text: "Aussteller & Partner" },
+      { id: "speaker", text: "Speaker" },
+      { id: "vortraege", text: "Vorträge" },
+      { id: "besucher", text: "Besucher" }
+    ],
+    correctAnswers: {
+      kongresse: "16",
+      themenparks: "4",
+      programm: "221",
+      partner: "200+",
+      speaker: "190+",
+      vortraege: "200+",
+      besucher: "14000+"
+    },
+    validNumbers: ["4", "16", "190+", "200+", "200+", "221", "256", "14000+"]
+  }
 ];
 
 // Runde 3 Fragen (Multiple Choice)
@@ -468,50 +468,50 @@ const challengeQuestionsRound3: MultipleChoiceQuestion[] = [
   {
     id: 1,
     question: "Wie viele Besucher:innen kamen 2024 zur DKM?",
-    options: ["14.700", "9.845", "20.100"],
+    options: ["14.127", "9.845", "20.100"],
     correctAnswer: 0,
     points: 10
   },
   {
     id: 2,
-    question: "Welche neue Messehalle wurde bei der DKM 2024 genutzt?",
-    options: ["Halle 4", "Halle 5", "Halle 6"],
+    question: "Was ist beim Meet-up NICHT eingeplant?",
+    options: ["Weinbar", "Tanzfläche", "Mittagsschlaf-Area"],
     correctAnswer: 2,
     points: 20
   },
   {
     id: 3,
-    question: "Wie viele Aussteller:innen waren bei der DKM 2024 dabei?",
-    options: ["260", "315", "400"],
+    question: "Welche Uhrzeit hat das Meet-up offiziell als Schluss?",
+    options: ["23:59 Uhr", "01:00 Uhr", "Open End – bis alle am Boden liegen"],
     correctAnswer: 1,
     points: 30
   },
   {
     id: 4,
-    question: "Wie viele Quadratmeter umfasste die Ausstellungsfläche?",
-    options: ["37.000", "41.000", "45.000"],
-    correctAnswer: 0,
+    question: "Mit welchem Badge ist Parken kostenlos?",
+    options: ["Nur VIP-Badge", "Normales Teilnehmer-Badge", "Aussteller-Badge gegen 5 €"],
+    correctAnswer: 1,
     points: 40
   },
   {
     id: 5,
-    question: "Aus wie vielen Ländern kamen die Besucher:innen?",
-    options: ["20", "35", "50"],
-    correctAnswer: 1,
+    question: "Welche App gehört offiziell zur DKM?",
+    options: ["DKM365", "DKMobile", "VersiApp"],
+    correctAnswer: 0,
     points: 50
   },
   {
     id: 6,
-    question: "Wie viele Konferenz- und Vortragstermine gab es?",
-    options: ["150", "200", "250"],
-    correctAnswer: 1,
+    question: "Was startet schon Wochen vor der Messe?",
+    options: ["Streaming-Days", "Tombola", "Messeaufbau"],
+    correctAnswer: 0,
     points: 60
   },
   {
     id: 7,
-    question: "Wie viele Mitausstellende waren bei der DKM 2024 dabei?",
-    options: ["35", "50", "65"],
-    correctAnswer: 1,
+    question: "Was gibt es vor Ort gratis?",
+    options: ["WLAN", "Handys", "Versicherungspolicen"],
+    correctAnswer: 0,
     points: 70
   }
 ];

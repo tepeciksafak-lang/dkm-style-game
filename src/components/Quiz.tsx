@@ -554,14 +554,7 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
         }
         setShuffledItems(prev => ({ ...prev, [q.id]: itemsCopy }));
       }
-      if (q.validNumbers) {
-        const numsCopy = [...q.validNumbers];
-        for (let i = numsCopy.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [numsCopy[i], numsCopy[j]] = [numsCopy[j], numsCopy[i]];
-        }
-        setShuffledValidNumbers(prev => ({ ...prev, [q.id]: numsCopy }));
-      }
+      // validNumbers werden NICHT gemischt, sondern in der definierten Reihenfolge angezeigt
     }
   }, [isRound1, currentQuestion, roundNumber]);
 
@@ -935,7 +928,7 @@ const Challenge = ({ playerName, roundNumber, onComplete, onContinueToNextRound 
                 return currentSortingQ.type === "number-matching" ? (
                   <NumberMatchingInput
                     items={shuffledItems[currentSortingQ.id] || currentSortingQ.items}
-                    validNumbers={shuffledValidNumbers[currentSortingQ.id] || currentSortingQ.validNumbers!}
+                    validNumbers={currentSortingQ.validNumbers!}
                     correctAnswers={currentSortingQ.correctAnswers!}
                     onSubmit={handleNumberMatchingAnswer}
                   />

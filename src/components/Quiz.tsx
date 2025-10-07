@@ -459,7 +459,7 @@ const challengeQuestionsRound2: SortingQuestion[] = [
       vortraege: "200+",
       besucher: "14000+"
     },
-    validNumbers: ["4", "16", "190+", "200+", "200+", "221", "256", "14000+"]
+    validNumbers: ["4", "16", "190+", "200+", "200+", "221", "14000+"]
   }
 ];
 

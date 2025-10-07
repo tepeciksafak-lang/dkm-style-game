@@ -298,6 +298,23 @@ const handleChallengeComplete = async (finalScore: number) => {
       Punkte: String(finalScore),
     });
     
+      // Bei Runde 2 oder 3: Prüfe den Status von Runde 1
+      let statusToSet = 'success';
+
+      if (roundNumber === 2 || roundNumber === 3) {
+        const { data: round1Data } = await supabase
+          .from("ok")
+          .select("Status")
+          .eq("Mailadresse", email.trim().toLowerCase())
+          .eq("Rundenr", "1")
+          .single();
+        
+        // Wenn Runde 1 'pending' hat, dann auch 'pending' für Runde 2/3
+        if (round1Data?.Status === 'pending') {
+          statusToSet = 'pending';
+        }
+      }
+
       const { error: insertError } = await supabase
         .from("ok")
         .insert({
@@ -309,7 +326,7 @@ const handleChallengeComplete = async (finalScore: number) => {
           Rundenr: String(roundNumber),
           Punkte: String(finalScore),
           Gesamtscore: String(newTotalScore),
-          Status: 'success',
+          Status: statusToSet,
         });
 
     if (insertError) {

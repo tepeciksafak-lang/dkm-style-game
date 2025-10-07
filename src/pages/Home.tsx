@@ -749,11 +749,6 @@ const handleChallengeComplete = async (finalScore: number) => {
       </div>
     </div>
   </RadioGroup>
-  {roundNumber > 1 && (
-    <p className="mt-1 text-sm text-blue-600 font-medium">
-      Runde {roundNumber} ist noch nicht freigeschaltet und wird in den kommenden Wochen verfügbar sein.
-    </p>
-  )}
 </div>
 
                 <Button 

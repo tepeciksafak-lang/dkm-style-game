@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trophy, Gift, Star, Medal, Search } from "lucide-react";
 import championsLeagueCrowd from "@/assets/champions-league-crowd.jpg";
+import speakerCornerAward from "@/assets/speaker-corner-award.png";
 
 const Preise = () => {
   interface DetailItem {
@@ -185,6 +186,17 @@ const Preise = () => {
                   </div>
                 </Card>
               ))}
+            </div>
+          </div>
+
+          {/* Speaker's Corner Award */}
+          <div className="mb-20">
+            <div className="container mx-auto max-w-4xl px-4">
+              <img 
+                src={speakerCornerAward} 
+                alt="Speaker's Corner Award - Verlosung der Supermakler Challenge 2025"
+                className="w-full rounded-lg shadow-lg"
+              />
             </div>
           </div>
 

@@ -88,7 +88,7 @@ const Preise = () => {
     {
       icon: <Gift className="text-dkm-navy" size={32} />,
       title: "Jeder Teilnehmer",
-      description: "SALEVIUM-Gutschein im Wert von 100 €",
+      description: "SALEVIUM-Gutschein im Wert von 100 €*",
       links: [
         "Exklusiver Zugang zu den Top 3 Sales Videos von Bilgehan Karatas (Geschäftsführer SALEVIUM)",
         { text: "https://www.salevium.de/", isLink: true }
@@ -207,42 +207,49 @@ const Preise = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {participationPrizes.map((prize, index) => (
-                <Card key={index} className="p-6 border-2 border-gray-200 text-center hover:shadow-[var(--shadow-smooth)] transition-all duration-300">
-                  <div className="flex justify-center mb-4">
-                    {prize.icon}
-                  </div>
-                  <h3 className="font-encode font-bold text-lg text-dkm-navy mb-3">
-                    {prize.title}
-                  </h3>
-                  <p className="font-encode text-gray-600 mb-3">
-                    {prize.description}
-                  </p>
-                  {prize.links && (
-                    <div className="space-y-2">
-                      {prize.links.map((link, linkIndex) => {
-                        if (typeof link === 'object' && link.isLink) {
-                          return (
-                            <div key={linkIndex}>
-                              <a 
-                                href={link.text} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="font-encode text-sm text-dkm-turquoise hover:text-dkm-navy transition-colors underline"
-                              >
-                                {link.text}
-                              </a>
-                            </div>
-                          );
-                        }
-                          return (
-                            <p key={linkIndex} className="font-encode text-sm text-gray-600">
-                              {link as string}
-                            </p>
-                          );
-                      })}
+                <div key={index} className="relative">
+                  <Card className="p-6 border-2 border-gray-200 text-center hover:shadow-[var(--shadow-smooth)] transition-all duration-300">
+                    <div className="flex justify-center mb-4">
+                      {prize.icon}
                     </div>
+                    <h3 className="font-encode font-bold text-lg text-dkm-navy mb-3">
+                      {prize.title}
+                    </h3>
+                    <p className="font-encode text-gray-600 mb-3">
+                      {prize.description}
+                    </p>
+                    {prize.links && (
+                      <div className="space-y-2">
+                        {prize.links.map((link, linkIndex) => {
+                          if (typeof link === 'object' && link.isLink) {
+                            return (
+                              <div key={linkIndex}>
+                                <a 
+                                  href={link.text} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="font-encode text-sm text-dkm-turquoise hover:text-dkm-navy transition-colors underline"
+                                >
+                                  {link.text}
+                                </a>
+                              </div>
+                            );
+                          }
+                            return (
+                              <p key={linkIndex} className="font-encode text-sm text-gray-600">
+                                {link as string}
+                              </p>
+                            );
+                        })}
+                      </div>
+                    )}
+                  </Card>
+                  {index === 0 && (
+                    <p className="font-encode text-xs text-gray-500 italic mt-2 text-center">
+                      Ab Mindesteinkaufs-/Auftragswert von 490 €. Nicht kombinierbar mit anderen Rabatten oder Gutscheinen.
+                    </p>
                   )}
-                </Card>
+                </div>
               ))}
             </div>
           </div>

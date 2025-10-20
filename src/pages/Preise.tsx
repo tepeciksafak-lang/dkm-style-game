@@ -88,7 +88,7 @@ const Preise = () => {
     {
       icon: <Gift className="text-dkm-navy" size={32} />,
       title: "Jeder Teilnehmer",
-      description: "SALEVIUM-Gutschein im Wert von 100 €*",
+      description: "SALEVIUM-Gutschein im Wert von 100\u00A0€*",
       links: [
         "Exklusiver Zugang zu den Top 3 Sales Videos von Bilgehan Karatas (Geschäftsführer SALEVIUM)",
         { text: "https://www.salevium.de/", isLink: true }

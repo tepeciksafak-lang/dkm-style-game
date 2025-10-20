@@ -246,7 +246,7 @@ const Preise = () => {
                   </Card>
                   {index === 0 && (
                     <p className="font-encode text-xs text-gray-500 italic mt-2 text-center">
-                      Ab Mindesteinkaufs-/Auftragswert von 490 €. Nicht kombinierbar mit anderen Rabatten oder Gutscheinen.
+                      *Ab Mindesteinkaufs-/Auftragswert von 490 €. Nicht kombinierbar mit anderen Rabatten oder Gutscheinen.
                     </p>
                   )}
                 </div>

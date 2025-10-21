@@ -220,7 +220,7 @@ const Leaderboard = () => {
         {/* Hinweis zur finalen Auswertung */}
         <div className="text-center mb-8 px-4">
           <p className="text-muted-foreground italic">
-            Die finale Auswertung findet am Mittwoch, den 29.11.2025 um 12:45 Uhr Zeit statt. Um 13:00 Uhr findet dann die Ehrung der Supermakler in der Speaker's Corner statt.
+            Die finale Auswertung findet am Mittwoch, den 29.10.2025 um 12:45 Uhr Zeit statt. Um 13:00 Uhr findet dann die Ehrung der Supermakler in der Speaker's Corner statt.
           </p>
         </div>
       </main>

@@ -136,9 +136,9 @@ const SiegerboardContent = ({ winners }: { winners: any[] }) => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
             Siegerboard
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-            Die Gewinner der DKM Sales Match Challenge stehen fest!
-          </p>
+        <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+          Gewinner der DKM Sales Challenge
+        </p>
         </div>
       </section>
 

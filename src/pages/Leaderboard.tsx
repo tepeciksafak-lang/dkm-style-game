@@ -1,254 +1,142 @@
-import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Trophy, Medal, Award, User } from "lucide-react";
+import { Trophy, Medal, Award } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import penaltyKick from "@/assets/penalty-kick.jpg";
-
-interface LeaderboardEntry {
-  id: number;
-  Username: string;
-  Punkte: string;
-  Gesamtscore: string | null;
-  created_at: string;
-  Rundenr: string;
-}
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import winnerImage1 from "@/assets/winner-1-martin-zwara.jpg";
+import winnerImage2 from "@/assets/winner-2-thomas-saar.jpg";
+import winnerImage3 from "@/assets/winner-3-marco-reinholz.jpg";
+import heroBackground from "@/assets/trophy-celebration.jpg";
 
 const Leaderboard = () => {
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [playerRank, setPlayerRank] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  
-  const playerName = searchParams.get('player');
-
-  useEffect(() => {
-    fetchLeaderboard();
-  }, []);
-
-  const fetchLeaderboard = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('leaderboard_view')
-        .select('*')
-        .limit(1000);
-
-      if (error) {
-        console.error('Error fetching leaderboard:', error);
-        return;
-      }
-
-      // Gruppiere nach Mailadresse und nimm nur den Eintrag mit der höchsten Rundenr (neuester Eintrag)
-      const uniqueByEmail = new Map<string, any>();
-      (data || []).forEach((entry: any) => {
-        const existingEntry = uniqueByEmail.get(entry.Mailadresse);
-        if (!existingEntry || parseInt(entry.Rundenr || '0') > parseInt(existingEntry.Rundenr || '0')) {
-          uniqueByEmail.set(entry.Mailadresse, entry);
-        }
-      });
-
-      const uniqueData = Array.from(uniqueByEmail.values());
-
-      // Sortiere nach numerischem Gesamtscore (fallback: Punkte)
-      const sorted = uniqueData.sort((a: any, b: any) => {
-        const aScore = parseInt((a.Gesamtscore ?? a.Punkte) ?? '0');
-        const bScore = parseInt((b.Gesamtscore ?? b.Punkte) ?? '0');
-        return bScore - aScore;
-      });
-
-      // Top 25 übernehmen
-      const top25 = sorted.slice(0, 25) as LeaderboardEntry[];
-      setLeaderboard(top25);
-      
-      // Spieler-Rang bestimmen (in der vollständig sortierten Liste)
-      if (playerName && sorted.length) {
-        const playerIndex = sorted.findIndex((entry: any) => entry.Username === playerName);
-        if (playerIndex !== -1) {
-          setPlayerRank(playerIndex + 1);
-        }
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
+  const winners = [
+    {
+      rank: 1,
+      name: "Martin Zwara",
+      image: winnerImage1,
+      icon: Trophy,
+      iconColor: "text-yellow-500",
+      badgeVariant: "default" as const,
+      badgeText: "Gold-Medaille",
+      scale: "md:scale-110"
+    },
+    {
+      rank: 2,
+      name: "Thomas Saar",
+      image: winnerImage2,
+      icon: Medal,
+      iconColor: "text-gray-400",
+      badgeVariant: "secondary" as const,
+      badgeText: "Silber-Medaille",
+      scale: ""
+    },
+    {
+      rank: 3,
+      name: "Marco Reinholz",
+      image: winnerImage3,
+      icon: Award,
+      iconColor: "text-amber-700",
+      badgeVariant: "outline" as const,
+      badgeText: "Bronze-Medaille",
+      scale: ""
     }
-  };
+  ];
 
-  const getRankIcon = (position: number) => {
-    switch (position) {
-      case 1:
-        return <Trophy className="w-6 h-6 text-yellow-500" />;
-      case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
-      case 3:
-        return <Award className="w-6 h-6 text-amber-600" />;
-      default:
-        return <span className="w-6 h-6 flex items-center justify-center text-lg font-bold text-muted-foreground">#{position}</span>;
-    }
-  };
-
-  const getRankBadgeVariant = (position: number) => {
-    switch (position) {
-      case 1:
-        return "default";
-      case 2:
-        return "secondary";
-      case 3:
-        return "outline";
-      default:
-        return "outline";
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="container mx-auto px-4 py-8">
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-              <p className="text-muted-foreground">Lade Leaderboard...</p>
-            </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  // Reorder for podium display: 2nd, 1st, 3rd
+  const podiumOrder = [winners[1], winners[0], winners[2]];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen flex flex-col">
       <Header />
       
-      {/* Hero Section with Background - Full Width */}
-      <section 
-        className="relative py-20 px-4 mb-8 bg-cover bg-center"
-        style={{ backgroundImage: `url(${penaltyKick})` }}
-      >
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
-        
-        <div className="relative z-10 text-center">
-          <h1 className="font-encode font-black text-4xl md:text-5xl text-white mb-4">
-            Leaderboard
-          </h1>
-          <p className="font-encode text-xl text-white/90 max-w-2xl mx-auto mb-2">
-            Die ersten 3 Quiz Challenges sind eröffnet.
-          </p>
-          <p className="font-encode text-lg text-white/90 max-w-2xl mx-auto">
-            Werden Sie der erste Supermakler der DKM!
-          </p>
-        </div>
-      </section>
-
-      <main className="container mx-auto px-4 py-8">
-
-        {/* Player's Rank Highlight */}
-        {playerName && playerRank && (
-          <Card className="mb-8 border-primary bg-primary/5">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-center gap-4">
-                <User className="w-6 h-6 text-primary" />
-                <span className="text-lg font-semibold">
-                  {playerName}, du bist auf Platz {playerRank}!
-                </span>
-                {getRankIcon(playerRank)}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Top 7 Leaderboard */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="text-2xl text-center">Top 25</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {leaderboard.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-muted-foreground">Noch keine Teilnehmer vorhanden.</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {leaderboard.map((entry, index) => {
-                  const position = index + 1;
-                  const isCurrentPlayer = playerName === entry.Username;
-                  
-                  return (
-                    <div
-                      key={entry.id}
-                      className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${
-                        isCurrentPlayer ? 'bg-primary/10 border-primary' : 'bg-muted/50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-4">
-                        {getRankIcon(position)}
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-lg">
-                              {entry.Username}
-                            </span>
-                            {isCurrentPlayer && (
-                              <Badge variant="default" className="text-xs">Du</Badge>
-                            )}
-                          </div>
-                          <span className="text-sm text-muted-foreground">
-                            {new Date(entry.created_at).toLocaleDateString('de-DE')}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <div className="text-right">
-                        <Badge variant={getRankBadgeVariant(position)} className="text-lg px-3 py-1">
-                          {entry.Gesamtscore || entry.Punkte} Punkte
-                        </Badge>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Hinweis zur finalen Auswertung */}
-        <div className="text-center mb-8 px-4">
-          <p className="text-muted-foreground italic">
-            Die finale Auswertung findet am Mittwoch, den 29.10.2025 um 12:45 Uhr statt. Um 13:00 Uhr findet dann die Ehrung der Supermakler in der Speaker's Corner statt.
-          </p>
-        </div>
-      </main>
-
-      {/* CTA with Full Width Background */}
-      <div 
-        className="relative py-32 px-8 text-center bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${penaltyKick})`
-        }}
-      >
-        <div className="relative z-10">
-          <h3 className="font-encode font-black text-4xl text-white mb-6">
-            Bereit für die Challenge?
-          </h3>
-          <p className="font-encode text-xl text-white mb-12 max-w-2xl mx-auto">
-            Werde der erste Supermakler der DKM!
-          </p>
-          <Button 
-            onClick={() => window.location.href = "/#register"}
-            variant="dkm"
-            size="lg"
-            className="text-xl px-16 py-8"
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroBackground})` }}
           >
-            Anpfiff
-          </Button>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background"></div>
+          </div>
+          
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <Trophy className="w-16 h-16 mx-auto mb-4 text-yellow-500" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+              Siegerboard
+            </h1>
+            <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+              Die Gewinner der DKM Sales Match Challenge stehen fest!
+            </p>
+          </div>
+        </section>
+
+        {/* Hinweis zur Ehrung */}
+        <div className="text-center mt-12 mb-8 px-4">
+          <p className="text-muted-foreground italic">
+            Die finale Auswertung fand am Mittwoch, den 29.10.2025 um 12:45 Uhr statt. Um 13:00 Uhr findet die Ehrung der Supermakler in der Speaker's Corner statt.
+          </p>
         </div>
-      </div>
+
+        {/* Winners Podium */}
+        <section className="container mx-auto px-4 py-12 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+            {podiumOrder.map((winner) => (
+              <Card 
+                key={winner.rank} 
+                className={`relative transition-all hover:shadow-xl ${winner.scale} ${
+                  winner.rank === 1 ? 'md:mt-0' : 'md:mt-8'
+                }`}
+              >
+                <div className="absolute -top-4 right-4 z-10">
+                  <Badge variant={winner.badgeVariant} className="text-lg px-4 py-1 shadow-lg">
+                    {winner.rank}. Platz
+                  </Badge>
+                </div>
+                
+                <CardContent className="pt-10 pb-8 px-6 text-center">
+                  <div className="flex flex-col items-center gap-4">
+                    {/* Avatar with Image */}
+                    <Avatar className={`${winner.rank === 1 ? 'w-32 h-32' : 'w-28 h-28'} border-4 ${
+                      winner.rank === 1 ? 'border-yellow-500' : 
+                      winner.rank === 2 ? 'border-gray-400' : 
+                      'border-amber-700'
+                    }`}>
+                      <AvatarImage src={winner.image} alt={winner.name} className="object-cover" />
+                      <AvatarFallback className="text-2xl">
+                        {winner.name.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    {/* Medal Icon */}
+                    <winner.icon className={`w-12 h-12 ${winner.iconColor}`} />
+
+                    {/* Name */}
+                    <h3 className={`font-bold ${winner.rank === 1 ? 'text-2xl' : 'text-xl'}`}>
+                      {winner.name}
+                    </h3>
+
+                    {/* Medal Badge */}
+                    <Badge variant={winner.badgeVariant} className="px-4 py-1">
+                      {winner.badgeText}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Congratulations Message */}
+          <div className="text-center mt-16 mb-8">
+            <h2 className="text-3xl font-bold mb-4">
+              Herzlichen Glückwunsch!
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Wir gratulieren allen Gewinnern der DKM Sales Match Challenge zu ihren herausragenden Leistungen!
+            </p>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>

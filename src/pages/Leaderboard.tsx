@@ -156,7 +156,9 @@ const SiegerboardContent = ({ winners }: { winners: any[] }) => {
             <Card 
               key={winner.rank} 
               className={`relative transition-all hover:shadow-xl ${winner.scale} ${
-                winner.rank === 1 ? 'md:mt-0' : 'md:mt-8'
+                winner.rank === 1 ? 'md:mt-0 order-1' : 
+                winner.rank === 2 ? 'md:mt-8 order-2 md:order-1' : 
+                'md:mt-8 order-3'
               }`}
             >
               <div className="absolute -top-4 right-4 z-10">

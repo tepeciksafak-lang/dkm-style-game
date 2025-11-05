@@ -11,7 +11,7 @@ const Header = () => {
     { name: "Die Challenge", href: "/" },
     { name: "Ablauf", href: "/ablauf" },
     { name: "Preise", href: "/preise" },
-    { name: "Leaderboard", href: "/leaderboard" },
+    { name: "Siegerboard", href: "/leaderboard" },
   ];
 
   return (

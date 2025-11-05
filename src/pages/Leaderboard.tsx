@@ -137,7 +137,7 @@ const SiegerboardContent = ({ winners }: { winners: any[] }) => {
             Siegerboard
           </h1>
         <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-          Gewinner der DKM Sales Challenge
+          Gewinner der DKM Supermakler Challenge
         </p>
         </div>
       </section>

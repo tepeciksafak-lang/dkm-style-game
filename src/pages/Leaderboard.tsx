@@ -205,7 +205,7 @@ const SiegerboardContent = ({ winners }: { winners: any[] }) => {
             Herzlichen Glückwunsch!
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Wir gratulieren allen Gewinnern der DKM Sales Match Challenge zu ihren herausragenden Leistungen!
+            Wir gratulieren allen Gewinnern der DKM Supermakler Challenge zu ihren herausragenden Leistungen!
           </p>
         </div>
       </section>

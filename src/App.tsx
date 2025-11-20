@@ -9,6 +9,7 @@ import Preise from "./pages/Preise";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import Leaderboard from "./pages/Leaderboard";
+import InternalDashboard from "./pages/InternalDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/ablauf" element={<Ablauf />} />
           <Route path="/preise" element={<Preise />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/internal-dashboard" element={<InternalDashboard />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
